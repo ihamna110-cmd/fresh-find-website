@@ -3526,11 +3526,12 @@ section.hero::after {
 
 .chatbot-window {
   position: fixed;
-  bottom: 104px;
-  left: 28px;
+  bottom: 85px;
+  left: 24px;
   right: auto;
-  width: 395px;
-  height: 580px;
+  width: 350px;
+  height: 460px;
+  max-height: calc(100vh - 110px);
   max-width: calc(100vw - 32px);
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);

@@ -313,8 +313,9 @@
     width: calc(100vw - 32px);
     left: 16px;
     right: auto;
-    bottom: 88px;
-    height: 500px;
+    bottom: 80px;
+    height: 440px;
+    max-height: calc(100vh - 95px);
   }
 
   .bookmarks-drawer {

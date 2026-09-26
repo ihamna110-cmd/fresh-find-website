@@ -1842,32 +1842,5 @@
     })();
   </script>
 
-    // Handle URL search query params on load (e.g. index.html#directory?q=Kale or index.html?q=Downtown)
-    (function() {
-      function checkQuerySearch() {
-        var hash = window.location.hash || '';
-        var search = window.location.search || '';
-        var q = '';
-        if (search.includes('q=')) {
-          q = new URLSearchParams(search).get('q');
-        } else if (hash.includes('q=')) {
-          q = decodeURIComponent(hash.split('q=')[1] || '');
-        }
-        if (q && window.freshFindApp && window.freshFindApp.marketDirectory) {
-          var kw = document.getElementById('filterKeyword') || document.getElementById('marketSearchInput');
-          if (kw) kw.value = q;
-          window.freshFindApp.marketDirectory.searchKeyword = q.toLowerCase();
-          window.freshFindApp.marketDirectory.render();
-          var dirEl = document.getElementById('directory');
-          if (dirEl) dirEl.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { setTimeout(checkQuerySearch, 300); });
-      } else {
-        setTimeout(checkQuerySearch, 300);
-      }
-    })();
-
 </body>
 </html>
