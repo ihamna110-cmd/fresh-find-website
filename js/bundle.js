@@ -6126,12 +6126,4 @@ if (document.readyState === 'loading') {
   startFreshFindApp();
 }
 
-
-// Instantiate global app instance
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.freshFindApp) {
-    window.freshFindApp = new FreshFindApp();
-    window.freshFindApp.init();
-  }
-});
 })();
