@@ -556,11 +556,21 @@
   pointer-events: none;
 }
 
-.team-grid-4, .team-grid-3 {
+.team-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.team-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 310px));
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   max-width: 1040px;
   margin: 0 auto;
   position: relative;
@@ -815,4 +825,15 @@
   .about-hero-title { font-size: 2.4rem; }
   .about-cta-section h2 { font-size: 2rem; }
   .about-floating-badge { left: 0; }
+}
+
+@media (max-width: 992px) {
+  .team-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 576px) {
+  .team-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
 }

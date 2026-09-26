@@ -23,7 +23,46 @@ export class Header {
     this.setupScrollEffect();
     this.setupSearch();
     this.setupActions();
+    this.setupNewsletter();
     this.syncInitialBadge();
+  }
+
+  setupNewsletter() {
+    window.handleNewsletterSubscribe = function(form) {
+      if (!form) return;
+      const input = form.querySelector('input[type="email"]');
+      const email = input ? input.value.trim() : '';
+      if (!email) return;
+
+      const btn = form.querySelector('button[type="submit"]');
+      const successMsg = form.querySelector('.newsletter-success-msg') || (form.parentElement && form.parentElement.querySelector('.newsletter-success-msg'));
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Subscribing...';
+      }
+
+      setTimeout(() => {
+        if (input) input.value = '';
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Subscribed ✓';
+        }
+        if (successMsg) {
+          successMsg.style.display = 'flex';
+        }
+        if (window.freshFindApp && typeof window.freshFindApp.showToast === 'function') {
+          window.freshFindApp.showToast(`Thank you for subscribing (${email})! 🎉`);
+        }
+      }, 600);
+    };
+
+    document.querySelectorAll('.newsletter-form-box').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        window.handleNewsletterSubscribe(form);
+      });
+    });
   }
 
   syncInitialBadge() {
@@ -125,7 +164,7 @@ export class Header {
     }, { passive: true });
   }
 
-      setupSearch() {
+  setupSearch() {
     const handleSearch = () => {
       const q = this.searchInput ? this.searchInput.value.trim() : '';
       if (!q) return;
@@ -145,7 +184,8 @@ export class Header {
           this.app.showToast("Showing results for \"" + q + "\"");
         }
       } else {
-        window.location.href = "index.html#directory";
+        sessionStorage.setItem('freshfind_pending_search', q);
+        window.location.href = "index.html?search=" + encodeURIComponent(q) + "#directory";
       }
     };
 
@@ -155,32 +195,6 @@ export class Header {
         if (e.key === 'Enter') handleSearch();
       });
     }
-  }
-        this.app.marketDirectory.searchKeyword = q.toLowerCase();
-        this.app.marketDirectory.render();
-        document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth' });
-        this.app?.showToast?.(`Showing results for "${q}"`);
-      } else {
-        window.location.href = `index.html#directory`;
-      }
-    };
-
-    this.searchBtn?.addEventListener('click', handleSearch);
-    this.searchInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSearch();
-    });
-  }
-        this.app?.showToast(`Showing results for "${q}"`);
-      } else {
-        // Redirect to homepage directory with query
-        window.location.href = `index.html#directory`;
-      }
-    };
-
-    this.searchBtn?.addEventListener('click', handleSearch);
-    this.searchInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSearch();
-    });
   }
 
   setupActions() {

@@ -33,9 +33,25 @@ export class MarketDirectory {
   }
 
   init() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search') || sessionStorage.getItem('freshfind_pending_search');
+    if (searchParam) {
+      this.searchKeyword = searchParam.trim().toLowerCase();
+      if (this.filterKeyword) this.filterKeyword.value = searchParam.trim();
+      if (this.heroSearchInput) this.heroSearchInput.value = searchParam.trim();
+      sessionStorage.removeItem('freshfind_pending_search');
+    }
+
     this.populateFilterOptions();
     this.setupEventListeners();
     this.render();
+
+    if (searchParam) {
+      setTimeout(() => {
+        document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth' });
+        this.app?.showToast?.(`Showing results for "${searchParam.trim()}"`);
+      }, 300);
+    }
   }
 
   populateFilterOptions() {
@@ -289,16 +305,24 @@ export class MarketDirectory {
       ? dataService.getUserLocation()
       : { lat: 34.0522, lng: -118.2437 };
 
-    // 1. Filter by Text Keyword
+    // 1. Filter by Text Keyword (city, area, market name, produce, fruits, vegetables, descriptions)
     if (this.searchKeyword) {
       const kw = this.searchKeyword;
       markets = markets.filter(m => 
-        m.name.toLowerCase().includes(kw) ||
-        m.address.toLowerCase().includes(kw) ||
-        m.area.toLowerCase().includes(kw) ||
+        (m.name && m.name.toLowerCase().includes(kw)) ||
+        (m.address && m.address.toLowerCase().includes(kw)) ||
+        (m.area && m.area.toLowerCase().includes(kw)) ||
+        (m.city && m.city.toLowerCase().includes(kw)) ||
+        (m.tagline && m.tagline.toLowerCase().includes(kw)) ||
         (m.shortDescription && m.shortDescription.toLowerCase().includes(kw)) ||
+        (m.longDescription && m.longDescription.toLowerCase().includes(kw)) ||
         (m.produceTypes && m.produceTypes.some(p => p.toLowerCase().includes(kw))) ||
-        (m.featuredProducts && m.featuredProducts.some(fp => fp.toLowerCase().includes(kw)))
+        (m.featuredProducts && m.featuredProducts.some(fp => fp.toLowerCase().includes(kw))) ||
+        (m.farmerProfiles && m.farmerProfiles.some(fp => 
+          (fp.name && fp.name.toLowerCase().includes(kw)) ||
+          (fp.farm && fp.farm.toLowerCase().includes(kw)) ||
+          (fp.specialty && fp.specialty.toLowerCase().includes(kw))
+        ))
       );
     }
 

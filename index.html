@@ -1045,17 +1045,16 @@
         <div class="footer-col">
           <h4>eGreen Newsletter</h4>
           <p style="font-size:0.88rem; margin-bottom:0.85rem;">Get weekly alerts on what crops are in peak harvest at your local market.</p>
-          <form id="newsletterForm" onsubmit="event.preventDefault(); window.handleNewsletterSubscribe(this);">
+          <form class="newsletter-form-box" onsubmit="event.preventDefault(); window.handleNewsletterSubscribe(this);">
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <input type="email" id="newsletterEmailInput" required placeholder="Enter your email..." class="filter-select" style="flex:1; min-width:160px; padding:0.5rem 0.85rem; border-radius:var(--radius-full);">
-              <button type="submit" class="btn-primary" style="padding:0.5rem 1.1rem; font-weight:700; border-radius:var(--radius-full); cursor:pointer;">Subscribe</button>
+              <input type="email" class="filter-select newsletter-input" required placeholder="Enter your email..." style="flex:1; min-width:160px; padding:0.5rem 0.85rem; border-radius:var(--radius-full);">
+              <button type="submit" class="btn-primary newsletter-btn" style="padding:0.5rem 1.1rem; font-weight:700; border-radius:var(--radius-full); cursor:pointer;">Subscribe</button>
             </div>
-            <div id="newsletterSuccessMsg" style="display:none; font-size:0.85rem; color:#22c55e; font-weight:700; margin-top:0.6rem; align-items:center; gap:0.3rem;">
+            <div class="newsletter-success-msg" style="display:none; font-size:0.85rem; color:#22c55e; font-weight:700; margin-top:0.6rem; align-items:center; gap:0.3rem;">
               ✓ Thank you for subscribing to eGreen Harvest Newsletter!
             </div>
           </form>
         </div>
-      </div>
 
       <div class="footer-bottom">
         <div>© 2026 FreshFind. SRS v1.0 Compliant.</div>
@@ -1842,5 +1841,33 @@
       }
     })();
   </script>
+
+    // Handle URL search query params on load (e.g. index.html#directory?q=Kale or index.html?q=Downtown)
+    (function() {
+      function checkQuerySearch() {
+        var hash = window.location.hash || '';
+        var search = window.location.search || '';
+        var q = '';
+        if (search.includes('q=')) {
+          q = new URLSearchParams(search).get('q');
+        } else if (hash.includes('q=')) {
+          q = decodeURIComponent(hash.split('q=')[1] || '');
+        }
+        if (q && window.freshFindApp && window.freshFindApp.marketDirectory) {
+          var kw = document.getElementById('filterKeyword') || document.getElementById('marketSearchInput');
+          if (kw) kw.value = q;
+          window.freshFindApp.marketDirectory.searchKeyword = q.toLowerCase();
+          window.freshFindApp.marketDirectory.render();
+          var dirEl = document.getElementById('directory');
+          if (dirEl) dirEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { setTimeout(checkQuerySearch, 300); });
+      } else {
+        setTimeout(checkQuerySearch, 300);
+      }
+    })();
+
 </body>
 </html>

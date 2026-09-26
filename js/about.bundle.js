@@ -1,5 +1,5 @@
 /**
- * FreshFind - Universal Production Bundle (About)
+ * FreshFind - About Page Bundle
  */
 (function() {
   if (window.__FRESHFIND_ABOUT_BUNDLE_LOADED__) return;
@@ -122,7 +122,46 @@ class Header {
     this.setupScrollEffect();
     this.setupSearch();
     this.setupActions();
+    this.setupNewsletter();
     this.syncInitialBadge();
+  }
+
+  setupNewsletter() {
+    window.handleNewsletterSubscribe = function(form) {
+      if (!form) return;
+      const input = form.querySelector('input[type="email"]');
+      const email = input ? input.value.trim() : '';
+      if (!email) return;
+
+      const btn = form.querySelector('button[type="submit"]');
+      const successMsg = form.querySelector('.newsletter-success-msg') || (form.parentElement && form.parentElement.querySelector('.newsletter-success-msg'));
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Subscribing...';
+      }
+
+      setTimeout(() => {
+        if (input) input.value = '';
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Subscribed ✓';
+        }
+        if (successMsg) {
+          successMsg.style.display = 'flex';
+        }
+        if (window.freshFindApp && typeof window.freshFindApp.showToast === 'function') {
+          window.freshFindApp.showToast(`Thank you for subscribing (${email})! 🎉`);
+        }
+      }, 600);
+    };
+
+    document.querySelectorAll('.newsletter-form-box').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        window.handleNewsletterSubscribe(form);
+      });
+    });
   }
 
   syncInitialBadge() {
@@ -224,7 +263,7 @@ class Header {
     }, { passive: true });
   }
 
-      setupSearch() {
+  setupSearch() {
     const handleSearch = () => {
       const q = this.searchInput ? this.searchInput.value.trim() : '';
       if (!q) return;
@@ -244,7 +283,8 @@ class Header {
           this.app.showToast("Showing results for \"" + q + "\"");
         }
       } else {
-        window.location.href = "index.html#directory";
+        sessionStorage.setItem('freshfind_pending_search', q);
+        window.location.href = "index.html?search=" + encodeURIComponent(q) + "#directory";
       }
     };
 
@@ -1282,5 +1322,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  window.audioManager = audioManager;
 })();

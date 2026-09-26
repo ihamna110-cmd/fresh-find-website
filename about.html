@@ -444,8 +444,16 @@
         </div>
         <div class="footer-col">
           <h4>eGreen Newsletter</h4>
-          <p style="font-size:0.88rem;margin-bottom:0.85rem;">Get weekly alerts on what crops are at peak harvest at your local market.</p>
-          <div class="find-input-wrap"><input type="email" placeholder="Enter your email..."></div>
+          <p style="font-size:0.88rem; margin-bottom:0.85rem;">Get weekly alerts on what crops are in peak harvest at your local market.</p>
+          <form class="newsletter-form-box" onsubmit="event.preventDefault(); window.handleNewsletterSubscribe(this);">
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <input type="email" class="filter-select newsletter-input" required placeholder="Enter your email..." style="flex:1; min-width:160px; padding:0.5rem 0.85rem; border-radius:var(--radius-full);">
+              <button type="submit" class="btn-primary newsletter-btn" style="padding:0.5rem 1.1rem; font-weight:700; border-radius:var(--radius-full); cursor:pointer;">Subscribe</button>
+            </div>
+            <div class="newsletter-success-msg" style="display:none; font-size:0.85rem; color:#22c55e; font-weight:700; margin-top:0.6rem; align-items:center; gap:0.3rem;">
+              ✓ Thank you for subscribing to eGreen Harvest Newsletter!
+            </div>
+          </form>
         </div>
       </div>
       <div class="footer-bottom">
