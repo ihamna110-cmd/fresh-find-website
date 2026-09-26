@@ -3505,8 +3505,8 @@ class MarketDetail {
       }
 
       this.detailMap = L.map('marketModalMap').setView([market.lat, market.lng], 14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
       }).addTo(this.detailMap);
 
       const customIcon = L.divIcon({
@@ -3936,8 +3936,8 @@ class MarketDirectory {
       if (this.map) { this.updateMapMarkers(this.getFilteredMarkets()); return; }
       try {
         this.map = L.map('marketsMap').setView([userLoc.lat, userLoc.lng], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors'
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(this.map);
         this.updateMapMarkers(this.getFilteredMarkets());
         setTimeout(() => this.map?.invalidateSize(), 200);
@@ -5487,8 +5487,8 @@ class ContactAbout {
     // FreshFind Community Hub HQ
     const hqCoords = [34.0522, -118.2437];
     this.contactMap = L.map('contactMap').setView(hqCoords, 14);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(this.contactMap);
 
     const customIcon = L.divIcon({

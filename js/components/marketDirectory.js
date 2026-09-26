@@ -239,8 +239,8 @@ export class MarketDirectory {
       if (this.map) { this.updateMapMarkers(this.getFilteredMarkets()); return; }
       try {
         this.map = L.map('marketsMap').setView([userLoc.lat, userLoc.lng], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors'
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(this.map);
         this.updateMapMarkers(this.getFilteredMarkets());
         setTimeout(() => this.map?.invalidateSize(), 200);
