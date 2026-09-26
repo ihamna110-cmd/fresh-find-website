@@ -7,7 +7,7 @@
 .about-page {
   background: linear-gradient(160deg, #f0fdf4 0%, #fff9ec 40%, #ecfdf5 100%);
   color: var(--text-main, #132e20);
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 

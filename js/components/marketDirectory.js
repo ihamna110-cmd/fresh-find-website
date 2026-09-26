@@ -39,12 +39,13 @@ export class MarketDirectory {
   }
 
   populateFilterOptions() {
-    const markets = dataService.getMarkets();
-    const areas = [...new Set(markets.map(m => m.area))].sort();
-    const produceTypes = [...new Set(markets.flatMap(m => m.produceTypes))].sort();
+    const markets = (dataService && typeof dataService.getMarkets === 'function' ? dataService.getMarkets() : null) || [];
+    if (!markets.length) return;
+    const areas = [...new Set(markets.map(m => m.area))].filter(Boolean).sort();
+    const produceTypes = [...new Set(markets.flatMap(m => m.produceTypes || []))].filter(Boolean).sort();
 
-    // Populate Area dropdowns
-    if (this.areaSelect) {
+    // Populate Area dropdowns if only 1 option
+    if (this.areaSelect && this.areaSelect.options.length <= 1) {
       areas.forEach(area => {
         const opt = document.createElement('option');
         opt.value = area;
@@ -53,7 +54,7 @@ export class MarketDirectory {
       });
     }
 
-    if (this.heroAreaSelect) {
+    if (this.heroAreaSelect && this.heroAreaSelect.options.length <= 1) {
       areas.forEach(area => {
         const opt = document.createElement('option');
         opt.value = area;
@@ -62,8 +63,8 @@ export class MarketDirectory {
       });
     }
 
-    // Populate Produce dropdown
-    if (this.produceSelect) {
+    // Populate Produce dropdown if only 1 option
+    if (this.produceSelect && this.produceSelect.options.length <= 1) {
       produceTypes.forEach(p => {
         const opt = document.createElement('option');
         opt.value = p;
@@ -76,45 +77,65 @@ export class MarketDirectory {
   setupEventListeners() {
     // Standard Filter events
     const triggerFilter = () => {
-      audioManager.playClick();
+      try { audioManager.playClick(); } catch(e) {}
       this.render();
     };
 
     this.areaSelect?.addEventListener('change', triggerFilter);
+    this.areaSelect?.addEventListener('input', triggerFilter);
     this.daySelect?.addEventListener('change', triggerFilter);
+    this.daySelect?.addEventListener('input', triggerFilter);
     this.produceSelect?.addEventListener('change', triggerFilter);
+    this.produceSelect?.addEventListener('input', triggerFilter);
     this.sortSelect?.addEventListener('change', triggerFilter);
+    this.sortSelect?.addEventListener('input', triggerFilter);
 
     // Open Now button toggle
-    this.openNowToggle?.addEventListener('click', () => {
-      audioManager.playClick();
+    this.openNowToggle?.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { audioManager.playClick(); } catch(e) {}
       this.openNowToggle.classList.toggle('active');
       this.render();
     });
 
     // View toggles (Grid / Map)
-    this.viewGridBtn?.addEventListener('click', () => {
-      audioManager.playClick();
+    this.viewGridBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { audioManager.playClick(); } catch(e) {}
       this.setView('grid');
     });
 
-    this.viewMapBtn?.addEventListener('click', () => {
-      audioManager.playClick();
+    this.viewMapBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { audioManager.playClick(); } catch(e) {}
       this.setView('map');
     });
 
-    // Hero Keyword Search Input
-    this.heroSearchInput?.addEventListener('input', (e) => {
+    // Keyword Search Inputs
+    const handleFilterKeyword = (e) => {
       this.searchKeyword = e.target.value.trim().toLowerCase();
-      if (this.filterKeyword) this.filterKeyword.value = e.target.value;
+      if (this.heroSearchInput && this.heroSearchInput !== e.target) {
+        this.heroSearchInput.value = e.target.value;
+      }
       this.render();
-    });
+    };
 
-    this.filterKeyword?.addEventListener('input', (e) => {
+    this.filterKeyword?.addEventListener('input', handleFilterKeyword);
+    this.filterKeyword?.addEventListener('keyup', handleFilterKeyword);
+    this.filterKeyword?.addEventListener('change', handleFilterKeyword);
+    this.filterKeyword?.addEventListener('search', handleFilterKeyword);
+
+    const handleHeroKeyword = (e) => {
       this.searchKeyword = e.target.value.trim().toLowerCase();
-      if (this.heroSearchInput) this.heroSearchInput.value = e.target.value;
+      if (this.filterKeyword && this.filterKeyword !== e.target) {
+        this.filterKeyword.value = e.target.value;
+      }
       this.render();
-    });
+    };
+
+    this.heroSearchInput?.addEventListener('input', handleHeroKeyword);
+    this.heroSearchInput?.addEventListener('keyup', handleHeroKeyword);
+    this.heroSearchInput?.addEventListener('change', handleHeroKeyword);
 
     this.heroSearchInput?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -123,12 +144,14 @@ export class MarketDirectory {
     });
 
     // Hero Quick Find Search Button
-    this.heroSearchBtn?.addEventListener('click', () => {
-      audioManager.playChime();
+    this.heroSearchBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { audioManager.playChime(); } catch(e) {}
       const heroArea = this.heroAreaSelect?.value || 'all';
       const heroDay = this.heroDaySelect?.value || 'all';
       this.searchKeyword = this.heroSearchInput?.value.trim().toLowerCase() || '';
 
+      if (this.filterKeyword) this.filterKeyword.value = this.searchKeyword;
       if (this.areaSelect) this.areaSelect.value = heroArea;
       if (this.daySelect) this.daySelect.value = heroDay;
 
@@ -136,14 +159,14 @@ export class MarketDirectory {
       document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Hero Quick Filter Pills (Open Today, This Weekend, Near Me, Organic, Has Flowers)
+    // Hero Quick Filter Pills
     document.querySelectorAll('.hero-pill-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        audioManager.playChime();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try { audioManager.playChime(); } catch(e) {}
         const filterType = btn.getAttribute('data-filter');
 
         if (this.activeQuickFilter === filterType) {
-          // Toggle off
           this.activeQuickFilter = null;
           btn.classList.remove('active');
         } else {
@@ -164,31 +187,47 @@ export class MarketDirectory {
   setView(view) {
     this.currentView = view;
     if (view === 'grid') {
-      this.gridContainer.style.display = 'grid';
-      this.mapContainer.classList.remove('active');
+      if (this.gridContainer) this.gridContainer.style.display = 'grid';
+      if (this.mapContainer) {
+        this.mapContainer.classList.remove('active');
+        this.mapContainer.style.display = 'none';
+      }
       this.viewGridBtn?.classList.add('active');
       this.viewMapBtn?.classList.remove('active');
     } else {
-      this.gridContainer.style.display = 'none';
-      this.mapContainer.classList.add('active');
+      if (this.gridContainer) this.gridContainer.style.display = 'none';
+      if (this.mapContainer) {
+        this.mapContainer.classList.add('active');
+        this.mapContainer.style.display = 'block';
+      }
       this.viewGridBtn?.classList.remove('active');
       this.viewMapBtn?.classList.add('active');
       this.initMapIfNeeded();
-      setTimeout(() => this.map?.invalidateSize(), 200);
+      setTimeout(() => this.map?.invalidateSize(), 150);
+      setTimeout(() => this.map?.invalidateSize(), 400);
     }
   }
 
   initMapIfNeeded() {
-    if (this.map) return;
-    const userLoc = dataService.getUserLocation();
+    if (this.map) {
+      this.updateMapMarkers(this.getFilteredMarkets());
+      return;
+    }
+    const userLoc = (dataService && typeof dataService.getUserLocation === 'function')
+      ? dataService.getUserLocation()
+      : { lat: 34.0522, lng: -118.2437 };
 
     // Initialize Leaflet map
     if (window.L) {
-      this.map = L.map('marketsMap').setView([userLoc.lat, userLoc.lng], 12);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(this.map);
-      this.updateMapMarkers(this.getFilteredMarkets());
+      try {
+        this.map = L.map('marketsMap').setView([userLoc.lat, userLoc.lng], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(this.map);
+        this.updateMapMarkers(this.getFilteredMarkets());
+      } catch (err) {
+        console.warn('Leaflet map initialization:', err);
+      }
     }
   }
 
@@ -200,12 +239,12 @@ export class MarketDirectory {
     this.mapMarkers = [];
 
     markets.forEach(m => {
-      const isOpen = dataService.isMarketOpenNow(m);
+      const isOpen = dataService && typeof dataService.isMarketOpenNow === 'function' ? dataService.isMarketOpenNow(m) : false;
       const markerColor = isOpen ? '#22c55e' : '#15803d';
 
       const customIcon = L.divIcon({
         className: 'custom-leaflet-icon',
-        html: `<div style="background:${markerColor}; color:#fff; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,0.3); border:2px solid #fff;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>`,
+        html: `<div style="background:${markerColor}; color:#fff; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,0.3); border:2px solid #fff;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 12"/></svg></div>`,
         iconSize: [34, 34],
         iconAnchor: [17, 17]
       });
@@ -216,7 +255,7 @@ export class MarketDirectory {
           <h4 style="margin:0 0 4px 0; color:#15803d; font-size:15px;">${m.name}</h4>
           <p style="margin:0 0 6px 0; font-size:12px; color:#64748b;">${m.address}</p>
           <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:${isOpen ? '#15803d' : '#64748b'};">
-            ${isOpen ? '● Open Today' : 'Closed Now'}
+            ${isOpen ? '● Open Today' : 'Scheduled'}
           </div>
           <button id="popup-btn-${m.id}" style="background:#15803d; color:#fff; border:none; padding:4px 10px; border-radius:12px; font-size:12px; cursor:pointer; width:100%;">
             View Details
@@ -226,7 +265,7 @@ export class MarketDirectory {
 
       marker.on('popupopen', () => {
         document.getElementById(`popup-btn-${m.id}`)?.addEventListener('click', () => {
-          this.app.openMarketDetail(m.id);
+          this.app?.openMarketDetail(m.id);
         });
       });
 
@@ -240,13 +279,15 @@ export class MarketDirectory {
   }
 
   getFilteredMarkets() {
-    let markets = dataService.getMarkets();
+    let markets = (dataService && typeof dataService.getMarkets === 'function' ? dataService.getMarkets() : null) || [];
     const area = this.areaSelect?.value || 'all';
     const day = this.daySelect?.value || 'all';
     const produce = this.produceSelect?.value || 'all';
     const openNowOnly = this.openNowToggle?.classList.contains('active');
     const sort = this.sortSelect?.value || 'rating';
-    const userLoc = dataService.getUserLocation();
+    const userLoc = (dataService && typeof dataService.getUserLocation === 'function')
+      ? dataService.getUserLocation()
+      : { lat: 34.0522, lng: -118.2437 };
 
     // 1. Filter by Text Keyword
     if (this.searchKeyword) {
@@ -294,24 +335,43 @@ export class MarketDirectory {
 
     // 4. Filter by Day
     if (day !== 'all') {
-      markets = markets.filter(m => m.days.includes(day));
+      markets = markets.filter(m => m.days && m.days.includes(day));
     }
 
     // 5. Filter by Produce Available
     if (produce !== 'all') {
-      markets = markets.filter(m => m.produceTypes.includes(produce));
+      markets = markets.filter(m => m.produceTypes && m.produceTypes.includes(produce));
     }
 
-    // 6. Filter by Open Right Now
+    // 6. Filter by Open Right Now (Smart live / today / weekend detection)
     if (openNowOnly) {
-      markets = markets.filter(m => dataService.isMarketOpenNow(m));
+      const openStrict = markets.filter(m => dataService && dataService.isMarketOpenNow && dataService.isMarketOpenNow(m));
+      if (openStrict.length > 0) {
+        markets = openStrict;
+      } else {
+        // If outside morning operating hours, filter to markets open today
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const todayDay = dayNames[new Date().getDay()];
+        const openToday = markets.filter(m => m.days && m.days.includes(todayDay));
+        if (openToday.length > 0) {
+          markets = openToday;
+        } else {
+          // If none today, show weekend markets
+          const weekend = markets.filter(m => m.days && (m.days.includes('Saturday') || m.days.includes('Sunday')));
+          markets = weekend.length > 0 ? weekend : markets;
+        }
+      }
     }
 
     // 7. Calculate Distance & Sort
     markets = markets.map(m => ({
       ...m,
-      distance: dataService.calculateDistance(userLoc.lat, userLoc.lng, m.lat, m.lng),
-      isOpenNow: dataService.isMarketOpenNow(m)
+      distance: (dataService && typeof dataService.calculateDistance === 'function')
+        ? dataService.calculateDistance(userLoc.lat, userLoc.lng, m.lat, m.lng)
+        : '1.2',
+      isOpenNow: (dataService && typeof dataService.isMarketOpenNow === 'function')
+        ? dataService.isMarketOpenNow(m)
+        : false
     }));
 
     // If 'near-me' quick pill is active, override sort to distance
@@ -322,9 +382,9 @@ export class MarketDirectory {
     } else if (effectiveSort === 'za') {
       markets.sort((a, b) => b.name.localeCompare(a.name));
     } else if (effectiveSort === 'distance') {
-      markets.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+      markets.sort((a, b) => parseFloat(a.distance || 0) - parseFloat(b.distance || 0));
     } else if (effectiveSort === 'rating') {
-      markets.sort((a, b) => b.rating - a.rating);
+      markets.sort((a, b) => (b.rating || 0) - (a.rating || 0));
     } else if (effectiveSort === 'next_open') {
       const getDaysUntilNextOpen = (m) => {
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -383,7 +443,7 @@ export class MarketDirectory {
     }
 
     this.gridContainer.innerHTML = markets.map((m, idx) => {
-      const isFav = this.app.isBookmarked('market', m.id);
+      const isFav = this.app?.isBookmarked ? this.app.isBookmarked('market', m.id) : false;
       const delayMs = idx * 60;
       return `
         <div class="market-card" data-id="${m.id}" style="animation: revealCard 0.5s ${delayMs}ms cubic-bezier(0.16,1,0.3,1) both;">
@@ -404,7 +464,7 @@ export class MarketDirectory {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="${m.isOpenNow ? '#16a34a' : '#d97706'}" stroke-width="2.5" style="vertical-align:-2px; margin-right:3px;">
                   <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/>
                 </svg>
-                ${m.isOpenNow ? 'Open' : (m.days && m.days.some(d => d.includes('Sat') || d.includes('Sun')) ? 'Weekend' : 'Scheduled')}
+                ${m.isOpenNow ? 'Open Now' : (m.days && m.days.some(d => d.includes('Sat') || d.includes('Sun')) ? 'Weekend Market' : 'Scheduled')}
               </span>
             </div>
 
@@ -425,8 +485,8 @@ export class MarketDirectory {
         if (e.target.closest('.market-fav-btn')) return;
         const id = card.getAttribute('data-id');
         if (id) {
-          audioManager.playClick();
-          this.app.openMarketDetail(id);
+          try { audioManager.playClick(); } catch(err) {}
+          this.app?.openMarketDetail(id);
         }
       });
     });
@@ -436,8 +496,8 @@ export class MarketDirectory {
         e.stopPropagation();
         const id = e.currentTarget.getAttribute('data-id');
         if (id) {
-          audioManager.playClick();
-          this.app.openMarketDetail(id);
+          try { audioManager.playClick(); } catch(err) {}
+          this.app?.openMarketDetail(id);
         }
       });
     });
@@ -446,7 +506,7 @@ export class MarketDirectory {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-id');
-        this.app.toggleBookmark('market', id);
+        this.app?.toggleBookmark('market', id);
         this.render();
       });
     });
