@@ -5,12 +5,24 @@
     "category": "Vegetables",
     "icon": "🍅",
     "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
-    "season": ["Summer", "Autumn"],
-    "peakMonths": ["July", "August", "September", "October"],
+    "season": [
+      "Summer",
+      "Autumn"
+    ],
+    "peakMonths": [
+      "July",
+      "August",
+      "September",
+      "October"
+    ],
     "description": "Prized for an incomparable rich, wine-sweet flavor and deep pink-red ribbed flesh. Grown from 19th-century heirloom seeds with zero genetic modification.",
     "nutrition": "High in Lycopene, Vitamin C, Potassium, and Vitamin K1. Great for heart health and glowing skin.",
     "storageTip": "Store stem-down at room temperature. Never refrigerate before slicing to preserve fragrant aromatic oils.",
-    "availableMarkets": ["mkt-1", "mkt-4", "mkt-7"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-4",
+      "mkt-7"
+    ]
   },
   {
     "id": "prod-2",
@@ -18,25 +30,53 @@
     "category": "Fruits",
     "icon": "🍎",
     "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80",
-    "season": ["Autumn", "Winter"],
-    "peakMonths": ["September", "October", "November", "December"],
+    "season": [
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
     "description": "Explosively crisp and juicy with a balanced honey-sweet and tart bite. Tree-ripened in high-altitude family orchards.",
     "nutrition": "Rich in dietary pectin fiber, Vitamin C, and polyphenols that assist digestion and reduce inflammation.",
     "storageTip": "Keep in the crisper drawer of your refrigerator at 32-35°F for maximum crunch lasting up to 6 weeks.",
-    "availableMarkets": ["mkt-1", "mkt-7", "mkt-3"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-7",
+      "mkt-3"
+    ]
   },
   {
     "id": "prod-3",
     "name": "Tuscan Lacinato Dinosaur Kale",
     "category": "Vegetables",
     "icon": "🥬",
-    "image": "https://images.unsplash.com/photo-1524179091875-bf99a9a6fa57?auto=format&fit=crop&w=600&q=80",
-    "season": ["Autumn", "Winter", "Spring"],
-    "peakMonths": ["October", "November", "December", "January", "February", "March"],
+    "image": "assets/images/tuscan_kale.jpg",
+    "season": [
+      "Autumn",
+      "Winter",
+      "Spring"
+    ],
+    "peakMonths": [
+      "October",
+      "November",
+      "December",
+      "January",
+      "February",
+      "March"
+    ],
     "description": "Dark blue-green embossed leaves with a sweeter, more tender taste than curly kale. Becomes even sweeter after light frost.",
     "nutrition": "Powerhouse of Vitamins A, C, and K, iron, and glucosinolates that support cellular detoxification.",
     "storageTip": "Wrap stems in a moist cloth towel and store in an airtight container or reusable silicone bag.",
-    "availableMarkets": ["mkt-1", "mkt-4", "mkt-5", "mkt-8"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-4",
+      "mkt-5",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-4",
@@ -44,12 +84,25 @@
     "category": "Honey & Preserves",
     "icon": "🍯",
     "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["April", "May", "June", "July"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "April",
+      "May",
+      "June",
+      "July"
+    ],
     "description": "100% unheated, unfiltered raw honey gathered by local bees foraging on wildflower blossoms and clover.",
     "nutrition": "Contains active enzymes, bee pollen, propolis, and natural antioxidants with anti-bacterial benefits.",
     "storageTip": "Keep sealed at room temperature in a dry pantry. If natural crystallization occurs, gently warm in a warm water bath.",
-    "availableMarkets": ["mkt-1", "mkt-2", "mkt-4", "mkt-8"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-2",
+      "mkt-4",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-5",
@@ -57,12 +110,23 @@
     "category": "Dairy & Eggs",
     "icon": "🧀",
     "image": "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer", "Autumn", "Winter"],
-    "peakMonths": ["Year-round"],
+    "season": [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "Year-round"
+    ],
     "description": "Velvety, mild, and creamy goat log infused with fresh garden rosemary and cracked pink peppercorns.",
     "nutrition": "Easier to digest A2 protein structure, lower in lactose, packed with bioavailable calcium and healthy fatty acids.",
     "storageTip": "Wrap in wax or parchment paper rather than plastic wrap to allow the cheese rind to breathe.",
-    "availableMarkets": ["mkt-1", "mkt-2", "mkt-5"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-2",
+      "mkt-5"
+    ]
   },
   {
     "id": "prod-6",
@@ -70,12 +134,25 @@
     "category": "Fruits",
     "icon": "🍓",
     "image": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["April", "May", "June", "July", "August"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "April",
+      "May",
+      "June",
+      "July",
+      "August"
+    ],
     "description": "Deep red to the core, picked at peak sugar ripeness just hours before market opening. Unmatched aroma and candy sweetness.",
     "nutrition": "One serving delivers over 140% daily Vitamin C, manganese, and anthocyanin antioxidants.",
     "storageTip": "Do not wash until immediately before eating. Store in single layers lined with paper towels.",
-    "availableMarkets": ["mkt-2", "mkt-6", "mkt-8"]
+    "availableMarkets": [
+      "mkt-2",
+      "mkt-6",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-7",
@@ -83,12 +160,27 @@
     "category": "Herbs",
     "icon": "🌿",
     "image": "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["May", "June", "July", "August", "September"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "May",
+      "June",
+      "July",
+      "August",
+      "September"
+    ],
     "description": "Aromatic lush green leaves essential for traditional pesto, Caprese salads, and woodfired rustic pizzas.",
     "nutrition": "High in eugenol essential oils, Vitamin K, beta-carotene, and natural anti-inflammatory compounds.",
     "storageTip": "Trim stem bottoms and place like a bouquet in a glass of water on your counter at room temperature.",
-    "availableMarkets": ["mkt-1", "mkt-2", "mkt-4", "mkt-5", "mkt-8"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-2",
+      "mkt-4",
+      "mkt-5",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-8",
@@ -96,25 +188,51 @@
     "category": "Dairy & Eggs",
     "icon": "🥚",
     "image": "https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer", "Autumn", "Winter"],
-    "peakMonths": ["Year-round"],
+    "season": [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "Year-round"
+    ],
     "description": "Laid by heritage hens roaming freely on open clover pastures. Deep amber yolks rich with natural omega-3s.",
     "nutrition": "Double the Vitamin E and 3x more Omega-3 fatty acids than conventional eggs, complete protein source.",
     "storageTip": "Keep inside carton on the center shelf of refrigerator, not the door, for consistent temperature.",
-    "availableMarkets": ["mkt-1", "mkt-3", "mkt-7", "mkt-5"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-3",
+      "mkt-7",
+      "mkt-5"
+    ]
   },
   {
     "id": "prod-9",
     "name": "Heirloom Rainbow Carrots",
     "category": "Vegetables",
     "icon": "🥕",
-    "image": "https://images.unsplash.com/photo-1598170845058-32b9d6a5c317?auto=format&fit=crop&w=600&q=80",
-    "season": ["Autumn", "Winter", "Spring"],
-    "peakMonths": ["October", "November", "December", "January", "February"],
+    "image": "assets/images/rainbow_carrots.jpg",
+    "season": [
+      "Autumn",
+      "Winter",
+      "Spring"
+    ],
+    "peakMonths": [
+      "October",
+      "November",
+      "December",
+      "January",
+      "February"
+    ],
     "description": "Stunning bunch of purple, sunshine yellow, deep orange, and white carrots with tender sweet crunch.",
     "nutrition": "Dense in lutein, beta-carotene, and anthocyanins that sharpen eyesight and support cardiovascular immunity.",
     "storageTip": "Remove green tops immediately (greens draw moisture from root) and store submerged in water or sealed bag.",
-    "availableMarkets": ["mkt-3", "mkt-4", "mkt-7"]
+    "availableMarkets": [
+      "mkt-3",
+      "mkt-4",
+      "mkt-7"
+    ]
   },
   {
     "id": "prod-10",
@@ -122,12 +240,25 @@
     "category": "Fruits",
     "icon": "🥑",
     "image": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["March", "April", "May", "June", "July"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "March",
+      "April",
+      "May",
+      "June",
+      "July"
+    ],
     "description": "Buttery, nutty, rich avocados left on coastal trees until maximum oil content is achieved.",
     "nutrition": "Monounsaturated oleic acid fats, folate, more potassium than bananas, soluble fiber.",
     "storageTip": "Ripen on counter until yielding to gentle thumb pressure. Once ripe, refrigerate to suspend further softening.",
-    "availableMarkets": ["mkt-6", "mkt-1", "mkt-8"]
+    "availableMarkets": [
+      "mkt-6",
+      "mkt-1",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-11",
@@ -135,12 +266,24 @@
     "category": "Vegetables",
     "icon": "🍄",
     "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
-    "season": ["Autumn", "Winter"],
-    "peakMonths": ["September", "October", "November", "December"],
+    "season": [
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
     "description": "Spectacular cascading white icicle mushrooms with a succulent texture reminiscent of lobster and crab meat.",
     "nutrition": "Renowned for neuroprotective erinacines and hericenones that promote memory focus and NGF synthesis.",
     "storageTip": "Store in a breathable brown paper bag in your refrigerator vegetable drawer. Never seal in plastic.",
-    "availableMarkets": ["mkt-5", "mkt-1", "mkt-4"]
+    "availableMarkets": [
+      "mkt-5",
+      "mkt-1",
+      "mkt-4"
+    ]
   },
   {
     "id": "prod-12",
@@ -148,12 +291,24 @@
     "category": "Fruits",
     "icon": "🍋",
     "image": "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=600&q=80",
-    "season": ["Winter", "Spring"],
-    "peakMonths": ["December", "January", "February", "March", "April"],
+    "season": [
+      "Winter",
+      "Spring"
+    ],
+    "peakMonths": [
+      "December",
+      "January",
+      "February",
+      "March",
+      "April"
+    ],
     "description": "A cross between a traditional lemon and a mandarin orange. Thinner peel, sweeter floral aroma, and low acidity.",
     "nutrition": "Superior bioflavonoids, Vitamin C, citric acid aiding mineral absorption and alkaline body balance.",
     "storageTip": "Room temperature for 1 week or inside a sealed zip bag in the fridge for up to 4 weeks.",
-    "availableMarkets": ["mkt-3", "mkt-6"]
+    "availableMarkets": [
+      "mkt-3",
+      "mkt-6"
+    ]
   },
   {
     "id": "prod-13",
@@ -161,12 +316,23 @@
     "category": "Dairy & Eggs",
     "icon": "🧈",
     "image": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer", "Autumn", "Winter"],
-    "peakMonths": ["Year-round"],
+    "season": [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "Year-round"
+    ],
     "description": "Slow-churned from cultured cream of pasture-raised Jersey cows. Rich golden hue, 84% butterfat with delicate sea salt flakes.",
     "nutrition": "Rich in CLA, Vitamin A, Vitamin K2 (MK-4), and butyrate for metabolic vitality.",
     "storageTip": "Store wrapped in greaseproof butter paper. Keep butter bell at room temp for daily spreading.",
-    "availableMarkets": ["mkt-1", "mkt-2", "mkt-5"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-2",
+      "mkt-5"
+    ]
   },
   {
     "id": "prod-14",
@@ -174,12 +340,23 @@
     "category": "Dairy & Eggs",
     "icon": "🥛",
     "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer", "Autumn", "Winter"],
-    "peakMonths": ["Year-round"],
+    "season": [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "Year-round"
+    ],
     "description": "Traditional small-batch strained whole milk Greek yogurt with thick velvety consistency and live active probiotic cultures.",
     "nutrition": "High protein, calcium, live Lactobacillus and Bifidobacterium cultures for microbiome health.",
     "storageTip": "Refrigerate at 36-39°F. Consume within 10 days of opening for peak probiotic potency.",
-    "availableMarkets": ["mkt-1", "mkt-4", "mkt-7"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-4",
+      "mkt-7"
+    ]
   },
   {
     "id": "prod-15",
@@ -187,12 +364,24 @@
     "category": "Honey & Preserves",
     "icon": "🐝",
     "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["May", "June", "July", "August"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "May",
+      "June",
+      "July",
+      "August"
+    ],
     "description": "Intact virgin beeswax comb filled with delicate, slow-crystallizing light amber nectar collected from mountain acacia groves.",
     "nutrition": "Naturally anti-microbial enzymes, royal jelly traces, pollen, antioxidant pinocembrin.",
     "storageTip": "Keep at room temperature in sealed container. Cut squares straight onto warm toast or cheese boards.",
-    "availableMarkets": ["mkt-2", "mkt-3", "mkt-8"]
+    "availableMarkets": [
+      "mkt-2",
+      "mkt-3",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-16",
@@ -200,12 +389,23 @@
     "category": "Honey & Preserves",
     "icon": "🫐",
     "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80",
-    "season": ["Summer", "Autumn"],
-    "peakMonths": ["July", "August", "September"],
+    "season": [
+      "Summer",
+      "Autumn"
+    ],
+    "peakMonths": [
+      "July",
+      "August",
+      "September"
+    ],
     "description": "Kettle-cooked in copper pans using wild-foraged mountain blackberries, organic lemon juice, and pure cane sugar with no artificial pectin.",
     "nutrition": "Packed with anthocyanins, dietary fiber, Vitamin C, and natural fruit pectin.",
     "storageTip": "Refrigerate after opening and enjoy within 6 weeks for optimal vibrant berry flavor.",
-    "availableMarkets": ["mkt-1", "mkt-3", "mkt-6"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-3",
+      "mkt-6"
+    ]
   },
   {
     "id": "prod-17",
@@ -213,12 +413,24 @@
     "category": "Honey & Preserves",
     "icon": "🍊",
     "image": "https://images.unsplash.com/photo-1601039641847-7857b994d704?auto=format&fit=crop&w=600&q=80",
-    "season": ["Autumn", "Winter"],
-    "peakMonths": ["September", "October", "November", "December"],
+    "season": [
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
     "description": "Rich Mediterranean Mission figs simmered with thin-cut citrus peels and aromatic orange blossom water.",
     "nutrition": "High in dietary polyphenols, potassium, calcium, and natural prebiotic fiber.",
     "storageTip": "Keep in a cool dry pantry before opening; store chilled once opened.",
-    "availableMarkets": ["mkt-2", "mkt-4", "mkt-7"]
+    "availableMarkets": [
+      "mkt-2",
+      "mkt-4",
+      "mkt-7"
+    ]
   },
   {
     "id": "prod-18",
@@ -226,12 +438,23 @@
     "category": "Herbs",
     "icon": "🪻",
     "image": "https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["June", "July", "August"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "June",
+      "July",
+      "August"
+    ],
     "description": "Culinary-grade angustifolia lavender hand-harvested at morning dew. Delivers sweet floral notes to pastries, teas, and syrups.",
     "nutrition": "Linalool and linalyl acetate terpenes that naturally promote relaxation and sleep quality.",
     "storageTip": "Hang upside down in a dark, dry space for preservation or store in an airtight glass jar.",
-    "availableMarkets": ["mkt-1", "mkt-5", "mkt-8"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-5",
+      "mkt-8"
+    ]
   },
   {
     "id": "prod-19",
@@ -239,12 +462,23 @@
     "category": "Herbs",
     "icon": "🌿",
     "image": "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer", "Autumn", "Winter"],
-    "peakMonths": ["Year-round"],
+    "season": [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ],
+    "peakMonths": [
+      "Year-round"
+    ],
     "description": "Robust woody sprigs of mountain rosemary and creeping wild thyme picked fresh with intense resinous and savory aroma.",
     "nutrition": "High concentration of rosmarinic acid, carnosic acid, and thymol with strong antioxidant activity.",
     "storageTip": "Wrap loosely in damp paper towels inside a reusable silicone bag in the crisper drawer.",
-    "availableMarkets": ["mkt-2", "mkt-4", "mkt-6"]
+    "availableMarkets": [
+      "mkt-2",
+      "mkt-4",
+      "mkt-6"
+    ]
   },
   {
     "id": "prod-20",
@@ -252,11 +486,25 @@
     "category": "Herbs",
     "icon": "🍃",
     "image": "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?auto=format&fit=crop&w=600&q=80",
-    "season": ["Spring", "Summer"],
-    "peakMonths": ["May", "June", "July", "August", "September"],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "peakMonths": [
+      "May",
+      "June",
+      "July",
+      "August",
+      "September"
+    ],
     "description": "Tender bright green mint leaves loaded with pure cooling menthol. Perfect for infused waters, teas, salads, and mocktails.",
     "nutrition": "Antispasmodic menthol compounds that support digestive comfort and respiratory freshness.",
     "storageTip": "Store upright with stems in a jar of cool water on your kitchen windowsill.",
-    "availableMarkets": ["mkt-1", "mkt-3", "mkt-5", "mkt-7"]
+    "availableMarkets": [
+      "mkt-1",
+      "mkt-3",
+      "mkt-5",
+      "mkt-7"
+    ]
   }
 ]

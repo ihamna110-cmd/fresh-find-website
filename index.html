@@ -366,91 +366,6 @@
       </div>
     </section>
 
-    <!-- 🔍 Quick Find Search Bar & Live Harvest Radar (Smooth Transition into Directory) -->
-    <section id="quickFindSection" class="quick-find-transition-section">
-      <div class="container">
-        <div class="quick-find-bar">
-          <div class="find-input-group">
-            <label for="heroSearchInput">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              Search by Keyword or Zip
-            </label>
-            <div class="find-input-wrap">
-              <input type="text" id="heroSearchInput" placeholder="Neighborhood, zip code, or market...">
-            </div>
-          </div>
-
-          <div class="find-input-group">
-            <label for="heroAreaSelect">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              Neighborhood / Area
-            </label>
-            <div class="find-input-wrap">
-              <select id="heroAreaSelect">
-              <option value="all">All Neighborhood Areas</option>
-              <option value="Bayview Harbor">Bayview Harbor</option>
-              <option value="Downtown Green District">Downtown Green District</option>
-              <option value="Heritage District">Heritage District</option>
-              <option value="Midtown Central">Midtown Central</option>
-              <option value="North Hills">North Hills</option>
-              <option value="Oakridge District">Oakridge District</option>
-              <option value="Riverside Promenade">Riverside Promenade</option>
-              <option value="Westside Greenbelt">Westside Greenbelt</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="find-input-group">
-            <label for="heroDaySelect">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              Day of Week
-            </label>
-            <div class="find-input-wrap">
-              <select id="heroDaySelect">
-                <option value="all">Any Day of the Week</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-            </div>
-          </div>
-
-          <button id="heroSearchBtn" class="btn-primary quick-find-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <span>Search</span>
-          </button>
-        </div>
-
-        <!-- 🌟 Quick Filter Pills -->
-        <div class="hero-quick-filter-pills" id="heroQuickPills">
-          <button class="hero-pill-btn" data-filter="open-today">
-            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <span>Open Today</span>
-          </button>
-          <button class="hero-pill-btn" data-filter="weekend">
-            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <span>This Weekend</span>
-          </button>
-          <button class="hero-pill-btn" data-filter="near-me">
-            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Near Me</span>
-          </button>
-          <button class="hero-pill-btn" data-filter="organic">
-            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-            <span>100% Organic</span>
-          </button>
-          <button class="hero-pill-btn" data-filter="flowers">
-            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"/><path d="M12 17a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0v-1a4 4 0 0 0-4-4z"/><path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z"/><path d="M2 12a4 4 0 0 0 4-4h1a4 4 0 0 0 0 8H6a4 4 0 0 0-4-4z"/></svg>
-            <span>Fresh Floral</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
     <!-- Breadcrumb Navigation Bar (SRS Mandatory) -->
     
 
@@ -1125,16 +1040,21 @@
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="#" id="footerOpenBookmarks">My Bookmarks</a></li>
             <li><a href="#" id="footerOpenAuth">Shopper Account</a></li>
-            <li><a href="javascript:void(0)" onclick="window.replayFreshFindIntro()" style="color:#22c55e; font-weight:700;">✨ Replay Intro</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>eGreen Newsletter</h4>
           <p style="font-size:0.88rem; margin-bottom:0.85rem;">Get weekly alerts on what crops are in peak harvest at your local market.</p>
-          <div class="find-input-wrap">
-            <input type="email" placeholder="Enter your email...">
-          </div>
+          <form id="newsletterForm" onsubmit="event.preventDefault(); window.handleNewsletterSubscribe(this);">
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <input type="email" id="newsletterEmailInput" required placeholder="Enter your email..." class="filter-select" style="flex:1; min-width:160px; padding:0.5rem 0.85rem; border-radius:var(--radius-full);">
+              <button type="submit" class="btn-primary" style="padding:0.5rem 1.1rem; font-weight:700; border-radius:var(--radius-full); cursor:pointer;">Subscribe</button>
+            </div>
+            <div id="newsletterSuccessMsg" style="display:none; font-size:0.85rem; color:#22c55e; font-weight:700; margin-top:0.6rem; align-items:center; gap:0.3rem;">
+              ✓ Thank you for subscribing to eGreen Harvest Newsletter!
+            </div>
+          </form>
         </div>
       </div>
 

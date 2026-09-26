@@ -358,7 +358,7 @@ const fallbackProduce = [
     "name": "Tuscan Lacinato Dinosaur Kale",
     "category": "Vegetables",
     "icon": "🥬",
-    "image": "https://images.unsplash.com/photo-1524179091875-bf99a9a6fa57?auto=format&fit=crop&w=600&q=80",
+    "image": "assets/images/tuscan_kale.jpg",
     "season": [
       "Autumn",
       "Winter",
@@ -516,7 +516,7 @@ const fallbackProduce = [
     "name": "Heirloom Rainbow Carrots",
     "category": "Vegetables",
     "icon": "🥕",
-    "image": "https://images.unsplash.com/photo-1598170845058-32b9d6a5c317?auto=format&fit=crop&w=600&q=80",
+    "image": "assets/images/rainbow_carrots.jpg",
     "season": [
       "Autumn",
       "Winter",
