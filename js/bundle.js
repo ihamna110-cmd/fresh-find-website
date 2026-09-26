@@ -3483,7 +3483,20 @@ class MarketDetail {
 
   initDetailMap(market) {
     const mapElement = document.getElementById('marketModalMap');
-    if (!mapElement || !window.L) return;
+    if (!mapElement) return;
+
+    // Fallback: inject Google Maps iframe if Leaflet not available
+    if (!window.L) {
+      const q = encodeURIComponent(market.name + ', ' + market.address);
+      mapElement.innerHTML = `<iframe
+        src="https://maps.google.com/maps?q=${q}&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        width="100%" height="100%"
+        style="border:0;border-radius:inherit;"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>`;
+      return;
+    }
 
     try {
       if (this.detailMap) {
@@ -3513,6 +3526,17 @@ class MarketDetail {
       }, 350);
     } catch (err) {
       console.warn('Map initialization in modal:', err);
+      // Google Maps iframe fallback on any error
+      try {
+        const q = encodeURIComponent(market.name + ', ' + market.address);
+        mapElement.innerHTML = `<iframe
+          src="https://maps.google.com/maps?q=${q}&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="100%"
+          style="border:0;border-radius:inherit;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>`;
+      } catch(e2) {}
     }
   }
 
@@ -3904,20 +3928,26 @@ class MarketDirectory {
     }
     const userLoc = (dataService && typeof dataService.getUserLocation === 'function')
       ? dataService.getUserLocation()
-      : { lat: 34.0522, lng: -118.2437 };
+      : { lat: 24.8607, lng: 67.0011 }; // Karachi, Pakistan
 
-    // Initialize Leaflet map
-    if (window.L) {
+    // Initialize Leaflet map; retry once after 1s if Leaflet CDN not yet ready
+    const _tryInit = () => {
+      if (!window.L) return;
+      if (this.map) { this.updateMapMarkers(this.getFilteredMarkets()); return; }
       try {
         this.map = L.map('marketsMap').setView([userLoc.lat, userLoc.lng], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors'
         }).addTo(this.map);
         this.updateMapMarkers(this.getFilteredMarkets());
+        setTimeout(() => this.map?.invalidateSize(), 200);
       } catch (err) {
         console.warn('Leaflet map initialization:', err);
+        this.map = null;
       }
-    }
+    };
+    if (window.L) { _tryInit(); }
+    else { setTimeout(_tryInit, 1000); }
   }
 
   updateMapMarkers(markets) {

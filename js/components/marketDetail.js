@@ -103,7 +103,20 @@ export class MarketDetail {
 
   initDetailMap(market) {
     const mapElement = document.getElementById('marketModalMap');
-    if (!mapElement || !window.L) return;
+    if (!mapElement) return;
+
+    // Fallback: inject Google Maps iframe if Leaflet not available
+    if (!window.L) {
+      const q = encodeURIComponent(market.name + ', ' + market.address);
+      mapElement.innerHTML = `<iframe
+        src="https://maps.google.com/maps?q=${q}&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        width="100%" height="100%"
+        style="border:0;border-radius:inherit;"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>`;
+      return;
+    }
 
     try {
       if (this.detailMap) {
@@ -133,6 +146,17 @@ export class MarketDetail {
       }, 350);
     } catch (err) {
       console.warn('Map initialization in modal:', err);
+      // Google Maps iframe fallback on any error
+      try {
+        const q = encodeURIComponent(market.name + ', ' + market.address);
+        mapElement.innerHTML = `<iframe
+          src="https://maps.google.com/maps?q=${q}&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="100%"
+          style="border:0;border-radius:inherit;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>`;
+      } catch(e2) {}
     }
   }
 
