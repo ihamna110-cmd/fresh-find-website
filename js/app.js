@@ -147,7 +147,7 @@ class FreshFindApp {
   }
 
   setupNavigation() {
-    // Smooth scrolling for all hash links with event delegation (100% click reliability)
+    // ── 1. Smooth scrolling for all hash links ──────────────────────────────
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
@@ -167,8 +167,59 @@ class FreshFindApp {
         document.querySelectorAll('.nav-item-pill, .nav-item-link').forEach(l => l.classList.remove('active'));
         const navMatch = document.querySelector(`.main-nav a[href="${href}"]`);
         if (navMatch) navMatch.classList.add('active');
+        // Close mobile menu on link click
+        document.getElementById('mainNav')?.classList.remove('open');
+        document.getElementById('mobileMenuToggle')?.classList.remove('active');
       }
     });
+
+    // ── 2. Mobile Hamburger Menu Toggle ─────────────────────────────────────
+    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileToggle && mainNav) {
+      mobileToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        mobileToggle.classList.toggle('active', isOpen);
+        mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        mobileToggle.innerHTML = isOpen
+          ? `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+          : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.site-navbar-capsule') && mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+        }
+      });
+
+      // Close on page nav-link click within mobile menu
+      mainNav.querySelectorAll('.nav-item-link, .nav-item-pill, .dropdown-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mainNav.classList.remove('open');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+        });
+      });
+    }
+
+    // ── 3. Sticky Scrolled Class (adds shadow/transition when scrolled) ──────
+    const headerWrapper = document.querySelector('.site-header-wrapper');
+    if (headerWrapper) {
+      const onScroll = () => {
+        if (window.scrollY > 10) {
+          headerWrapper.classList.add('scrolled');
+        } else {
+          headerWrapper.classList.remove('scrolled');
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   }
 
   setupAuthModal() {

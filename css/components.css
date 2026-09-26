@@ -7,10 +7,10 @@
    ========================================================================== */
 .site-header-wrapper {
   position: sticky;
-  top: 42px;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1001;
   width: 100%;
   padding: 0;
   box-sizing: border-box;
@@ -4046,9 +4046,8 @@ html {
   padding: 0.45rem 1.5rem;
   overflow: hidden;
   box-sizing: border-box;
-  position: sticky;
-  top: 0;
-  z-index: 1002;
+  position: relative;
+  z-index: 1;
   font-size: 0.84rem;
   color: #e2e8f0;
 }
