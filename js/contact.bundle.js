@@ -224,32 +224,36 @@ class Header {
     }, { passive: true });
   }
 
-  setupSearch() {
+      setupSearch() {
     const handleSearch = () => {
-      const q = this.searchInput?.value.trim();
+      const q = this.searchInput ? this.searchInput.value.trim() : '';
       if (!q) return;
-      audioManager.playClick();
+      try { if (typeof audioManager !== 'undefined' && audioManager.playClick) audioManager.playClick(); } catch(e) {}
 
-      // If marketDirectory exists on the page
-      if (this.app?.marketDirectory) {
+      const kwInput = document.getElementById('filterKeyword') || document.getElementById('marketSearchInput');
+
+      if (this.app && this.app.marketDirectory) {
+        if (kwInput) {
+          kwInput.value = q;
+        }
+        this.app.marketDirectory.searchKeyword = q.toLowerCase();
+        this.app.marketDirectory.render();
         const dirEl = document.getElementById('directory');
         if (dirEl) dirEl.scrollIntoView({ behavior: 'smooth' });
-        const dirSearch = document.getElementById('marketSearchInput');
-        if (dirSearch) {
-          dirSearch.value = q;
-          this.app.marketDirectory.render();
+        if (this.app && typeof this.app.showToast === 'function') {
+          this.app.showToast("Showing results for \"" + q + "\"");
         }
-        this.app?.showToast(`Showing results for "${q}"`);
       } else {
-        // Redirect to homepage directory with query
-        window.location.href = `index.html#directory`;
+        window.location.href = "index.html#directory";
       }
     };
 
-    this.searchBtn?.addEventListener('click', handleSearch);
-    this.searchInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSearch();
-    });
+    if (this.searchBtn) this.searchBtn.addEventListener('click', handleSearch);
+    if (this.searchInput) {
+      this.searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleSearch();
+      });
+    }
   }
 
   setupActions() {
