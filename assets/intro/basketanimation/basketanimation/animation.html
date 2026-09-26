@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshFind - Cream Theme Organic Scrollytelling</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-cream: #fbf9f4;
+      --color-text-main: #2d2a26;
+      --color-green-dark: #166534;
+      --color-green-mid: #15803d;
+      --color-green-light: #22c55e;
+      --color-card-bg: rgba(255, 253, 249, 0.85);
+      --color-border: rgba(45, 42, 38, 0.08);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-cream);
+      color: var(--color-text-main);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background-color: #bbf7d0;
+      color: #14532d;
+    }
+    
+    .font-brand {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Layout Classes */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(251, 249, 244, 0.95), transparent);
+    }
+
+    /* Logo Image Styling (Enlarged) */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      height: 6.5rem; /* Increased height for a larger logo display */
+    }
+
+    .logo-container img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .stage-tracker {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(21, 128, 61, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-badge {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 9999px;
+      background-color: #16a34a;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .nav-stage-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #14532d;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .nav-stage-label { font-size: 0.75rem; }
+    }
+
+    .home-btn {
+      padding: 0.625rem 1.25rem;
+      background-color: #15803d;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-btn:hover {
+      background-color: #166534;
+    }
+
+    /* Pinned Viewport Container */
+    #pin-viewport {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .bg-text-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      user-select: none;
+    }
+
+    #bg-text-fresh {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 22vw;
+      letter-spacing: 0.05em;
+      color: rgba(212, 212, 212, 0.4);
+      text-transform: uppercase;
+      transition: opacity 0.3s;
+    }
+
+    #bg-text-harvest {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 18vw;
+      letter-spacing: 0.05em;
+      color: rgba(20, 83, 45, 0.1);
+      text-transform: uppercase;
+      position: absolute;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+
+    .ambient-glow-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    #ambient-glow {
+      width: 35vw;
+      height: 35vw;
+      border-radius: 9999px;
+      background-color: rgba(253, 230, 138, 0.4);
+      filter: blur(120px);
+      transition: background-color 0.7s;
+    }
+
+    .scene-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    #scene-container {
+      position: relative;
+      width: 320px;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      #scene-container {
+        width: 500px;
+        height: 800px;
+      }
+    }
+
+    /* Product Asset Styling */
+    .produce-item {
+      position: absolute;
+      z-index: 10;
+      will-change: transform;
+      opacity: 0;
+      transform: translateY(8rem);
+    }
+
+    .produce-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08));
+    }
+
+    #veg-carrot { width: 6rem; height: 6rem; }
+    #veg-broccoli { width: 7rem; height: 7rem; }
+    #veg-tomato { width: 6rem; height: 6rem; }
+    #veg-corn { width: 7rem; height: 7rem; }
+    #veg-grapes { width: 6rem; height: 6rem; }
+    #veg-pineapple { width: 8rem; height: 8rem; }
+
+    #basket-wrapper {
+      position: absolute;
+      z-index: 20;
+      bottom: 25%;
+      width: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+    }
+
+    @media (min-width: 768px) {
+      #basket-wrapper { width: 350px; }
+    }
+
+    #basket-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Cream glassmorphic card style */
+    .cream-card {
+      background: var(--color-card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 20px 40px rgba(45, 42, 38, 0.06), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 28rem;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .floating-basket {
+      animation: float-slow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Main Content Sections */
+    main {
+      position: relative;
+      z-index: 30;
+    }
+
+    .content-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .content-section { padding: 0 6rem; }
+    }
+
+    .section-intro-inner {
+      max-width: 36rem;
+    }
+
+    .tagline-small {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .main-heading {
+      font-size: 3.75rem;
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      margin-top: 0.75rem;
+      line-height: 1;
+      font-family: 'Outfit', sans-serif;
+      color: #171717;
+    }
+
+    @media (min-width: 768px) {
+      .main-heading { font-size: 6rem; }
+    }
+
+    .main-heading span {
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    .section-desc {
+      color: #525252;
+      margin-top: 1.5rem;
+      letter-spacing: 0.025em;
+      max-width: 24rem;
+      line-height: 1.625;
+      font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-desc { font-size: 1rem; }
+    }
+
+    .section-details {
+      justify-content: flex-start;
+    }
+
+    .details-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .details-line {
+      height: 1px;
+      width: 2rem;
+      background-color: #15803d;
+    }
+
+    .details-tag {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #166534;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .details-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #171717;
+    }
+
+    .details-list {
+      color: #525252;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      line-height: 1.625;
+      list-style-type: disc;
+      list-style-position: inside;
+    }
+
+    .section-finale {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .finale-inner {
+      max-width: 42rem;
+      padding: 0 1.5rem;
+    }
+
+    .finale-subheading {
+      font-size: 10px;
+      letter-spacing: 0.5em;
+      color: #166534;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .finale-title {
+      font-size: 2.25rem;
+      font-weight: 300;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      color: #171717;
+    }
+
+    @media (min-width: 768px) {
+      .finale-title { font-size: 3.75rem; }
+    }
+
+    .finale-title span {
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    .finale-desc {
+      color: #525252;
+      max-width: 28rem;
+      margin: 0 auto 2.5rem auto;
+      font-size: 0.875rem;
+      line-height: 1.625;
+    }
+
+    .finale-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .finale-btn {
+      padding: 1.25rem 2.5rem;
+      background-color: #15803d;
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      border-radius: 0.125rem;
+      box-shadow: 0 10px 15px -3px rgba(20, 83, 45, 0.1);
+    }
+
+    .finale-btn:hover {
+      background-color: #166534;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <!-- Integrated Complete Logo Image (Enlarged) -->
+    <a href="#" class="logo-container">
+      <img src="Gemini_Generated_Image_63883l63883l6388-removebg-preview.png" alt="FreshFind Logo" onerror="this.src='https://placehold.co/240x60?text=freshfind'">
+    </a>
+    
+    <!-- Stage Badge Tracker -->
+    <div class="stage-tracker">
+      <div id="nav-badge" class="nav-badge"></div>
+      <span id="nav-stage-label" class="nav-stage-label">Stage I: The Harvest Basket</span>
+    </div>
+
+    <a href="https://help-rank-75403278.figma.site" class="home-btn">
+      Home Page
+    </a>
+  </header>
+
+  <!-- PINNED VIEWPORT: Fixed Animation Canvas -->
+  <div id="pin-viewport">
+    
+    <!-- Background Typography Layer -->
+    <div class="bg-text-layer">
+      <h2 id="bg-text-fresh">
+        FRESH
+      </h2>
+      <h2 id="bg-text-harvest">
+        ORGANIC
+      </h2>
+    </div>
+
+    <!-- Ambient Glow Backing -->
+    <div class="ambient-glow-container">
+      <div id="ambient-glow"></div>
+    </div>
+
+    <!-- PRODUCT & BASKET ANIMATION LAYER -->
+    <div class="scene-wrapper">
+      <div id="scene-container">
+        
+        <!-- Vegetable 1: Carrot -->
+        <div id="veg-carrot" class="produce-item">
+          <img src="carrotimages-removebg-preview.png" alt="Carrot" onerror="this.src='https://placehold.co/100x100?text=Carrot'">
+        </div>
+
+        <!-- Vegetable 2: Broccoli -->
+        <div id="veg-broccoli" class="produce-item">
+          <img src="brocolliimages-removebg-preview (1).png" alt="Broccoli" onerror="this.src='https://placehold.co/100x100?text=Broccoli'">
+        </div>
+
+        <!-- Vegetable 3: Tomato -->
+        <div id="veg-tomato" class="produce-item">
+          <img src="tomatoimages-removebg-preview.png" alt="Tomato" onerror="this.src='https://placehold.co/100x100?text=Tomato'">
+        </div>
+
+        <!-- Vegetable 4: Corn -->
+        <div id="veg-corn" class="produce-item">
+          <img src="cornimages-removebg-preview.png" alt="Corn" onerror="this.src='https://placehold.co/100x100?text=Corn'">
+        </div>
+
+        <!-- Vegetable 5: Grapes -->
+        <div id="veg-grapes" class="produce-item">
+          <img src="purple-grapes-with-green-leaves_23-2152020781-removebg-preview.png" alt="Grapes" onerror="this.src='https://placehold.co/100x100?text=Grapes'">
+        </div>
+
+        <!-- Vegetable 6: Pineapple -->
+        <div id="veg-pineapple" class="produce-item">
+          <img src="pineappleimages-removebg-preview.png" alt="Pineapple" onerror="this.src='https://placehold.co/100x100?text=Pineapple'">
+        </div>
+
+        <!-- Main Basket Asset -->
+        <div id="basket-wrapper" class="floating-basket">
+          <img src="pngtree-clay-texture-picnic-basket-isometric-3d-icon-glossy-base-soft-rounded-png-image_19074281.png" alt="Picnic Basket" onerror="this.src='https://placehold.co/350x350?text=Basket'">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCROLLABLE CONTENT SECTIONS -->
+  <main>
+
+    <!-- Section 1: Intro -->
+    <section class="content-section">
+      <div class="section-intro-inner">
+        <span class="tagline-small">Stage I : Pure & Organic</span>
+        <h1 class="main-heading">
+          DAILY<br><span>HARVEST</span>
+        </h1>
+        <p class="section-desc">
+          Scroll down to unpack fresh, high-quality organic produce straight out of the market basket.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Details -->
+    <section class="content-section section-details">
+      <div class="cream-card">
+        <div class="details-tag-row">
+          <span class="details-line"></span>
+          <span class="details-tag">Premium Quality</span>
+        </div>
+        <h2 class="details-title">Freshly Picked</h2>
+        <ul class="details-list">
+          <li>Sourced directly from certified organic local growers</li>
+          <li>Hand-inspected for optimum ripeness and top nutrition</li>
+          <li>Delivered clean, crisp, and ready for your kitchen</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 3: Finale & Homepage Navigation -->
+    <section class="content-section section-finale">
+      <div class="finale-inner">
+        <span class="finale-subheading">Taste the Difference</span>
+        <h2 class="finale-title">YOUR BASKET IS PACKED.<br><span>EXPLORE FRESHFIND.</span></h2>
+        <p class="finale-desc">
+          Ready to experience the full prototype? Click below to jump straight to your homepage.
+        </p>
+        <div class="finale-btn-wrapper">
+          <a href="https://help-rank-75403278.figma.site" class="finale-btn">
+            Go To Homepage
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GSAP Core & ScrollTrigger Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const navStageLabel = document.getElementById("nav-stage-label");
+    const navBadge = document.getElementById("nav-badge");
+
+    // Master Timeline tied to scroll progress
+    const masterTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        onUpdate: (self) => {
+          if (self.progress < 0.4) {
+            navStageLabel.textContent = "Stage I: Unpacking Basket";
+            navBadge.style.backgroundColor = "#16a34a";
+          } else {
+            navStageLabel.textContent = "Stage II: Ready to Explore";
+            navBadge.style.backgroundColor = "#22c55e";
+          }
+        }
+      }
+    });
+
+    // 1. Unpack items from basket (Section 1 to Section 2)
+    masterTimeline
+      .to("#veg-carrot", {
+        y: -160,
+        x: -110,
+        opacity: 1,
+        scale: 1.1,
+        rotation: -25,
+        duration: 1
+      }, 0)
+      .to("#veg-broccoli", {
+        y: -210,
+        x: -35,
+        opacity: 1,
+        scale: 1.2,
+        rotation: 12,
+        duration: 1
+      }, 0)
+      .to("#veg-tomato", {
+        y: -150,
+        x: 45,
+        opacity: 1,
+        scale: 1.1,
+        rotation: 18,
+        duration: 1
+      }, 0)
+      .to("#veg-corn", {
+        y: -220,
+        x: 115,
+        opacity: 1,
+        scale: 1.15,
+        rotation: 30,
+        duration: 1
+      }, 0.1)
+      .to("#veg-grapes", {
+        y: -90,
+        x: -140,
+        opacity: 1,
+        scale: 1.05,
+        rotation: -15,
+        duration: 1
+      }, 0.1)
+      .to("#veg-pineapple", {
+        y: -120,
+        x: 140,
+        opacity: 1,
+        scale: 1.2,
+        rotation: -10,
+        duration: 1
+      }, 0.1)
+      .to("#bg-text-fresh", {
+        opacity: 0.05,
+        scale: 1.1,
+        duration: 1
+      }, 0)
+      .to("#bg-text-harvest", {
+        opacity: 0.2,
+        duration: 1
+      }, 0.5)
+
+      // 2. Fade out basket and vegetables gracefully as user scrolls into the final section
+      .to("#basket-wrapper", {
+        opacity: 0.1,
+        duration: 0.5
+      }, 0.6)
+      .to([
+        "#veg-carrot", 
+        "#veg-broccoli", 
+        "#veg-tomato", 
+        "#veg-corn", 
+        "#veg-grapes", 
+        "#veg-pineapple"
+      ], {
+        opacity: 0,
+        duration: 0.5
+      }, 0.6);
+  </script>
+</body>
+</html>

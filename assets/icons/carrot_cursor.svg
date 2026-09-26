@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+  <!-- Carrot Green Foliage Top (Hotspot at 4, 4) -->
+  <path d="M4 4C6 1 10 1 12 3C10 5 8 5 4 4Z" fill="#22C55E"/>
+  <path d="M4 4C2 7 2 11 5 12C6 9 6 7 4 4Z" fill="#16A34A"/>
+  <path d="M4 4C7 4 10 7 11 9C9 9 7 8 4 4Z" fill="#4ADE80"/>
+
+  <!-- Carrot Body -->
+  <path d="M7 7C11 5 18 10 24 16C27 19 30 25 31 29C29 30 25 27 19 24C10 18 5 11 7 7Z" fill="url(#carrotGradient)"/>
+  
+  <!-- Subtle Carrot Texture Ridges -->
+  <path d="M12 11C14 13 16 13 18 14" stroke="#D97706" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M16 16C18 18 20 18 23 19" stroke="#D97706" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M21 21C23 23 25 23 27 24" stroke="#D97706" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Shimmer Highlight -->
+  <path d="M8 9C12 7 18 12 23 17" stroke="#FDE68A" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+
+  <defs>
+    <linearGradient id="carrotGradient" x1="7" y1="7" x2="31" y2="29" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="50%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+  </defs>
+</svg>

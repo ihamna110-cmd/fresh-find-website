@@ -1,0 +1,293 @@
+[
+  {
+    "id": "mkt-1",
+    "name": "Green Valley Organic Harvest Market",
+    "tagline": "Pristine farm-fresh produce directly from local sustainable growers",
+    "area": "Downtown Green District",
+    "address": "450 Organic Boulevard, Central Green Square, Downtown",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "rating": 4.9,
+    "reviewCount": 142,
+    "image": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Award-winning downtown market featuring over 40 certified organic local family farms with seasonal fruits, greens, and artisan bread.",
+    "longDescription": "Green Valley Organic Harvest Market is the city's premier weekend gathering for health-conscious food lovers. Established in 2012, this vibrant market hosts over 40 generational family farmers who practice 100% pesticide-free, regenerative agriculture. Visitors enjoy live acoustic music, fresh-squeezed organic juices, and interactive seasonal tastings.",
+    "days": ["Saturday", "Sunday"],
+    "hours": "08:00 AM - 02:00 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "Closed",
+      "Thursday": "Closed",
+      "Friday": "Closed",
+      "Saturday": "08:00 AM - 02:00 PM",
+      "Sunday": "08:00 AM - 02:00 PM"
+    },
+    "produceTypes": ["Fruits", "Vegetables", "Herbs", "Dairy & Eggs", "Artisan Bakery"],
+    "featuredProducts": ["Organic Heirloom Tomatoes", "Crisp Honeycrisp Apples", "Wild Mountain Honey", "Pasture-Raised Eggs", "Artisan Sourdough"],
+    "amenities": ["Wheelchair Accessible", "Pet Friendly", "Card & Digital Pay", "EV Charging", "Free Bicycle Parking"],
+    "contact": {
+      "phone": "+1 (555) 234-8901",
+      "email": "contact@greenvalleymarket.org",
+      "website": "https://greenvalleyorganic.org"
+    },
+    "farmerProfiles": [
+      { "name": "Elena Vance", "farm": "Sunlit Valley Orchard", "specialty": "Apples & Stone Fruits" },
+      { "name": "Marcus Chen", "farm": "Verdant Roots Co-op", "specialty": "Hydroponic Greens & Microgreens" }
+    ]
+  },
+  {
+    "id": "mkt-2",
+    "name": "Riverfront Artisanal Farmers Market",
+    "tagline": "Scenic riverwalk shopping with artisanal dairy and heirloom crops",
+    "area": "Riverside Promenade",
+    "address": "120 Riverside Esplanade, Riverwalk Pier 4",
+    "lat": 34.0560,
+    "lng": -118.2580,
+    "rating": 4.8,
+    "reviewCount": 98,
+    "image": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Stroll alongside the calm riverbanks while shopping for goat cheeses, seasonal berries, raw wildflower honey, and wild-harvested teas.",
+    "longDescription": "Situated along the scenic Riverwalk, this lively market combines artisanal food crafting with community spirit. Renowned for its dairy artisans, European-style bread bakers, and farm-fresh berries, the Riverfront Market provides panoramic waterfront views and interactive cooking workshops every Sunday morning.",
+    "days": ["Sunday", "Wednesday"],
+    "hours": "09:00 AM - 03:00 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "09:00 AM - 03:00 PM",
+      "Thursday": "Closed",
+      "Friday": "Closed",
+      "Saturday": "Closed",
+      "Sunday": "09:00 AM - 03:00 PM"
+    },
+    "produceTypes": ["Fruits", "Dairy & Eggs", "Herbs", "Artisan Bakery", "Honey & Preserves"],
+    "featuredProducts": ["Handcrafted Goat Cheeses", "Organic Blueberries", "Lavender Bundles", "Clover Honey", "Herb Focaccia"],
+    "amenities": ["Riverfront Seating", "Live Music", "Restrooms Available", "Card & Digital Pay"],
+    "contact": {
+      "phone": "+1 (555) 872-4411",
+      "email": "hello@riverfrontmarket.com",
+      "website": "https://riverfrontmarket.com"
+    },
+    "farmerProfiles": [
+      { "name": "Matteo Bianchi", "farm": "Cascada Alpine Goat Dairy", "specialty": "Aged Cheeses & Yogurt" },
+      { "name": "Sofia Lind", "farm": "River Mist Herbs", "specialty": "Fresh Basil, Rosemary & Culinary Herbs" }
+    ]
+  },
+  {
+    "id": "mkt-3",
+    "name": "Suncrest Morning Community Market",
+    "tagline": "Early sunrise harvests for the neighborhood morning crowd",
+    "area": "North Hills",
+    "address": "880 Suncrest Peak Road, North Hills Plaza",
+    "lat": 34.0720,
+    "lng": -118.2300,
+    "rating": 4.7,
+    "reviewCount": 76,
+    "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "A friendly neighborhood gathering featuring early-morning harvested leafy greens, citrus delights, and freshly baked whole-grain pastries.",
+    "longDescription": "Suncrest Market opens early so neighborhood families and fitness enthusiasts can purchase crops harvested just hours prior at dawn. Featuring a dedicated kids' gardening booth, cold-pressed citrus juice bars, and master gardener Q&A stations.",
+    "days": ["Tuesday", "Thursday", "Saturday"],
+    "hours": "07:30 AM - 01:00 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "07:30 AM - 01:00 PM",
+      "Wednesday": "Closed",
+      "Thursday": "07:30 AM - 01:00 PM",
+      "Friday": "Closed",
+      "Saturday": "07:30 AM - 01:00 PM",
+      "Sunday": "Closed"
+    },
+    "produceTypes": ["Vegetables", "Fruits", "Artisan Bakery", "Juices"],
+    "featuredProducts": ["Crisp Baby Spinach", "Valencia Oranges", "Golden Carrots", "Multigrain Boules", "Cold-Pressed Beet Juice"],
+    "amenities": ["Dog Friendly", "Playground Adjacent", "On-site Coffee", "Card & Digital Pay"],
+    "contact": {
+      "phone": "+1 (555) 439-0021",
+      "email": "suncrestfarmers@gmail.com",
+      "website": "https://suncrestmarket.org"
+    },
+    "farmerProfiles": [
+      { "name": "David Morales", "farm": "Highland Citrus Groves", "specialty": "Navel & Blood Oranges" }
+    ]
+  },
+  {
+    "id": "mkt-4",
+    "name": "Emerald Meadows Eco-Village Market",
+    "tagline": "Zero-waste, 100% bio-dynamic agricultural wonderland",
+    "area": "Westside Greenbelt",
+    "address": "710 Meadowlark Avenue, Westside Eco Commons",
+    "lat": 34.0410,
+    "lng": -118.2710,
+    "rating": 4.95,
+    "reviewCount": 210,
+    "image": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Pioneering zero-waste eco-market with bio-dynamic root vegetables, edible flowers, heritage grains, and composting drop-offs.",
+    "longDescription": "Emerald Meadows is a nationally acclaimed model for ecological community markets. Every stall operates with zero single-use plastics, packaging is 100% biodegradable or reusable, and all produce is bio-dynamically certified. Features community compost collection, heirloom seed swap tables, and solar-powered food stands.",
+    "days": ["Friday", "Saturday"],
+    "hours": "08:30 AM - 02:30 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "Closed",
+      "Thursday": "Closed",
+      "Friday": "08:30 AM - 02:30 PM",
+      "Saturday": "08:30 AM - 02:30 PM",
+      "Sunday": "Closed"
+    },
+    "produceTypes": ["Vegetables", "Herbs", "Grains & Pulses", "Honey & Preserves"],
+    "featuredProducts": ["Rainbow Chard", "Heritage Red Wheat", "Edible Nasturtium Flowers", "Raw Royal Jelly", "Kombucha On Tap"],
+    "amenities": ["Zero-Waste Certified", "Compost Hub", "Bicycle Repair Station", "Wheelchair Accessible"],
+    "contact": {
+      "phone": "+1 (555) 912-7744",
+      "email": "info@emeraldmeadows.eco",
+      "website": "https://emeraldmeadows.eco"
+    },
+    "farmerProfiles": [
+      { "name": "Claire Dupont", "farm": "Terre Vivante Biodynamic Farm", "specialty": "Heirloom Root Crops & Microgreens" },
+      { "name": "Tariq Al-Mansoor", "farm": "Golden Apiary", "specialty": "Raw Monofloral Honey" }
+    ]
+  },
+  {
+    "id": "mkt-5",
+    "name": "Oakridge Twilight Farmers Market",
+    "tagline": "Evening street market with fresh evening harvests and local cuisine",
+    "area": "Oakridge District",
+    "address": "304 Old Forest Way, Oakridge Historic Square",
+    "lat": 34.0615,
+    "lng": -118.2350,
+    "rating": 4.65,
+    "reviewCount": 84,
+    "image": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Atmospheric evening market with fairy lights, dusk-picked vegetables, gourmet mushrooms, woodfired artisan pizza, and live folk music.",
+    "longDescription": "Designed specifically for working professionals and night owls who cannot make early morning weekend markets. Oakridge Twilight brings together exotic mushroom foragers, micro-creamery butter makers, craft bakers, and evening vegetable harvesters under charming string lights.",
+    "days": ["Wednesday", "Friday"],
+    "hours": "04:00 PM - 08:30 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "04:00 PM - 08:30 PM",
+      "Thursday": "Closed",
+      "Friday": "04:00 PM - 08:30 PM",
+      "Saturday": "Closed",
+      "Sunday": "Closed"
+    },
+    "produceTypes": ["Vegetables", "Herbs", "Mushrooms", "Dairy & Eggs", "Artisan Bakery"],
+    "featuredProducts": ["Lion's Mane & Shiitake Mushrooms", "Cultured Farmhouse Butter", "Tuscan Kale", "Focaccia Barese"],
+    "amenities": ["Evening Lighting", "Heated Dining Pavilions", "Wine & Cider Tasting", "Live Music"],
+    "contact": {
+      "phone": "+1 (555) 789-3320",
+      "email": "twilight@oakridgemarket.com",
+      "website": "https://oakridgemarket.com"
+    },
+    "farmerProfiles": [
+      { "name": "Oliver Sterling", "farm": "Fungal Forest Cultivators", "specialty": "Specialty Culinary & Medicinal Mushrooms" }
+    ]
+  },
+  {
+    "id": "mkt-6",
+    "name": "Harbor Breeze Coastal Produce Exchange",
+    "tagline": "Ocean breezes, coastal citrus, organic berries, and seaweed organics",
+    "area": "Bayview Harbor",
+    "address": "55 Pelican Wharf, Bayview Marina Boardwalk",
+    "lat": 34.0320,
+    "lng": -118.2840,
+    "rating": 4.85,
+    "reviewCount": 115,
+    "image": "https://images.unsplash.com/photo-1543083477-4f785aeafaa9?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Savor the refreshing ocean breeze while browsing coastal strawberries, Meyer lemons, organic avocados, and ocean-mineral sea salts.",
+    "longDescription": "Set against the sparkling marina, Harbor Breeze Exchange celebrates maritime micro-climates. Coastal berries grown in sandy loam soils taste remarkably sweeter, and local certified foragers offer edible seaweeds, Meyer lemons, and cold-pressed olive oils.",
+    "days": ["Sunday"],
+    "hours": "08:00 AM - 01:30 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "Closed",
+      "Thursday": "Closed",
+      "Friday": "Closed",
+      "Saturday": "Closed",
+      "Sunday": "08:00 AM - 01:30 PM"
+    },
+    "produceTypes": ["Fruits", "Vegetables", "Herbs", "Specialty Salts & Oils"],
+    "featuredProducts": ["Sweet Coastal Strawberries", "Hass Avocados", "Meyer Lemons", "Smoked Sea Salt", "Extra Virgin Olive Oil"],
+    "amenities": ["Waterfront Walkway", "Boat Dock Access", "Pet Friendly", "Seafood Safety Certified"],
+    "contact": {
+      "phone": "+1 (555) 670-9988",
+      "email": "crew@harborbreezemarket.org",
+      "website": "https://harborbreezemarket.org"
+    },
+    "farmerProfiles": [
+      { "name": "Maya Lin", "farm": "Coastal Crest Berry Ranch", "specialty": "Albion Strawberries & Blackberries" }
+    ]
+  },
+  {
+    "id": "mkt-7",
+    "name": "Heritage Valley Agricultural Fair & Market",
+    "tagline": "Celebrating heirloom seed varieties and antique orchard treasures",
+    "area": "Heritage District",
+    "address": "900 Pioneer Heritage Way, Historic Old Barn Grounds",
+    "lat": 34.0780,
+    "lng": -118.2520,
+    "rating": 4.9,
+    "reviewCount": 160,
+    "image": "https://images.unsplash.com/photo-1506484381205-f7945653044d?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Step back in agricultural heritage with 18th-century apple varieties, purple carrots, heirloom pumpkins, and stone-ground heritage grits.",
+    "longDescription": "Dedicated to biodiversity and saving near-extinct food varieties. Heritage Valley brings together heritage crop preservationists, antique apple orchardists, and traditional cheese masters. Kids love the heritage chicken coop and apple pressing demonstrations.",
+    "days": ["Saturday"],
+    "hours": "08:00 AM - 02:00 PM",
+    "weeklySchedule": {
+      "Monday": "Closed",
+      "Tuesday": "Closed",
+      "Wednesday": "Closed",
+      "Thursday": "Closed",
+      "Friday": "Closed",
+      "Saturday": "08:00 AM - 02:00 PM",
+      "Sunday": "Closed"
+    },
+    "produceTypes": ["Fruits", "Vegetables", "Grains & Pulses", "Dairy & Eggs"],
+    "featuredProducts": ["Cox's Orange Pippin Apples", "Black Beauty Eggplants", "Cherokee Purple Tomatoes", "Stone-ground Cornmeal"],
+    "amenities": ["Historical Tours", "Seed Bank Exhibit", "Free Parking Lot", "Handicap Accessible"],
+    "contact": {
+      "phone": "+1 (555) 321-7654",
+      "email": "heritagefair@valleymarkets.org",
+      "website": "https://heritagevalleymarket.org"
+    },
+    "farmerProfiles": [
+      { "name": "Arthur Pendelton", "farm": "Ancestral Orchardists", "specialty": "Rare & Ancient Apple Varieties" }
+    ]
+  },
+  {
+    "id": "mkt-8",
+    "name": "Midtown Urban Sprouts Community Market",
+    "tagline": "Rooftop agriculture and vertical hydroponic fresh harvests",
+    "area": "Midtown Central",
+    "address": "210 Metro Central Concourse, Pavilion Plaza",
+    "lat": 34.0480,
+    "lng": -118.2510,
+    "rating": 4.75,
+    "reviewCount": 92,
+    "image": "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?auto=format&fit=crop&w=800&q=80",
+    "shortDescription": "Innovative urban agriculture hub showcasing vertical microgreens, rooftop honey, aeroponic strawberries, and crisp salad greens.",
+    "longDescription": "Located in the heart of the tech & financial district, Midtown Urban Sprouts connects high-density urban residents with modern urban farms operating within 10 miles of city center. Perfect for a quick healthy lunchtime pickup or weekday evening pantry stocking.",
+    "days": ["Monday", "Thursday"],
+    "hours": "11:00 AM - 04:30 PM",
+    "weeklySchedule": {
+      "Monday": "11:00 AM - 04:30 PM",
+      "Tuesday": "Closed",
+      "Wednesday": "Closed",
+      "Thursday": "11:00 AM - 04:30 PM",
+      "Friday": "Closed",
+      "Saturday": "Closed",
+      "Sunday": "Closed"
+    },
+    "produceTypes": ["Vegetables", "Herbs", "Honey & Preserves", "Juices"],
+    "featuredProducts": ["Spicy Radish Microgreens", "Aeroponic Butterhead Lettuce", "Rooftop Blossom Honey", "Wheatgrass Shots"],
+    "amenities": ["Subway Connected", "Contactless Tap-to-Pay", "Express Grab Bags"],
+    "contact": {
+      "phone": "+1 (555) 888-2040",
+      "email": "midtownsprouts@urbanfarm.io",
+      "website": "https://midtownsprouts.io"
+    },
+    "farmerProfiles": [
+      { "name": "Zara Khan", "farm": "Skyline Hydroponics", "specialty": "Crisp Salads & Fresh Micro-Herbs" }
+    ]
+  }
+]

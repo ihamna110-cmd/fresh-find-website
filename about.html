@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — FreshFind | Fresh All Along</title>
+  <meta name="description" content="FreshFind connects communities with local farmers markets. Discover our mission, story, team, and how we make fresh produce accessible to everyone.">
+  <link rel="icon" type="image/png" href="assets/images/freshfind_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body class="about-page">
+
+  <div class="site-bg-pattern" aria-hidden="true"></div>
+  <div class="bg-ambient-orb bg-ambient-orb-1" aria-hidden="true"></div>
+  <div class="bg-ambient-orb bg-ambient-orb-2" aria-hidden="true"></div>
+
+  <!-- ── NAVBAR ── -->
+  <header class="site-header-wrapper">
+    <div class="site-navbar-capsule">
+      <a href="index.html#home" class="brand-logo" id="brandLogoLink" title="FreshFind">
+        <div class="brand-logo-icon"><img src="assets/images/freshfind_logo.png" alt="FreshFind" class="brand-logo-img"></div>
+        <div class="brand-logo-text">
+          <span class="brand-name">FreshFind</span>
+          <span class="brand-sub">Local Farms. Fresh Lives.</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html#home" class="nav-item-link">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Home</span>
+        </a>
+        <div class="nav-dropdown-wrap">
+          <a href="index.html#directory" class="nav-item-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Markets</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#directory" class="dropdown-link">All Farmers Markets</a>
+            <a href="index.html#directory" class="dropdown-link">Open Right Now</a>
+            <a href="index.html#directory" class="dropdown-link">Weekend Markets</a>
+          </div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <a href="index.html#produce" class="nav-item-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <span>Produce</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#produce" class="dropdown-link">Seasonal Produce Guide</a>
+            <a href="index.html#seasonal" class="dropdown-link">Harvest Calendar</a>
+            <a href="index.html#eco-calculator" class="dropdown-link">Eco Calculator</a>
+          </div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <a href="about.html" class="nav-item-pill active">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>About</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="about.html" class="dropdown-link">Our Story &amp; Mission</a>
+            <a href="about.html#team" class="dropdown-link">Meet Our Team</a>
+            <a href="about.html#how-it-works" class="dropdown-link">How It Works</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-item-link">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Contact</span>
+        </a>
+      </nav>
+      <div class="nav-search-bar" id="navSearchBar">
+        <svg class="nav-search-lens" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="navSearchInput" placeholder="Search markets, produce..." aria-label="Search">
+        <button id="navSearchSubmitBtn" class="nav-search-btn" title="Search" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div class="nav-actions-group">
+        <!-- Notification Bell -->
+        <button id="navNotifyBtn" class="nav-icon-circle-btn" title="Notifications" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="nav-notify-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Saved Bookmarks Pill -->
+        <button id="navCartBtn" class="nav-cart-pill-btn" title="Saved Bookmarks" aria-label="Saved Bookmarks">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+          <span class="nav-cart-label">Saved</span>
+          <span id="headerBookmarkBadge" class="nav-cart-badge">0</span>
+        </button>
+
+        <!-- Mobile Toggle -->
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation (Directly Below Navbar) -->
+  <nav class="breadcrumb-container" aria-label="Breadcrumb">
+    <div class="container breadcrumb-inner">
+      <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+          <a href="index.html">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Home
+          </a>
+        </li>
+        <li class="breadcrumb-sep">/</li>
+        <li class="breadcrumb-item active">About Us</li>
+      </ul>
+      <div class="breadcrumb-status-pill">
+        <span class="live-pulse-dot"></span>
+        <span>Our Mission &amp; Community Story</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ══ A: HERO ══ -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero-grid">
+          <div class="about-hero-content reveal-up">
+            <span class="about-hero-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
+              About FreshFind
+            </span>
+            <h1 class="about-hero-title">
+              Growing Connections.<br><span>Bringing Freshness.</span>
+            </h1>
+            <p class="about-hero-desc">
+              We bridge the gap between local family farms and urban communities — making fresh, seasonal, pesticide-free produce accessible to everyone, every day.
+            </p>
+            <div class="about-hero-stats">
+              <div class="hero-stat-pill"><strong>120+</strong><span>Local Markets</span></div>
+              <div class="hero-stat-pill"><strong>4.8★</strong><span>Community Rating</span></div>
+              <div class="hero-stat-pill"><strong>Zero</strong><span>Food Miles</span></div>
+            </div>
+            <div class="about-hero-actions" style="margin-top:2rem;">
+              <a href="index.html#directory" class="btn-primary" style="text-decoration:none;padding:0.95rem 1.9rem;font-size:1rem;">
+                <span>Explore Markets</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+              <a href="index.html#produce" class="btn-secondary" style="text-decoration:none;padding:0.95rem 1.9rem;font-size:1rem;">
+                <span>Discover Produce</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-hero-visual reveal-up delay-2">
+            <div class="about-hero-img-frame">
+              <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=800&q=80" alt="Fresh Harvest Produce Stall" loading="lazy">
+            </div>
+            <div class="about-floating-badge">
+              <div class="about-floating-badge-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#22c55e" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg></div>
+              <div>
+                <div class="about-floating-badge-stat">100% Organic</div>
+                <div class="about-floating-badge-label">Local Family Farms</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ B: STORY ══ -->
+    <section class="about-story-section">
+      <div class="container">
+        <div class="about-story-grid">
+          <div class="about-story-content reveal-up">
+            <span class="section-tag" style="margin-bottom:0.9rem;display:inline-block;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>OUR STORY</span>
+            <h2>FreshFind — Fresh All Along</h2>
+            <p class="about-story-p">FreshFind is a beautifully simple platform that helps urban residents discover nearby farmers markets, check live open schedules, and explore seasonal produce with ease.</p>
+            <p class="about-story-p">Our goal is to reunite communities with their food roots — putting market locations, operating hours, crop calendars, and grower stories all in one clean, accessible experience.</p>
+            <p class="about-story-p">We believe discovering fresh, locally grown food should feel as natural as enjoying it — simple, joyful, and fully within reach of every family.</p>
+            <div class="about-quote-highlight">
+              "Fresh food. Stronger communities. Better tomorrow."
+            </div>
+          </div>
+          <div class="about-story-visual-wrap reveal-up delay-2">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Local Farmers Market" class="about-story-blob-img" loading="lazy">
+            <div class="about-story-deco-card">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:50%; background:rgba(185,130,69,0.15); color:#b98245;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+              <div>
+                <div style="font-weight:800;font-size:0.95rem;color:#132e20;">Est. 2026</div>
+                <div style="font-size:0.8rem;color:#6e8878;">FreshFind</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ C: MISSION BANNER ══ -->
+    <section class="about-mission-section">
+      <div class="container">
+        <div class="about-mission-inner reveal-up">
+          <div class="about-mission-icon">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <h2 class="about-mission-heading">Our Mission</h2>
+          <p class="about-mission-text">
+            "To make discovering fresh, local, and seasonal produce easier for everyone while helping communities connect directly with nearby farmers markets — zero barriers, zero food miles."
+          </p>
+          <div class="about-curved-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ D: WHY CHOOSE (4 FEATURE CARDS) ══ -->
+    <section class="about-features-section">
+      <div class="container">
+        <div class="about-section-header reveal-up">
+          <span class="section-tag" style="margin-bottom:0.9rem;display:inline-block;">KEY ADVANTAGES</span>
+          <h2>Why Choose FreshFind?</h2>
+          <p>Everything you need to enjoy honest, nutritious food grown right in your neighborhood.</p>
+        </div>
+        <div class="features-grid-4">
+          <div class="feature-pill-card reveal-up delay-1">
+            <div class="feature-card-number">01</div>
+            <div class="feature-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            </div>
+            <h3>Fresh &amp; Local</h3>
+            <p>Discover certified local produce and connect with family-run farmers markets in your community — zero food miles, maximum nutrition.</p>
+          </div>
+          <div class="feature-pill-card reveal-up delay-2">
+            <div class="feature-card-number">02</div>
+            <div class="feature-card-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>Easy Discovery</h3>
+            <p>Find market locations, live open schedules, and useful grower information all in one clean, intuitive interface — available anywhere.</p>
+          </div>
+          <div class="feature-pill-card reveal-up delay-3">
+            <div class="feature-card-number">03</div>
+            <div class="feature-card-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>Seasonal Goodness</h3>
+            <p>Explore what's at peak ripeness today — fruits, vegetables, herbs, and artisan goods — guided by our real-time harvest calendar.</p>
+          </div>
+          <div class="feature-pill-card reveal-up delay-4">
+            <div class="feature-card-number">04</div>
+            <div class="feature-card-icon" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <h3>Community First</h3>
+            <p>Support growers directly, strengthen local food systems, and build meaningful connections between neighborhoods and their farms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ E: HOW IT WORKS ══ -->
+    <section class="about-how-section" id="how-it-works">
+      <div class="container">
+        <div class="about-section-header reveal-up">
+          <span class="section-tag" style="margin-bottom:0.9rem;display:inline-block;">HOW IT WORKS</span>
+          <h2>Your Harvest Journey in 3 Steps</h2>
+          <p>Simple, reliable, and completely free — designed to fit your daily lifestyle seamlessly.</p>
+        </div>
+        <div class="how-steps-grid">
+          <div class="step-card reveal-up delay-1">
+            <div class="step-number">1</div>
+            <h3>Search Your Area</h3>
+            <p>Find farmers markets near you using neighborhood filters, proximity tracking, and real-time open/closed status with interactive maps.</p>
+          </div>
+          <div class="step-card reveal-up delay-2">
+            <div class="step-number">2</div>
+            <h3>Explore Seasonal Produce</h3>
+            <p>Browse what's at peak ripeness right now, learn storage secrets, get nutritional tips, and discover seasonal pairing guides.</p>
+          </div>
+          <div class="step-card reveal-up delay-3">
+            <div class="step-number">3</div>
+            <h3>Support Local Growers</h3>
+            <p>Visit markets, buy directly from family farms, save money, and calculate your eco-impact with our built-in carbon footprint tracker.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ F: OUR TEAM ══ -->
+    <section class="about-team-section" id="team">
+      <div class="container">
+        <div class="about-section-header reveal-up">
+          <span class="section-tag" style="margin-bottom:0.9rem;display:inline-block;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>THE CREATORS</span>
+          <h2>Meet Our Team</h2>
+          <p>Passionate designers, engineers, and food advocates dedicated to sustainable local agriculture and community wellness.</p>
+        </div>
+        <div class="team-grid-3">
+
+          <!-- Card 1: Emaan Imran -->
+          <div class="team-member-card reveal-up delay-1">
+            <div class="team-avatar-wrap">
+              <img src="assets/images/team/emaan_imran.jpg" alt="Emaan Imran" loading="lazy">
+              <div class="team-avatar-online" aria-hidden="true"></div>
+            </div>
+            <span class="team-deco-leaf"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#22c55e" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg></span>
+            <h3>Emaan Imran</h3>
+            <div class="team-member-role">Founder &amp; Lead Curator</div>
+            <p class="team-member-bio">Agricultural researcher dedicated to empowering family farms and bridging the gap between growers and urban communities.</p>
+            <div class="team-social-row">
+              <a href="#" class="team-social-btn" title="LinkedIn" aria-label="LinkedIn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Twitter" aria-label="Twitter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Email" aria-label="Email">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Hamna Imran -->
+          <div class="team-member-card reveal-up delay-2">
+            <div class="team-avatar-wrap">
+              <img src="assets/images/team/hamna_imran.jpg" alt="Hamna Imran" loading="lazy">
+              <div class="team-avatar-online" aria-hidden="true"></div>
+            </div>
+            <span class="team-deco-leaf"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg></span>
+            <h3>Hamna Imran</h3>
+            <div class="team-member-role">Lead UI/UX Designer</div>
+            <p class="team-member-bio">Crafts natural, organic web interfaces inspired by botanical gardens, rustic farmstands, and sustainable design principles.</p>
+            <div class="team-social-row">
+              <a href="#" class="team-social-btn" title="LinkedIn" aria-label="LinkedIn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Portfolio" aria-label="Portfolio">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Email" aria-label="Email">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Aliya Shoaib -->
+          <div class="team-member-card reveal-up delay-3">
+            <div class="team-avatar-wrap">
+              <img src="assets/images/team/aliya_shoaib.jpg" alt="Aliya Shoaib" loading="lazy">
+              <div class="team-avatar-online" aria-hidden="true"></div>
+            </div>
+            <span class="team-deco-leaf"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#84cc16" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg></span>
+            <h3>Aliya Shoaib</h3>
+            <div class="team-member-role">Produce &amp; Nutrition Expert</div>
+            <p class="team-member-bio">Culinary nutritionist curating crop seasonality guides, fresh harvest pairings, and farm-to-table recipe journeys.</p>
+            <div class="team-social-row">
+              <a href="#" class="team-social-btn" title="LinkedIn" aria-label="LinkedIn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Instagram" aria-label="Instagram">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="team-social-btn" title="Email" aria-label="Email">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ G: CTA ══ -->
+    <section class="about-cta-section">
+      <div class="container">
+        <div class="about-cta-inner reveal-up">
+          <div style="display:flex; justify-content:center; margin-bottom:1rem;"><div style="width:60px; height:60px; border-radius:50%; background:rgba(34,197,94,0.12); display:flex; align-items:center; justify-content:center; color:#16a34a;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div></div>
+          <h2>Ready to Discover Something Fresh?</h2>
+          <p>Explore local markets and find fresh seasonal produce waiting right around the corner.</p>
+          <a href="index.html#directory" class="about-cta-btn">
+            <span>Find a Market Near You</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom:1rem;">
+            <div class="brand-logo-icon"><img src="assets/images/freshfind_logo.png" alt="FreshFind" class="brand-logo-img"></div>
+            <span class="brand-name">FreshFind</span>
+          </div>
+          <p style="font-size:0.9rem;line-height:1.65;margin-bottom:1.25rem;">Fresh All Along. Your local farmers market companion. Connecting growers, chefs, and families through sustainable, seasonal food.</p>
+          <span style="font-size:0.8rem;font-weight:700;color:var(--accent);">FreshFind — Web Innovation Unleashed</span>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#directory">Find a Market</a></li>
+            <li><a href="index.html#produce">Produce Guide</a></li>
+            <li><a href="index.html#seasonal">Seasonal Calendar</a></li>
+            <li><a href="index.html#eco-calculator">Eco Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Our Mission</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html#team">Meet Our Team</a></li>
+            <li><a href="about.html#how-it-works">How It Works</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>eGreen Newsletter</h4>
+          <p style="font-size:0.88rem;margin-bottom:0.85rem;">Get weekly alerts on what crops are at peak harvest at your local market.</p>
+          <div class="find-input-wrap"><input type="email" placeholder="Enter your email..."></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 FreshFind. SRS v1.0 Compliant.</div>
+        <div style="display:flex;gap:1.5rem;">
+          <span>Web Innovation Unleashed</span>
+          <span>eGreen Basket</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script>
+    // Scroll-reveal observer
+    const revealEls = document.querySelectorAll('.reveal-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => obs.observe(el));
+
+    // Simple mobile menu
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+      document.getElementById('mainNav')?.classList.toggle('open');
+    });
+  </script>
+  <script src="js/about.bundle.js"></script>
+</body>
+</html>

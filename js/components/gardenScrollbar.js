@@ -1,0 +1,592 @@
+/**
+ * FreshFind Living Garden Scrollbar Component (DELUXE VIP EDITION)
+ * Highly optimized, zero-lag signature botanical scrollbar featuring:
+ * - Large sprouting top bud cap (44x44px)
+ * - Wide organic curving vine stem track with glowing nodes
+ * - Deluxe 3D botanical leaf thumb (54x74px) with veins, gloss & dynamic breeze sway
+ * - Decorative breeze-swaying branch leaves along the track
+ * - Handcrafted woven market basket bottom cap (50x50px) with harvest celebration
+ * - Event-driven, low-CPU physics loop (0% idle CPU)
+ * - Draggable and click-to-jump track support
+ */
+
+export class GardenScrollbar {
+  constructor(app) {
+    this.app = app;
+    this.container = null;
+    this.track = null;
+    this.thumb = null;
+    this.topCap = null;
+    this.bottomBasket = null;
+    this.particlesContainer = null;
+    this.decorativeLeaves = [];
+
+    this.isDragging = false;
+    this.startY = 0;
+    this.startScrollTop = 0;
+
+    // Scroll physics & velocity state
+    this.lastScrollY = 0;
+    this.lastScrollTime = Date.now();
+    this.scrollVelocity = 0;
+    this.targetRotation = 0;
+    this.currentRotation = 0;
+    this.scrollTimeout = null;
+    this.isScrolling = false;
+    this.hasHarvested = false;
+
+    // Performance cached layout metrics
+    this.cachedTrackHeight = 0;
+    this.cachedThumbHeight = 68;
+    this.cachedMaxScroll = 1;
+    this.rafId = null;
+    this.isPhysicsRunning = false;
+    this.lastParticleTime = 0;
+  }
+
+  init() {
+    this.buildDOM();
+    this.cacheMetrics();
+    this.bindEvents();
+    this.updatePosition();
+  }
+
+  cacheMetrics() {
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    const clientHeight = window.innerHeight;
+    this.cachedMaxScroll = Math.max(1, scrollHeight - clientHeight);
+
+    if (this.track) {
+      this.cachedTrackHeight = this.track.clientHeight;
+    }
+    if (this.thumb) {
+      this.cachedThumbHeight = this.thumb.clientHeight || 68;
+    }
+  }
+
+  buildDOM() {
+    const existing = document.getElementById('gardenScrollbar');
+    if (existing) existing.remove();
+
+    this.container = document.createElement('div');
+    this.container.id = 'gardenScrollbar';
+    this.container.className = 'garden-scrollbar-wrap';
+    this.container.setAttribute('role', 'scrollbar');
+    this.container.setAttribute('aria-label', 'Living Garden Botanical Scrollbar');
+    this.container.setAttribute('aria-controls', 'main');
+
+    this.container.innerHTML = `
+      <!-- Top Bud Cap: Large Sprouting Fresh Leaf -->
+      <div class="garden-top-bud" title="Scroll to Top of Garden" id="gardenTopBud">
+        <svg viewBox="0 0 44 44" class="garden-bud-svg" fill="none">
+          <circle cx="22" cy="22" r="18" fill="rgba(184, 233, 134, 0.25)" filter="blur(4px)" />
+          <!-- Stem Base -->
+          <path d="M22 40 C22 30, 20 24, 22 18" stroke="#163D2A" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Left Fresh Leaf -->
+          <path d="M22 24 C15 20, 8 22, 6 15 C11 13, 18 16, 22 24" fill="url(#gardenSproutGrad1)" stroke="#163D2A" stroke-width="1.2"/>
+          <!-- Right Sunlit Leaf -->
+          <path d="M22 21 C27 15, 36 16, 38 8 C31 8, 24 13, 22 21" fill="url(#gardenSproutGrad2)" stroke="#163D2A" stroke-width="1.2"/>
+          <!-- Morning Dew Glow Core -->
+          <circle cx="22" cy="15" r="3.2" fill="#FFF9EC" stroke="#B8E986" stroke-width="1"/>
+          <circle cx="21" cy="14" r="1.2" fill="#ffffff"/>
+          <defs>
+            <linearGradient id="gardenSproutGrad1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#B8E986"/>
+              <stop offset="100%" stop-color="#6FAF45"/>
+            </linearGradient>
+            <linearGradient id="gardenSproutGrad2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#B8E986"/>
+              <stop offset="50%" stop-color="#6FAF45"/>
+              <stop offset="100%" stop-color="#163D2A"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Vine Stem Track -->
+      <div class="garden-vine-track" id="gardenVineTrack">
+        <!-- SVG Organic Vine Stem Curve with Nodes -->
+        <svg class="garden-vine-svg" preserveAspectRatio="none" viewBox="0 0 28 500">
+          <!-- Background Vine Shadow -->
+          <path class="garden-vine-path-bg" d="M14 0 Q20 125, 9 250 T18 500" fill="none" stroke="rgba(22, 61, 42, 0.35)" stroke-width="7" stroke-linecap="round"/>
+          <!-- Vibrant Organic Stem -->
+          <path class="garden-vine-path" d="M14 0 Q20 125, 9 250 T18 500" fill="none" stroke="url(#gardenVineGrad)" stroke-width="4.5" stroke-linecap="round"/>
+          <!-- Glowing Vine Nodes -->
+          <circle cx="16" cy="95" r="3.2" fill="#B8E986" stroke="#163D2A" stroke-width="0.8"/>
+          <circle cx="10" cy="210" r="3.2" fill="#6FAF45" stroke="#163D2A" stroke-width="0.8"/>
+          <circle cx="14" cy="335" r="3.2" fill="#B8E986" stroke="#163D2A" stroke-width="0.8"/>
+          <circle cx="17" cy="440" r="3.2" fill="#6FAF45" stroke="#163D2A" stroke-width="0.8"/>
+          <defs>
+            <linearGradient id="gardenVineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#B8E986"/>
+              <stop offset="30%" stop-color="#6FAF45"/>
+              <stop offset="70%" stop-color="#163D2A"/>
+              <stop offset="100%" stop-color="#B98245"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Decorative Leaves along the vine at 18%, 42%, 68%, 88% -->
+        <div class="garden-deco-leaf deco-1" style="top: 18%;" data-side="left">
+          <svg viewBox="0 0 22 22" width="20" height="20">
+            <path d="M20 20 C11 17, 3 11, 3 3 C11 3, 17 11, 20 20" fill="#6FAF45" stroke="#163D2A" stroke-width="1.2"/>
+            <path d="M20 20 L6 6" stroke="#DDEACB" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="garden-deco-leaf deco-2" style="top: 42%;" data-side="right">
+          <svg viewBox="0 0 22 22" width="20" height="20">
+            <path d="M3 20 C12 17, 20 11, 20 3 C12 3, 6 11, 3 20" fill="#B8E986" stroke="#163D2A" stroke-width="1.2"/>
+            <path d="M3 20 L17 6" stroke="#FFF9EC" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="garden-deco-leaf deco-3" style="top: 68%;" data-side="left">
+          <svg viewBox="0 0 22 22" width="18" height="18">
+            <path d="M20 20 C11 17, 3 11, 3 3 C11 3, 17 11, 20 20" fill="#6FAF45" stroke="#163D2A" stroke-width="1.2"/>
+            <path d="M20 20 L6 6" stroke="#DDEACB" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="garden-deco-leaf deco-4" style="top: 88%;" data-side="right">
+          <svg viewBox="0 0 22 22" width="18" height="18">
+            <path d="M3 20 C12 17, 20 11, 20 3 C12 3, 6 11, 3 20" fill="#DDEACB" stroke="#163D2A" stroke-width="1.2"/>
+          </svg>
+        </div>
+
+        <!-- Trailing Spores Container -->
+        <div class="garden-particles-layer" id="gardenParticlesLayer"></div>
+
+        <!-- Large Draggable Botanical Leaf Thumb (54x74px) -->
+        <div class="garden-leaf-thumb" id="gardenLeafThumb" title="Drag to Scroll" tabindex="0" role="slider" aria-orientation="vertical">
+          <div class="garden-thumb-inner">
+            <svg viewBox="0 0 52 74" class="garden-thumb-leaf-svg" style="overflow:visible;">
+              <defs>
+                <!-- Realistic Multi-Stop Chlorophyll Gradient -->
+                <linearGradient id="leafRealBodyGrad" x1="0.15" y1="0.0" x2="0.85" y2="1.0">
+                  <stop offset="0%" stop-color="#BAF268"/>
+                  <stop offset="18%" stop-color="#84DB3A"/>
+                  <stop offset="45%" stop-color="#49A429"/>
+                  <stop offset="75%" stop-color="#236B27"/>
+                  <stop offset="100%" stop-color="#123B17"/>
+                </linearGradient>
+
+                <!-- Sunlit Upper Leaf Blade Translucency -->
+                <linearGradient id="leafSunlightGlow" x1="0" y1="0" x2="1" y2="0.8">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+                  <stop offset="35%" stop-color="#CEFAA0" stop-opacity="0.30"/>
+                  <stop offset="100%" stop-color="#236B27" stop-opacity="0"/>
+                </linearGradient>
+
+                <!-- Leaf Soft Shadow for 3D Depth -->
+                <radialGradient id="leafDewShadow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(10,35,16,0.6)"/>
+                  <stop offset="100%" stop-color="rgba(10,35,16,0)"/>
+                </radialGradient>
+
+                <!-- Dew Drop Refraction -->
+                <linearGradient id="dewDropGrad" x1="0.2" y1="0.1" x2="0.8" y2="0.9">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+                  <stop offset="40%" stop-color="#E2FCD0" stop-opacity="0.75"/>
+                  <stop offset="85%" stop-color="#559938" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#19481E" stop-opacity="0.85"/>
+                </linearGradient>
+
+                <filter id="leafSoftBlur" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
+              </defs>
+
+              <!-- 1. Ambient Drop Shadow / 3D Grounding Layer -->
+              <path d="M26 68 C25 60, 25 53, 26 47 C14 44, 4 33, 4 21 C4 9, 15 2, 27 1 C39 2, 49 11, 48 23 C48 35, 38 45, 27 48 C27 54, 28 61, 28 68 Z"
+                    fill="rgba(10, 30, 16, 0.42)" transform="translate(1.5, 3.5)" filter="url(#leafSoftBlur)"/>
+
+              <!-- 2. Organic Leaf Stem (Petiole) -->
+              <path d="M26 72 C25 65, 25.5 58, 26 50" fill="none" stroke="#2D7A2E" stroke-width="3" stroke-linecap="round"/>
+              <path d="M26.2 72 C25.3 65, 25.8 58, 26.2 50" fill="none" stroke="#8FE240" stroke-width="1.2" stroke-linecap="round"/>
+
+              <!-- 3. Main Realistic Leaf Body (Natural asymmetrical botanical curve) -->
+              <path class="leaf-blade-path"
+                    d="M27 2 
+                       C21 8, 5 16, 5 28 
+                       C5 40, 15 49, 26 52 
+                       C37 49, 47 38, 47 26 
+                       C47 14, 33 6, 27 2 Z"
+                    fill="url(#leafRealBodyGrad)"
+                    stroke="#16431E"
+                    stroke-width="1.2"/>
+
+              <!-- 4. Sunlit Upper Hemisphere & Cellular Sheen Layer -->
+              <path d="M27 3 
+                       C21 9, 6 17, 6 28 
+                       C6 38, 14 46, 26 50 
+                       C25 36, 25 18, 27 3 Z"
+                    fill="url(#leafSunlightGlow)"/>
+
+              <!-- 5. Fine Leaf Margin Highlight (Wax Cuticle Edge) -->
+              <path d="M26 3 C20 9, 7 17, 7 28 C7 36, 12 43, 20 48"
+                    fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8" stroke-linecap="round"/>
+
+              <!-- 6. Realistic Primary Midrib Spine (Tapering & naturally curved) -->
+              <path d="M26 51 C25.5 38, 25.8 20, 27 3"
+                    fill="none" stroke="#133D19" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M26 51 C25.5 38, 25.8 20, 27 3"
+                    fill="none" stroke="#E5F9CB" stroke-width="1.2" stroke-linecap="round"/>
+
+              <!-- 7. Delicate Curved Secondary Veins (Left Leaf Blade) -->
+              <g stroke="#D4F3AF" stroke-width="0.75" stroke-linecap="round" fill="none" opacity="0.85">
+                <path d="M26 44 C20 42, 13 41, 10 37"/>
+                <path d="M26 36 C19 34, 12 31, 8 26"/>
+                <path d="M26 27 C19 24, 13 21, 10 16"/>
+                <path d="M26.5 18 C22 15, 17 13, 14 9"/>
+                <path d="M27 10 C24 8, 21 7, 19 4"/>
+              </g>
+
+              <!-- 8. Delicate Curved Secondary Veins (Right Leaf Blade) -->
+              <g stroke="#C6EFA0" stroke-width="0.75" stroke-linecap="round" fill="none" opacity="0.85">
+                <path d="M26 44 C32 42, 39 40, 42 35"/>
+                <path d="M26 35 C33 33, 40 29, 44 23"/>
+                <path d="M26.2 26 C33 23, 39 19, 42 14"/>
+                <path d="M26.5 17 C31 14, 36 12, 39 8"/>
+                <path d="M27 9 C30 7, 33 6, 35 4"/>
+              </g>
+
+              <!-- 9. Soft Dorsal Reflection Glow Ridge -->
+              <path d="M26 8 C23 18, 21 30, 23 44" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1.0" filter="url(#leafSoftBlur)"/>
+
+              <!-- 10. Hyper-Realistic Dew Droplet with Refraction & Sun Sparkle -->
+              <ellipse cx="17" cy="27" rx="3.4" ry="2.8" fill="rgba(10,35,16,0.38)" transform="translate(1, 1.5)"/>
+              <ellipse cx="17" cy="27" rx="3.3" ry="2.7" fill="url(#dewDropGrad)"/>
+              <!-- Droplet Specular Reflection -->
+              <circle cx="16" cy="25.8" r="1.1" fill="#FFFFFF" opacity="0.95"/>
+              <circle cx="18" cy="27.6" r="0.5" fill="#E4FCD0" opacity="0.8"/>
+            </svg>
+
+            <!-- Active Drag & Velocity Glow Aura -->
+            <div class="garden-thumb-glow" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Basket Cap: Handcrafted Woven Market Basket (50x50px) -->
+      <div class="garden-bottom-basket" title="Fresh Harvest Basket" id="gardenBottomBasket">
+        <div class="garden-basket-inner">
+          <svg viewBox="0 0 44 44" class="garden-basket-svg">
+            <!-- Glow background on bottom reached -->
+            <circle cx="22" cy="25" r="19" fill="rgba(185, 130, 69, 0.25)" class="garden-basket-aura" />
+            
+            <!-- Basket Sturdy Handle -->
+            <path d="M11 22 C11 8, 33 8, 33 22" fill="none" stroke="#B98245" stroke-width="3" stroke-linecap="round"/>
+            <path d="M14 22 C14 11, 30 11, 30 22" fill="none" stroke="#875323" stroke-width="1.2"/>
+
+            <!-- Fresh Harvest Vegetables inside basket -->
+            <!-- Carrot -->
+            <path class="harvest-crop crop-carrot" d="M13 16 L19 24 L16 25 Z" fill="#ea580c"/>
+            <path d="M12 13 L14 16 L11 15" stroke="#6FAF45" stroke-width="1.8" stroke-linecap="round"/>
+            <!-- Juicy Tomato -->
+            <circle class="harvest-crop crop-tomato" cx="22" cy="19" r="4.6" fill="#dc2626"/>
+            <path d="M20 15 L22 17 L24 15" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Apple / Green Herb -->
+            <circle class="harvest-crop crop-herb" cx="29" cy="20" r="4" fill="#6FAF45"/>
+
+            <!-- Woven Basket Base Body -->
+            <path d="M7 22 L11 38 C12 41, 32 41, 33 38 L37 22 Z" fill="url(#gardenBasketGrad)" stroke="#673d16" stroke-width="1.8"/>
+            
+            <!-- Woven Lattice Lines -->
+            <path d="M8 26 L36 26 M9 31 L35 31 M11 36 L33 36" stroke="#875323" stroke-width="1.2"/>
+            <path d="M15 22 L17 38 M22 22 L22 39 M29 22 L27 38" stroke="#875323" stroke-width="1.2"/>
+            <path d="M6 22 L38 22" stroke="#B98245" stroke-width="3" stroke-linecap="round"/>
+
+            <defs>
+              <linearGradient id="gardenBasketGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e2ab69"/>
+                <stop offset="50%" stop-color="#B98245"/>
+                <stop offset="100%" stop-color="#875323"/>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Harvest Celebration Sparkles on reaching bottom -->
+          <div class="harvest-sparkle-wrap" id="harvestSparkleWrap" aria-hidden="true">
+            <span class="harvest-sparkle s-1">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="#facc15" stroke="#facc15" stroke-width="1"><path d="M12 2l2.09 6.26L21 9l-5.46 4.73L17.18 21 12 17.27 6.82 21l1.64-7.27L3 9l6.91-.74z"/></svg>
+            </span>
+            <span class="harvest-sparkle s-2">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            </span>
+            <span class="harvest-sparkle s-3">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(this.container);
+
+    this.track = document.getElementById('gardenVineTrack');
+    this.thumb = document.getElementById('gardenLeafThumb');
+    this.topCap = document.getElementById('gardenTopBud');
+    this.bottomBasket = document.getElementById('gardenBottomBasket');
+    this.particlesContainer = document.getElementById('gardenParticlesLayer');
+    this.decorativeLeaves = Array.from(this.container.querySelectorAll('.garden-deco-leaf'));
+  }
+
+  bindEvents() {
+    window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+    window.addEventListener('resize', () => {
+      this.cacheMetrics();
+      this.updatePosition();
+    }, { passive: true });
+
+    // Click on top bud -> scroll to top
+    this.topCap?.addEventListener('click', () => {
+      this.app?.audioManager?.playClick?.();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Click on bottom basket -> scroll to bottom
+    this.bottomBasket?.addEventListener('click', () => {
+      this.app?.audioManager?.playChime?.();
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+    });
+
+    // Click anywhere on vine track to jump scroll
+    this.track?.addEventListener('click', (e) => {
+      if (e.target.closest('#gardenLeafThumb')) return;
+      const rect = this.track.getBoundingClientRect();
+      const clickY = e.clientY - rect.top;
+      const pct = Math.max(0, Math.min(1, clickY / rect.height));
+      const targetScroll = pct * this.cachedMaxScroll;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+
+    // Drag handling on leaf thumb
+    this.thumb?.addEventListener('mousedown', (e) => this.onDragStart(e));
+    this.thumb?.addEventListener('touchstart', (e) => this.onDragStart(e.touches[0]), { passive: false });
+
+    window.addEventListener('mousemove', (e) => this.onDragMove(e), { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (this.isDragging) {
+        e.preventDefault();
+        this.onDragMove(e.touches[0]);
+      }
+    }, { passive: false });
+
+    window.addEventListener('mouseup', () => this.onDragEnd());
+    window.addEventListener('touchend', () => this.onDragEnd());
+
+    // Keyboard accessibility
+    this.thumb?.addEventListener('keydown', (e) => {
+      const step = 80;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        window.scrollBy({ top: step, behavior: 'smooth' });
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        window.scrollBy({ top: -step, behavior: 'smooth' });
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+      }
+    });
+  }
+
+  handleScroll() {
+    const now = Date.now();
+    const currentScrollY = window.scrollY;
+    const dt = Math.max(1, now - this.lastScrollTime);
+    const dy = currentScrollY - this.lastScrollY;
+
+    // Instant velocity in px/ms
+    const rawVelocity = dy / dt;
+    this.scrollVelocity = this.scrollVelocity * 0.7 + rawVelocity * 0.3;
+
+    this.lastScrollY = currentScrollY;
+    this.lastScrollTime = now;
+
+    // Cap sway between -14deg and +14deg
+    this.targetRotation = Math.max(-14, Math.min(14, this.scrollVelocity * 9));
+
+    this.isScrolling = true;
+    this.container?.classList.add('scrolling');
+
+    if (Math.abs(this.scrollVelocity) > 1.2) {
+      this.container?.classList.add('fast-scroll');
+    } else {
+      this.container?.classList.remove('fast-scroll');
+    }
+
+    // Spawn trailing shimmer dew particles (throttled to avoid DOM bloat)
+    if (now - this.lastParticleTime > 150 && Math.abs(this.scrollVelocity) > 0.4) {
+      this.lastParticleTime = now;
+      this.spawnTrailSpore();
+    }
+
+    // Sway decorative leaves subtly
+    this.swayDecorativeLeaves(this.scrollVelocity);
+
+    // Check bottom harvest condition
+    this.checkHarvestBottom();
+
+    // Start physics loop if not already running
+    this.startPhysicsLoop();
+
+    // Settle debounce
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.isScrolling = false;
+      this.targetRotation = 0;
+      this.scrollVelocity = 0;
+      this.container?.classList.remove('scrolling', 'fast-scroll');
+      this.settleBounce();
+    }, 120);
+  }
+
+  startPhysicsLoop() {
+    if (this.isPhysicsRunning) return;
+    this.isPhysicsRunning = true;
+
+    const loop = () => {
+      // Lerp rotation for organic fluid movement
+      this.currentRotation += (this.targetRotation - this.currentRotation) * 0.16;
+
+      this.updatePosition();
+
+      // Stop physics loop when motion has settled to save CPU
+      if (!this.isScrolling && !this.isDragging && Math.abs(this.currentRotation - this.targetRotation) < 0.05) {
+        this.currentRotation = 0;
+        this.updatePosition();
+        this.isPhysicsRunning = false;
+        this.rafId = null;
+        return;
+      }
+
+      this.rafId = requestAnimationFrame(loop);
+    };
+
+    this.rafId = requestAnimationFrame(loop);
+  }
+
+  updatePosition() {
+    if (!this.track || !this.thumb) return;
+
+    const scrollTop = window.scrollY;
+    const scrollPct = Math.max(0, Math.min(1, scrollTop / (this.cachedMaxScroll || 1)));
+
+    const trackHeight = this.cachedTrackHeight || this.track.clientHeight;
+    const thumbHeight = this.cachedThumbHeight;
+    const maxThumbTop = Math.max(0, trackHeight - thumbHeight);
+    const thumbTop = scrollPct * maxThumbTop;
+
+    this.thumb.style.transform = `translate3d(0, ${thumbTop.toFixed(1)}px, 0) rotate(${this.currentRotation.toFixed(2)}deg)`;
+
+    const pctInt = Math.round(scrollPct * 100);
+    this.thumb.setAttribute('aria-valuenow', pctInt);
+  }
+
+  swayDecorativeLeaves(velocity) {
+    const angle = Math.max(-18, Math.min(18, velocity * 12));
+    this.decorativeLeaves.forEach((leaf, idx) => {
+      const isLeft = leaf.getAttribute('data-side') === 'left';
+      const dir = isLeft ? -1 : 1;
+      const stagger = 1 + idx * 0.15;
+      leaf.style.transform = `rotate(${(angle * dir * stagger).toFixed(1)}deg)`;
+    });
+  }
+
+  settleBounce() {
+    this.decorativeLeaves.forEach((leaf) => {
+      leaf.style.transform = `rotate(0deg)`;
+    });
+
+    if (this.thumb) {
+      this.thumb.classList.add('settle-bounce');
+      setTimeout(() => this.thumb?.classList.remove('settle-bounce'), 450);
+    }
+  }
+
+  checkHarvestBottom() {
+    const scrollTop = window.scrollY;
+    const clientHeight = window.innerHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 40);
+
+    if (isAtBottom) {
+      if (!this.hasHarvested) {
+        this.hasHarvested = true;
+        this.bottomBasket?.classList.add('harvest-active');
+        this.app?.audioManager?.playChime?.();
+        this.app?.showToast?.('🧺 Reached the Harvest Floor! 100% Farm Fresh!');
+      }
+    } else {
+      if (this.hasHarvested) {
+        this.hasHarvested = false;
+        this.bottomBasket?.classList.remove('harvest-active');
+      }
+    }
+  }
+
+  spawnTrailSpore() {
+    if (!this.particlesContainer || !this.thumb) return;
+    const thumbTop = parseFloat(this.thumb.style.transform.split('translate3d(0, ')[1] || '0');
+
+    const spore = document.createElement('div');
+    spore.className = 'garden-spore';
+
+    const relY = thumbTop + 34;
+    const relX = 14 + (Math.random() * 12 - 6);
+    const size = Math.random() * 6 + 4;
+
+    spore.style.cssText = `
+      top: ${relY}px;
+      left: ${relX}px;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${Math.random() > 0.4 ? '#B8E986' : '#FFF9EC'};
+      box-shadow: 0 0 8px #B8E986;
+    `;
+
+    this.particlesContainer.appendChild(spore);
+    setTimeout(() => spore.remove(), 550);
+  }
+
+  onDragStart(e) {
+    this.isDragging = true;
+    this.startY = e.clientY;
+    this.startScrollTop = window.scrollY;
+    this.container?.classList.add('dragging');
+    document.body.classList.add('garden-scrollbar-dragging');
+    this.app?.audioManager?.playClick?.();
+    this.startPhysicsLoop();
+  }
+
+  onDragMove(e) {
+    if (!this.isDragging || !this.track) return;
+    const deltaY = e.clientY - this.startY;
+    const trackHeight = this.cachedTrackHeight || this.track.clientHeight;
+    const thumbHeight = this.cachedThumbHeight;
+    const maxThumbTop = Math.max(1, trackHeight - thumbHeight);
+
+    const scrollDelta = (deltaY / maxThumbTop) * this.cachedMaxScroll;
+    window.scrollTo({
+      top: this.startScrollTop + scrollDelta,
+      behavior: 'auto'
+    });
+  }
+
+  onDragEnd() {
+    if (this.isDragging) {
+      this.isDragging = false;
+      this.container?.classList.remove('dragging');
+      document.body.classList.remove('garden-scrollbar-dragging');
+      this.settleBounce();
+    }
+  }
+
+  destroy() {
+    if (this.rafId) cancelAnimationFrame(this.rafId);
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+    this.container?.remove();
+  }
+}

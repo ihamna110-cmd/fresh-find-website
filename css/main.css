@@ -1,0 +1,470 @@
+/* ==========================================================================
+   FreshFind - Biophilic Eco Design System & Tokens
+   Theme: eGreen Basket
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Fresh Organic Garden (Light Theme Default) */
+  --bg-main: #f4fbf7;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-translucent: rgba(255, 255, 255, 0.88);
+  --bg-muted: rgba(234, 246, 238, 0.82);
+  --bg-subtle: rgba(240, 253, 244, 0.75);
+  
+  --primary: #15803d;
+  --primary-light: #22c55e;
+  --primary-dark: #0f5127;
+  --primary-glow: rgba(34, 197, 94, 0.35);
+  
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  
+  --accent: #d97706;
+  --accent-light: #f59e0b;
+  --accent-glow: rgba(245, 158, 11, 0.25);
+  
+  --text-main: #132e20;
+  --text-muted: #4b6354;
+  --text-subtle: #6e8878;
+  --text-inverse: #ffffff;
+  
+  --border-light: #d1fae5;
+  --border-medium: #a7f3d0;
+  --border-glass: rgba(255, 255, 255, 0.6);
+  
+  --open-badge-bg: #dcfce7;
+  --open-badge-text: #166534;
+  --open-pulse: #22c55e;
+  
+  --closed-badge-bg: #fee2e2;
+  --closed-badge-text: #991b1b;
+  
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 6px rgba(16, 185, 129, 0.06);
+  --shadow-md: 0 8px 24px rgba(21, 128, 61, 0.08);
+  --shadow-lg: 0 16px 40px rgba(15, 81, 39, 0.12);
+  --shadow-glow: 0 0 25px rgba(34, 197, 94, 0.28);
+  
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  
+  /* Typography */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Transitions */
+  --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-main: #0a130e;
+  --bg-surface: #111f17;
+  --bg-surface-elevated: #16291f;
+  --bg-surface-translucent: rgba(17, 31, 23, 0.85);
+  --bg-muted: #182e21;
+  --bg-subtle: #14241b;
+  
+  --primary: #22c55e;
+  --primary-light: #4ade80;
+  --primary-dark: #15803d;
+  --primary-glow: rgba(34, 197, 94, 0.45);
+  
+  --secondary: #34d399;
+  --secondary-light: #6ee7b7;
+  
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+  --accent-glow: rgba(245, 158, 11, 0.35);
+  
+  --text-main: #f0fdf4;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --text-inverse: #0f172a;
+  
+  --border-light: #1f3b2c;
+  --border-medium: #284c39;
+  --border-glass: rgba(255, 255, 255, 0.08);
+  
+  --open-badge-bg: #064e3b;
+  --open-badge-text: #6ee7b7;
+  --open-pulse: #34d399;
+  
+  --closed-badge-bg: #450a0a;
+  --closed-badge-text: #fca5a5;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 30px rgba(34, 197, 94, 0.35);
+}
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   FreshFind Cursor & Scrollbar — 100% Reliable & Beautiful
+   ========================================================================== */
+html {
+  overflow-y: scroll !important;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e rgba(21, 128, 61, 0.12);
+}
+
+/* Custom Biophilic Scrollbar (Works on all modern WebKit/Blink browsers) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f1fdf4;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #09130d;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
+  border-radius: 9999px;
+  border: 2px solid #f1fdf4;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  border-color: #09130d;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}
+
+/* Safe Cursor: Always visible with pointer on interactives */
+html, body {
+  cursor: auto;
+}
+
+a, button, [role="button"], select, input[type="range"], .market-card, .produce-card {
+  cursor: pointer !important;
+}
+
+body {
+  font-size: 16px;
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  position: relative;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Fresh Find Garden Field Organic Background Texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(ellipse at 10% 15%, rgba(34, 197, 94, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 75%, rgba(245, 158, 11, 0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 50%, rgba(16, 185, 129, 0.07) 0%, transparent 40%),
+    linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+[data-theme="dark"] body::before {
+  background-image: 
+    radial-gradient(ellipse at 10% 15%, rgba(34, 197, 94, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 75%, rgba(245, 158, 11, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    linear-gradient(rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+}
+
+/* Background Ambient Glow Orbs - GPU Accelerated */
+.bg-ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  transform: translateZ(0);
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.bg-ambient-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--primary-light) 0%, var(--primary) 60%, transparent 100%);
+  top: -140px;
+  right: -120px;
+  opacity: 0.22;
+}
+
+.bg-ambient-orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 60%, transparent 100%);
+  bottom: 5%;
+  left: -140px;
+  opacity: 0.16;
+  animation-duration: 26s;
+  animation-delay: -12s;
+}
+
+.bg-ambient-orb-3 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(99,102,241,0.4) 0%, rgba(139,92,246,0.2) 60%, transparent 100%);
+  top: 50%;
+  left: 48%;
+  opacity: 0.1;
+  animation-duration: 22s;
+  animation-delay: -8s;
+}
+
+/* 🌿 User Botanical Illustration Background Pattern (Strictly 40% Opacity) */
+.site-bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/images/pattern-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.40; /* Exactly 40% opacity as requested by user */
+  pointer-events: none;
+  z-index: 0;
+  transform: translateZ(0);
+}
+
+[data-theme="dark"] .site-bg-pattern {
+  opacity: 0.22;
+  filter: invert(0.92) hue-rotate(95deg) contrast(1.15) brightness(0.95);
+}
+
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.2rem, 4vw + 1rem, 3.8rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 2.5vw + 0.8rem, 2.6rem); }
+h3 { font-size: clamp(1.3rem, 1.8vw + 0.5rem, 1.8rem); }
+h4 { font-size: 1.2rem; }
+
+p {
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.section-title-wrap {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-medium);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.85rem;
+}
+
+.section-title {
+  margin-bottom: 0.9rem;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+}
+
+/* Glassmorphism Surface Base */
+.glass-panel {
+  background: var(--bg-surface-translucent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+}
+
+/* Live Open Badge with Pulsing Beacon */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status-badge.open {
+  background: var(--open-badge-bg);
+  color: var(--open-badge-text);
+  border: 1px solid var(--border-medium);
+}
+
+.status-badge.open .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--open-pulse);
+  position: relative;
+}
+
+.status-badge.open .pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: var(--open-pulse);
+  opacity: 0.6;
+  animation: radarPulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.status-badge.closed {
+  background: var(--closed-badge-bg);
+  color: var(--closed-badge-text);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.status-badge.closed .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--closed-badge-text);
+}
+
+/* ═══════════════════════════════════════════════
+   INTRO SAFETY — Ensure site is always interactive
+   ═══════════════════════════════════════════════ */
+
+/* After intro dismissed: full scroll & interaction */
+body.intro-finished {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  pointer-events: auto !important;
+}
+
+/* All clickable elements always get pointer */
+body a,
+body button,
+body [role="button"],
+body input,
+body select,
+body textarea,
+body label,
+body .market-card,
+body .produce-card,
+body .nav-item-link,
+body .nav-item-pill,
+body .dropdown-link {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Modal overlay - always on top and clickable */
+.modal-overlay.active {
+  display: flex !important;
+  pointer-events: auto !important;
+  z-index: 2147483640 !important;
+}
+
+/* Custom Cursor Passthrough & Zero-Lag Guarantee */
+#ffCarrotCursor,
+.ff-carrot-cursor,
+.ff-carrot-cursor *,
+#ffCarrotWrap,
+#ffCarrotWrap * {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}

@@ -1,0 +1,17 @@
+# Large video recordings
+*.mp4
+!assets/video/*.mp4
+
+# Nested unzipped folder
+GLOBAL CHALLENGE/
+
+# Scratch & temporary scripts
+check_html.js
+fix_bundle.py
+hero_from_user.html
+hero_source.html
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+*.log

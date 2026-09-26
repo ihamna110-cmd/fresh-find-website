@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshFind — Fresh All Along | eGreen Basket</title>
+  <meta name="description" content="Discover nearby local farmers markets, check live operating schedules, explore fresh seasonal produce, and compute your eco-savings.">
+  <meta name="keywords" content="FreshFind, Farmers Market, Organic Produce, Sustainable Agriculture, eGreen Basket">
+  <meta name="author" content="FreshFind Innovation Team">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="FreshFind — Fresh All Along">
+  <meta property="og:description" content="Find nearby farmers markets, live open schedules, seasonal crops, and eco footprint calculation.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Permanent Marker, Jost, Caveat, Playfair Display, Outfit, Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Jost:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS for Interactive Real-Time Maps (Zero API Key needed) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+
+  <!-- FreshFind Stylesheets -->
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- GSAP & ScrollTrigger for High-Performance Scrollytelling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- FreshFind Standalone Intro Controller (Immediate availability) -->
+  <script src="js/introController.js"></script>
+
+  <link rel="icon" type="image/png" href="assets/images/freshfind_logo.png">
+</head>
+<body>
+
+  <!-- Background Ambient Glow Orbs -->
+  <div class="bg-ambient-orb bg-ambient-orb-1" aria-hidden="true"></div>
+  <div class="bg-ambient-orb bg-ambient-orb-2" aria-hidden="true"></div>
+  <div class="bg-ambient-orb bg-ambient-orb-3" aria-hidden="true"></div>
+
+  <!-- 🌿 User-Specified Botanical Garden Background Pattern (40% Opacity) -->
+  <div class="site-bg-pattern" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       🌿 CREAM THEME ORGANIC INTRO OVERLAY (Auto-Dismissing, Zero-Overlap)
+       ========================================================================== -->
+  <section id="scrollyIntroSection" aria-label="FreshFind Introduction">
+    <!-- Intro Brand Header: Logo with Text & INTRO Badge -->
+    <div class="intro-brand-header" id="introBrandHeader">
+      <div class="intro-brand-logo-icon">
+        <img src="assets/images/freshfind_logo.png" alt="FreshFind Organic Logo" class="intro-brand-logo-img">
+      </div>
+      <div class="intro-brand-text-col">
+        <div class="intro-brand-title-wrap">
+          <span class="intro-brand-name">FreshFind</span>
+          <span class="intro-badge-pill">INTRO</span>
+        </div>
+        <span class="intro-brand-tagline">Fresh All Along</span>
+      </div>
+    </div>
+
+    <!-- Intro Floating Stage Tracker -->
+    <div class="intro-stage-tracker" id="introStageTracker">
+      <div id="introNavBadge" class="intro-nav-badge"></div>
+      <span id="introNavStageLabel" class="intro-nav-label">Stage I: The Harvest Basket</span>
+    </div>
+
+    <!-- Quick Skip to Platform Button -->
+    <button type="button" class="intro-skip-btn" id="introSkipBtn" onclick="window.dismissFreshFindIntro()" aria-label="Skip to Platform">
+      <span>Skip Intro</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+
+    <!-- PINNED VIEWPORT: Contained Inside Intro Host -->
+    <div id="pin-viewport">
+      <!-- Background Typography Layer -->
+      <div class="bg-text-layer">
+        <h2 id="bg-text-fresh">FRESH</h2>
+        <h2 id="bg-text-harvest">ORGANIC</h2>
+      </div>
+
+      <!-- Ambient Glow Backing -->
+      <div class="ambient-glow-container">
+        <div id="ambient-glow"></div>
+      </div>
+
+      <!-- PRODUCT & BASKET ANIMATION LAYER -->
+      <div class="scene-wrapper">
+        <div id="scene-container">
+          <!-- Vegetable 1: Carrot -->
+          <div id="veg-carrot" class="produce-item">
+            <img src="assets/intro/carrot.png" alt="Carrot">
+          </div>
+
+          <!-- Vegetable 2: Broccoli -->
+          <div id="veg-broccoli" class="produce-item">
+            <img src="assets/intro/broccoli.png" alt="Broccoli">
+          </div>
+
+          <!-- Vegetable 3: Tomato -->
+          <div id="veg-tomato" class="produce-item">
+            <img src="assets/intro/tomato.png" alt="Tomato">
+          </div>
+
+          <!-- Vegetable 4: Corn -->
+          <div id="veg-corn" class="produce-item">
+            <img src="assets/intro/corn.png" alt="Corn">
+          </div>
+
+          <!-- Vegetable 5: Grapes -->
+          <div id="veg-grapes" class="produce-item">
+            <img src="assets/intro/grapes.png" alt="Grapes">
+          </div>
+
+          <!-- Vegetable 6: Pineapple -->
+          <div id="veg-pineapple" class="produce-item">
+            <img src="assets/intro/pineapple.png" alt="Pineapple">
+          </div>
+
+          <!-- Main Basket Asset -->
+          <div id="basket-wrapper" class="floating-basket">
+            <img src="assets/intro/basket.png" alt="Fresh Harvest Basket">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Overlay Card (Bottom Center) -->
+    <div class="intro-action-card" id="introActionCard">
+      <span class="intro-action-tagline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+        Pure &amp; Organic Harvest
+      </span>
+      <h2 class="intro-action-heading">Daily <span>Harvest</span> Basket</h2>
+      <p class="intro-action-sub">Fresh produce hand-picked from verified local family growers.</p>
+      <div class="intro-action-btn-row">
+        <button type="button" class="intro-enter-btn" id="enterPlatformBtn" onclick="window.dismissFreshFindIntro()">
+          <span>Enter FreshFind Platform</span>
+          <span class="intro-countdown-pill" id="introCountdownNum">3</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌾 Live Farm Harvest & Market Stream Ticker (Placed Above Navigation Bar) -->
+  <div class="top-live-ticker-wrap">
+    <div class="ticker-pill">
+      <span class="pulse-dot"></span>
+      <span>LIVE HARVEST RADAR</span>
+      <span style="opacity:.85;">• <span id="tickerDay"></span> • <span id="tickerClock"></span></span>
+    </div>
+    <div class="ticker-marquee">
+      <div class="ticker-track" id="heroTickerTrack">
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 2a10 10 0 0 0-10 10c0 4.4 2.9 8.2 7 9.5V22h6v-.5c4.1-1.3 7-5.1 7-9.5A10 10 0 0 0 12 2z"/></svg> <strong>Downtown Farmers Market:</strong> Orchard Honeycrisp Apples freshly arrived</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.78 11.84 2.27 21.7 2.27 21.7z"/></svg> <strong>Green Haven Co-Op:</strong> Heirloom Rainbow Carrots &amp; Baby Spinach in stock</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg> <strong>Sunset Valley:</strong> Organic Wild Strawberries picked 2 hours ago</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg> <strong>Highland Apiaries:</strong> Raw Wildflower Comb Honey restocked</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><polygon points="12 2 15 8 22 9 17 14 18 21 12 17 6 21 7 14 2 9 9 8 12 2"/></svg> <strong>Riverbend Growers:</strong> Sweet Golden Corn freshly picked</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg> <strong>Valley Organics:</strong> Hass Avocados &amp; Sweet Basil Microgreens ready</span>
+        <span class="ticker-sep">•</span>
+        <span class="ticker-item"><svg class="card-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg> <strong>Northridge Farm:</strong> Crisp Purple Broccoli &amp; Kale picked at sunrise</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <!-- Floating Island Header & Navigation (Reference Matched) -->
+  <header class="site-header-wrapper">
+    <div class="site-navbar-capsule">
+      <!-- 1. Brand Logo -->
+      <a href="#home" class="brand-logo" id="brandLogoLink" title="FreshFind - Local Farms. Fresh Lives.">
+        <div class="brand-logo-icon">
+          <img src="assets/images/freshfind_logo.png" alt="FreshFind Organic Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-logo-text">
+          <span class="brand-name">FreshFind</span>
+          <span class="brand-sub">Local Farms. Fresh Lives.</span>
+        </div>
+      </a>
+
+      <!-- 2. Navigation Menu Links -->
+      <nav class="main-nav" id="mainNav">
+        <!-- Home -->
+        <a href="#home" class="nav-item-pill active">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+          <span>Home</span>
+        </a>
+
+        <!-- Markets -->
+        <div class="nav-dropdown-wrap">
+          <a href="#directory" class="nav-item-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Markets</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="#directory" class="dropdown-link">All Farmers Markets</a>
+            <a href="#directory" class="dropdown-link" onclick="window.freshFindApp?.marketDirectory?.setQuickFilter?.('open-now')">Open Right Now</a>
+            <a href="#directory" class="dropdown-link" onclick="window.freshFindApp?.marketDirectory?.setQuickFilter?.('weekend')">Weekend Markets</a>
+          </div>
+        </div>
+
+        <!-- Produce -->
+        <div class="nav-dropdown-wrap">
+          <a href="#produce" class="nav-item-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+            <span>Produce</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="#produce" class="dropdown-link">Seasonal Produce Guide</a>
+            <a href="#seasonal" class="dropdown-link">Harvest Calendar</a>
+            <a href="#eco-calculator" class="dropdown-link">Eco Calculator</a>
+            <a href="#harvest-radar" class="dropdown-link" style="color:var(--primary);font-weight:700;">⚡ Live Harvest Radar →</a>
+          </div>
+        </div>
+
+        <!-- About Us (Direct Page Link) -->
+        <a href="about.html" class="nav-item-link" id="navLinkAbout">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>About Us</span>
+        </a>
+
+        <!-- Contact Us (Direct Page Link) -->
+        <a href="contact.html" class="nav-item-link" id="navLinkContact">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <span>Contact Us</span>
+        </a>
+      </nav>
+
+      <!-- 3. Integrated Search Bar -->
+      <div class="nav-search-bar" id="navSearchBar">
+        <svg class="nav-search-lens" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="navSearchInput" placeholder="Search markets, produce..." aria-label="Search markets and produce">
+        <button id="navSearchSubmitBtn" class="nav-search-btn" title="Search" aria-label="Submit Search">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 4. Right Action Buttons: Notification Bell (3), User Avatar, Cart/Basket (2) (Matched to Mockup) -->
+      <div class="nav-actions-group">
+        <!-- Notification Bell with Badge -->
+        <button id="navNotifyBtn" class="nav-icon-circle-btn nav-notify-has-badge" title="Market Updates & Alerts" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="nav-notify-count-badge">3</span>
+        </button>
+
+        <!-- Saved Bookmarks Pill (Bookmark Ribbon Icon) -->
+        <button id="navCartBtn" class="nav-cart-pill-btn" title="Saved Bookmarks" aria-label="Saved Bookmarks">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="nav-cart-label">Saved</span>
+          <span id="headerBookmarkBadge" class="nav-cart-badge">0</span>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation (Directly Below Navbar) -->
+  <nav class="breadcrumb-container" id="globalBreadcrumbContainer" aria-label="Breadcrumb">
+    <div class="container breadcrumb-inner">
+      <ul class="breadcrumb-list" id="breadcrumbList">
+        <li class="breadcrumb-item">
+          <a href="#home">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Home
+          </a>
+        </li>
+        <li class="breadcrumb-sep">/</li>
+        <li class="breadcrumb-item active" id="breadcrumbActiveItem">Farmers Markets &amp; Seasonal Produce</li>
+      </ul>
+      <div class="breadcrumb-status-pill">
+        <span class="live-pulse-dot"></span>
+        <span>Local Certified • Zero Food Miles</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+     <!-- ============================================================
+          HERO SECTION — Fresh Finds Video Hero
+          ============================================================ -->
+     <section class="hero" id="home">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/hero_video.mp4" type="video/mp4">
+      </video>
+
+      <div class="hero-content">
+        
+        <h1>Where fresh<br>meets <span>local.</span></h1>
+        <p class="sub">Discover farmers markets, seasonal produce, and the local growers behind every fresh find.</p>
+        <div class="cta-row">
+          <a href="#directory" class="btn-hero-primary">
+            Explore Markets
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          </a>
+          <a href="#produce" class="btn-hero-secondary">
+            Browse Produce Guide
+          </a>
+          <a href="about.html" class="btn-hero-secondary">
+            Our Story &amp; Team
+          </a>
+        </div>
+
+        <!-- Live Platform Stats Ribbon -->
+        <div class="hero-stats-ribbon">
+          <div class="stat-item">
+            <strong id="statFarmersNum">500+</strong>
+            <span>Local Farmers</span>
+          </div>
+          <div class="stat-item">
+            <strong id="statMarketsNum">50+</strong>
+            <span>Active Markets</span>
+          </div>
+          <div class="stat-item">
+            <strong id="statCustomersNum">10K+</strong>
+            <span>Happy Customers</span>
+          </div>
+          <div class="stat-item">
+            <strong>100%</strong>
+            <span>Fresh &amp; Seasonal</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔍 Quick Find Search Bar & Live Harvest Radar (Smooth Transition into Directory) -->
+    <section id="quickFindSection" class="quick-find-transition-section">
+      <div class="container">
+        <div class="quick-find-bar">
+          <div class="find-input-group">
+            <label for="heroSearchInput">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              Search by Keyword or Zip
+            </label>
+            <div class="find-input-wrap">
+              <input type="text" id="heroSearchInput" placeholder="Neighborhood, zip code, or market...">
+            </div>
+          </div>
+
+          <div class="find-input-group">
+            <label for="heroAreaSelect">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Neighborhood / Area
+            </label>
+            <div class="find-input-wrap">
+              <select id="heroAreaSelect">
+                <option value="all">All Neighborhood Areas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="find-input-group">
+            <label for="heroDaySelect">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              Day of Week
+            </label>
+            <div class="find-input-wrap">
+              <select id="heroDaySelect">
+                <option value="all">Any Day of the Week</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="heroSearchBtn" class="btn-primary quick-find-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Search</span>
+          </button>
+        </div>
+
+        <!-- 🌟 Quick Filter Pills -->
+        <div class="hero-quick-filter-pills" id="heroQuickPills">
+          <button class="hero-pill-btn" data-filter="open-today">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <span>Open Today</span>
+          </button>
+          <button class="hero-pill-btn" data-filter="weekend">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>This Weekend</span>
+          </button>
+          <button class="hero-pill-btn" data-filter="near-me">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Near Me</span>
+          </button>
+          <button class="hero-pill-btn" data-filter="organic">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <span>100% Organic</span>
+          </button>
+          <button class="hero-pill-btn" data-filter="flowers">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"/><path d="M12 17a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0v-1a4 4 0 0 0-4-4z"/><path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z"/><path d="M2 12a4 4 0 0 0 4-4h1a4 4 0 0 0 0 8H6a4 4 0 0 0-4-4z"/></svg>
+            <span>Fresh Floral</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breadcrumb Navigation Bar (SRS Mandatory) -->
+    
+
+    <!-- 📍 Market Directory Section -->
+    <section id="directory" class="section">
+      <div class="container">
+        <div class="section-title-wrap reveal-on-scroll">
+          <span class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg>
+            Market Directory
+          </span>
+          <h2 class="section-title">Discover Nearby Farmers Markets</h2>
+          <p class="section-desc" id="marketResultCount">Explore authentic community farmers markets with verified schedules and farm profiles.</p>
+        </div>
+
+        <!-- Directory Controls & Filters Bar (SRS Mandatory) -->
+        <div class="directory-controls-bar">
+          <div class="filter-pills-row">
+            <!-- Filter by Keyword / Name -->
+            <input type="text" id="filterKeyword" class="filter-select" placeholder="Search markets or crops..." style="min-width: 170px; max-width: 220px; font-weight: 500;">
+
+            <!-- Filter by Area -->
+            <select id="filterArea" class="filter-select">
+              <option value="all">All Neighborhood Areas</option>
+            </select>
+
+            <!-- Filter by Day -->
+            <select id="filterDay" class="filter-select">
+              <option value="all">Any Day of the Week</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+
+            <!-- Filter by Produce Type -->
+            <select id="filterProduce" class="filter-select">
+              <option value="all">All Produce Categories</option>
+            </select>
+
+            <!-- Open Right Now Toggle (SRS Highlight) -->
+            <div id="filterOpenNow" class="open-now-toggle" title="Click to show only markets currently open">
+              <span class="pulse-dot"></span>
+              <span>Open Right Now</span>
+            </div>
+          </div>
+
+          <!-- Sorting & View Modes -->
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+            <select id="sortMarkets" class="filter-select">
+              <option value="rating">Highest Rated</option>
+              <option value="distance">Nearest Proximity</option>
+              <option value="next_open">Next Open Day</option>
+              <option value="az">Alphabetical (A - Z)</option>
+              <option value="za">Alphabetical (Z - A)</option>
+            </select>
+
+            <!-- Dual View Switcher (Card Grid vs Map) -->
+            <div class="view-toggle-btns">
+              <button id="viewGridBtn" class="view-toggle-btn active" title="Grid View">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Grid
+              </button>
+              <button id="viewMapBtn" class="view-toggle-btn" title="Map View">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                Map
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map View Container (Leaflet.js) -->
+        <div id="marketsMapContainer" class="map-view-container">
+          <div id="marketsMap"></div>
+        </div>
+
+        <!-- Market Cards Grid -->
+        <div id="marketsGrid" class="markets-grid">
+          <!-- Dynamically populated from markets.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 🥕 Produce Guide Section -->
+    <section id="produce" class="section" style="background:var(--bg-subtle);">
+      <div class="container">
+        <div class="section-title-wrap reveal-on-scroll">
+          <span class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path></svg>
+            Produce Guide
+          </span>
+          <h2 class="section-title">Seasonal Fresh Produce Catalogue</h2>
+          <p class="section-desc">Learn about seasonal peak harvest periods, nutritional benefits, and which local markets stock each crop.</p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div id="produceCategoryFilters" class="season-tabs-bar" style="margin-bottom:2rem;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Produce Cards Grid -->
+        <div id="produceGrid" class="produce-grid">
+          <!-- Dynamically populated from produce.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 🌟 Seasonal Recommendations Wheel -->
+    <section id="seasonal" class="section">
+      <div class="container">
+        <div class="section-title-wrap reveal-on-scroll">
+          <span class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line></svg>
+            Seasonal Calendar
+          </span>
+          <h2 class="section-title">What's Peak in Season Right Now?</h2>
+          <p class="section-desc">Eating seasonally guarantees maximum nutrient density, lower prices, and drastically reduced carbon transport emissions.</p>
+        </div>
+
+        <!-- Season Selection Tabs -->
+        <div id="seasonTabsContainer" class="season-tabs-bar">
+          <!-- Populated dynamically (Spring, Summer, Autumn, Winter) -->
+        </div>
+
+        <!-- Seasonal Showcase Card -->
+        <div id="seasonShowcaseCard" class="season-showcase-card">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 🌿 Futuristic "eGreen Basket" Innovation: Carbon & Eco-Impact Calculator -->
+    <div id="eco" style="position:relative; top:-90px; visibility:hidden;"></div>
+    <section id="eco-calculator" class="section" style="background:var(--bg-subtle);">
+      <div class="container">
+        <div class="section-title-wrap reveal-on-scroll">
+          <span class="section-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+            eGreen Innovation
+          </span>
+          <h2 class="section-title">Your Food Miles & Carbon Savings Calculator</h2>
+          <p class="section-desc">Calculate your real environmental contribution by choosing local farmers markets over industrial commercial supply chains.</p>
+        </div>
+
+        <div class="eco-calc-card reveal-on-scroll delay-2">
+          <div class="eco-calc-controls">
+            <div class="calc-slider-group">
+              <div class="calc-slider-header">
+                <span>Weekly Home Meals Cooked with Local Produce:</span>
+                <span id="ecoMealsValue" class="calc-slider-value">7</span>
+              </div>
+              <input type="range" id="ecoMealsSlider" class="eco-range-slider" min="1" max="21" value="7">
+            </div>
+
+            <div class="calc-slider-group">
+              <div class="calc-slider-header">
+                <span>Household Size (People):</span>
+                <span id="ecoPeopleValue" class="calc-slider-value">2</span>
+              </div>
+              <input type="range" id="ecoPeopleSlider" class="eco-range-slider" min="1" max="6" value="2">
+            </div>
+
+            <div style="background:var(--bg-muted); border:1px solid var(--border-medium); padding:1.25rem; border-radius:var(--radius-md);">
+              <h4 style="font-size:0.95rem; color:var(--primary); margin-bottom:0.35rem;">💡 Did you know?</h4>
+              <p style="font-size:0.85rem; line-height:1.5;">
+                Conventional supermarket produce travels an average of <b>1,500 food miles</b> before reaching your plate. Local farmers market crops travel only <b>12 miles</b> from seed to stall!
+              </p>
+            </div>
+          </div>
+
+          <div class="eco-results-grid">
+            <div class="eco-metric-box">
+              <div class="eco-metric-num" id="ecoMilesSaved">20,748</div>
+              <div class="eco-metric-label">Food Miles Saved / Yr</div>
+            </div>
+
+            <div class="eco-metric-box">
+              <div class="eco-metric-num" id="ecoCo2Saved">1,701 kg</div>
+              <div class="eco-metric-label">CO2 Emissions Avoided</div>
+            </div>
+
+            <div class="eco-metric-box">
+              <div class="eco-metric-num" id="ecoPlasticSaved">1,310</div>
+              <div class="eco-metric-label">Plastic Packs Eliminated</div>
+            </div>
+
+            <div class="eco-metric-box">
+              <div class="eco-metric-num" id="ecoTreesSaved">77.3</div>
+              <div class="eco-metric-label">Tree Seedlings Equivalent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📊 Futuristic Platform Stats Banner -->
+    <section class="section" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-dark) 100%); padding: 4rem 0; overflow:hidden; position:relative;">
+      <!-- Animated grid overlay -->
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+      <div class="container">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:2.5rem; text-align:center;" class="reveal-on-scroll">
+          <div class="stat-item">
+            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#fff; line-height:1; margin-bottom:0.5rem;" class="count-num" data-target="8">0</div>
+            <div style="font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.75);">Local Farmers Markets</div>
+          </div>
+          <div class="stat-item">
+            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#fff; line-height:1; margin-bottom:0.5rem;" class="count-num" data-target="50">0</div>
+            <div style="font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.75);">Fresh Produce Items</div>
+          </div>
+          <div class="stat-item">
+            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#fff; line-height:1; margin-bottom:0.5rem;" class="count-num" data-target="1500">0</div>
+            <div style="font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.75);">Food Miles Saved / Trip</div>
+          </div>
+          <div class="stat-item">
+            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#fbbf24; line-height:1; margin-bottom:0.5rem;" class="count-num" data-target="100">0</div>
+            <div style="font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.75);">% Carbon-Conscious</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🌾 SMART HARVEST RADAR & COMMUNITY ROUTE PLANNER (PREMIUM INTERACTIVE FEATURE) -->
+    <section id="harvest-radar" class="section harvest-radar-section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-title-wrap">
+          <span class="section-tag">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Live Farm Freshness &amp; Itinerary Engine
+          </span>
+          <h2 class="section-title">Live Harvest Radar &amp; Market Route Planner</h2>
+          <p class="section-desc">Track real-time pick timestamps and brix sweetness ratings from local growers, or generate a tailored 3-stop eco market tour in one click.</p>
+        </div>
+
+        <!-- Mode Switcher Tabs -->
+        <div class="radar-mode-switcher">
+          <button type="button" class="radar-tab-btn active" id="tabHarvestRadar" data-mode="radar">
+            <span class="tab-indicator-dot"></span>
+            <span>⚡ Live Harvest Freshness Radar</span>
+          </button>
+          <button type="button" class="radar-tab-btn" id="tabRoutePlanner" data-mode="planner">
+            <span class="tab-indicator-dot"></span>
+            <span>🧭 Smart Market Day Trip Planner</span>
+          </button>
+        </div>
+
+        <!-- MODE 1: LIVE HARVEST RADAR PANEL -->
+        <div id="radarPanelContent" class="radar-content-panel active">
+          <!-- Filter Tags -->
+          <div class="radar-filter-bar">
+            <button type="button" class="radar-filter-chip active" data-filter="all">All Fresh Arrivals (6)</button>
+            <button type="button" class="radar-filter-chip" data-filter="fruits">🍎 Crisp Fruits &amp; Berries</button>
+            <button type="button" class="radar-filter-chip" data-filter="greens">🥬 Greens &amp; Roots</button>
+            <button type="button" class="radar-filter-chip" data-filter="artisanal">🍯 Honey &amp; Farm Pantry</button>
+          </div>
+
+          <!-- Radar Cards Grid -->
+          <div class="radar-cards-grid" id="radarCardsGrid">
+            <!-- Card 1: Honeycrisp Apples -->
+            <div class="radar-card" data-category="fruits">
+              <div class="radar-card-top">
+                <span class="radar-badge live">
+                  <span class="pulse-dot"></span>
+                  <span>Picked 05:45 AM</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Oakwood Orchards (6.4 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 2a10 10 0 0 0-10 10c0 4.4 2.9 8.2 7 9.5V22h6v-.5c4.1-1.3 7-5.1 7-9.5A10 10 0 0 0 12 2z"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Orchard Honeycrisp Apples</h3>
+                  <span class="crop-variety">Tree-Ripened Crisp · Grade A</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Brix Sweetness</span>
+                  <strong class="metric-val text-accent">15.2° <small>High Sweet</small></strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Crispness Index</span>
+                  <strong class="metric-val text-primary">98% <small>Peak Snap</small></strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining">18 crates left</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill" style="width: 82%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Honeycrisp Apples')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2: Wild Mountain Berries -->
+            <div class="radar-card" data-category="fruits">
+              <div class="radar-card-top">
+                <span class="radar-badge live">
+                  <span class="pulse-dot"></span>
+                  <span>Picked 2 Hours Ago</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Sunset Valley (9.1 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f43f5e" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="#f43f5e"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Wild Mountain Strawberries</h3>
+                  <span class="crop-variety">Organic Sweet Alpine · Small Batch</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Brix Sweetness</span>
+                  <strong class="metric-val text-accent">16.4° <small>Super Sweet</small></strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Antioxidant Index</span>
+                  <strong class="metric-val text-primary">High ORAC</strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining text-danger">Almost Sold Out (6 crates)</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill fill-danger" style="width: 93%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Wild Mountain Strawberries')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 3: Heirloom Rainbow Carrots -->
+            <div class="radar-card" data-category="greens">
+              <div class="radar-card-top">
+                <span class="radar-badge fresh">
+                  <span class="pulse-dot"></span>
+                  <span>Sunrise Harvest</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Green Haven Co-Op (4.3 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f97316" stroke-width="2"><path d="M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.78 11.84 2.27 21.7 2.27 21.7z"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Heirloom Rainbow Carrots</h3>
+                  <span class="crop-variety">Purple Haze, Solar Yellow &amp; Orange</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Moisture Retention</span>
+                  <strong class="metric-val text-primary">99% <small>Turgid</small></strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Food Miles</span>
+                  <strong class="metric-val text-success">Zero Import</strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining">42 bunches available</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill" style="width: 58%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Rainbow Carrots')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 4: Baby Spinach & Tuscan Kale -->
+            <div class="radar-card" data-category="greens">
+              <div class="radar-card-top">
+                <span class="radar-badge fresh">
+                  <span class="pulse-dot"></span>
+                  <span>Picked 06:10 AM</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Riverbend Greens (5.8 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#22c55e" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Tuscan Dino Kale &amp; Spinach</h3>
+                  <span class="crop-variety">Tender Baby Leaf · Hydro-cooled</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Vitamin C / K</span>
+                  <strong class="metric-val text-primary">Peak Potency</strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Soil Health</span>
+                  <strong class="metric-val text-success">Regenerative</strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining">30 bags left</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill" style="width: 70%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Tuscan Dino Kale')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 5: Raw Wildflower Comb Honey -->
+            <div class="radar-card" data-category="artisanal">
+              <div class="radar-card-top">
+                <span class="radar-badge honey">
+                  <span class="pulse-dot"></span>
+                  <span>Cold Extracted</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Highland Apiaries (12.0 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#eab308" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Raw Wildflower Honey &amp; Comb</h3>
+                  <span class="crop-variety">Unpasteurized · Live Enzymes</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Purity Level</span>
+                  <strong class="metric-val text-accent">100% Raw Comb</strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Pollen Density</span>
+                  <strong class="metric-val text-primary">High Flora</strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining">24 jars available</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill fill-amber" style="width: 50%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Raw Honey')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 6: Sweet Golden Bicolor Corn -->
+            <div class="radar-card" data-category="greens">
+              <div class="radar-card-top">
+                <span class="radar-badge live">
+                  <span class="pulse-dot"></span>
+                  <span>Picked 05:15 AM</span>
+                </span>
+                <span class="radar-dist"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Sunny Acre Farm (7.2 mi)</span>
+              </div>
+              <div class="radar-crop-header">
+                <div class="crop-icon-bubble"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#eab308" stroke-width="2"><polygon points="12 2 15 8 22 9 17 14 18 21 12 17 6 21 7 14 2 9 9 8 12 2"/></svg></div>
+                <div>
+                  <h3 class="crop-title">Sweet Golden Bicolor Corn</h3>
+                  <span class="crop-variety">Mirai Sweet Variety · Shucked Today</span>
+                </div>
+              </div>
+              <div class="radar-metrics-row">
+                <div class="metric-box">
+                  <span class="metric-lbl">Natural Sugars</span>
+                  <strong class="metric-val text-accent">Peak Brix</strong>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-lbl">Direct Farm Share</span>
+                  <strong class="metric-val text-success">92% to Grower</strong>
+                </div>
+              </div>
+              <div class="radar-stock-wrap">
+                <div class="stock-labels">
+                  <span>Today's Market Crate Allotment</span>
+                  <strong class="stock-remaining">36 ears left</strong>
+                </div>
+                <div class="stock-progress-bar">
+                  <div class="stock-fill" style="width: 65%;"></div>
+                </div>
+              </div>
+              <div class="radar-card-actions">
+                <button type="button" class="radar-action-btn notify" onclick="window.freshFindApp?.triggerCropAlert?.('Sweet Golden Corn')">
+                  <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Reserve Alert</span>
+                </button>
+                <a href="#directory" class="radar-action-btn view-market">
+                  <span>View Market <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-left:3px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODE 2: SMART MARKET ROUTE PLANNER -->
+        <div id="plannerPanelContent" class="radar-content-panel">
+          <div class="planner-box-container">
+            <div class="planner-config-grid">
+              <!-- Step 1 -->
+              <div class="planner-step-card">
+                <div class="step-num-badge">1</div>
+                <h4>Select Today's Cravings</h4>
+                <p class="step-sub">Pick what you want to hunt for at the markets:</p>
+                <div class="planner-chip-group" id="cravingChips">
+                  <button type="button" class="planner-selectable-chip active" data-val="berries"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><circle cx="12" cy="12" r="9"/></svg> Wild Berries</button>
+                  <button type="button" class="planner-selectable-chip active" data-val="greens"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg> Crisp Greens</button>
+                  <button type="button" class="planner-selectable-chip" data-val="bakery"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M12 2a10 10 0 0 0-10 10c0 4.4 2.9 8.2 7 9.5V22h6v-.5c4.1-1.3 7-5.1 7-9.5A10 10 0 0 0 12 2z"/></svg> Artisan Sourdough</button>
+                  <button type="button" class="planner-selectable-chip" data-val="honey"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg> Raw Honey</button>
+                  <button type="button" class="planner-selectable-chip" data-val="cheese"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><polygon points="12 2 15 8 22 9 17 14 18 21 12 17 6 21 7 14 2 9 9 8 12 2"/></svg> Farmstead Cheese</button>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="planner-step-card">
+                <div class="step-num-badge">2</div>
+                <h4>Choose Commute Mode</h4>
+                <p class="step-sub">Calculate instant carbon savings for your trip:</p>
+                <div class="planner-chip-group" id="commuteChips">
+                  <button type="button" class="planner-selectable-chip active" data-val="walk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><circle cx="12" cy="5" r="2"/><path d="m9 20 3-6 2 2v4"/><path d="m15 10-3 3-3-2"/></svg> Walking Tour (Zero CO₂)</button>
+                  <button type="button" class="planner-selectable-chip" data-val="bike"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 6H5"/></svg> Eco-Bicycle (Zero CO₂)</button>
+                  <button type="button" class="planner-selectable-chip" data-val="transit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/></svg> Light Rail / Metro</button>
+                  <button type="button" class="planner-selectable-chip" data-val="ev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Electric / Carpool</button>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="planner-step-card">
+                <div class="step-num-badge">3</div>
+                <h4>Ideal Schedule Window</h4>
+                <p class="step-sub">Align with vendor open hours and fresh arrivals:</p>
+                <div class="planner-chip-group" id="timeChips">
+                  <button type="button" class="planner-selectable-chip active" data-val="morning"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/></svg> Early Harvest (8 AM - 11 AM)</button>
+                  <button type="button" class="planner-selectable-chip" data-val="midday"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg> Midday Stroll (11 AM - 2 PM)</button>
+                  <button type="button" class="planner-selectable-chip" data-val="weekend"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg> Weekend Family Grand Tour</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="planner-action-bar">
+              <button type="button" id="generateItineraryBtn" class="btn-primary-large">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>Generate Smart Market Day Itinerary</span>
+              </button>
+            </div>
+
+            <!-- Dynamic Itinerary Output Card -->
+            <div id="itineraryOutputCard" class="itinerary-output-card">
+              <div class="itinerary-header">
+                <div>
+                  <span class="itinerary-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> YOUR OPTIMIZED MARKET TRAIL</span>
+                  <h3 class="itinerary-title" id="itineraryTitle">The Saturday Morning Sunrise Harvest Loop</h3>
+                </div>
+                <div class="itinerary-badges">
+                  <span class="badge-eco-save" id="itineraryCo2Badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg> Saves 4.8 kg CO₂</span>
+                  <span class="badge-walk-dist" id="itineraryDistBadge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 2.6 mi Total Loop</span>
+                </div>
+              </div>
+
+              <!-- 3-Stop Timeline -->
+              <div class="itinerary-timeline" id="itineraryTimeline">
+                <!-- Staged stops rendered dynamically -->
+              </div>
+
+              <!-- Action Bar for Itinerary -->
+              <div class="itinerary-footer-actions">
+                <button type="button" class="itinerary-btn copy" id="copyItineraryBtn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy Itinerary to Clipboard</span>
+                </button>
+                <a href="#directory" class="itinerary-btn locate" id="locateItineraryMapBtn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  <span>View Stops on Interactive Map</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom:1rem;">
+            <div class="brand-logo-icon">
+              <img src="assets/images/freshfind_logo.png" alt="FreshFind Organic Logo" class="brand-logo-img">
+            </div>
+            <span class="brand-name">FreshFind</span>
+          </div>
+          <p style="font-size:0.9rem; line-height:1.6; margin-bottom:1.25rem;">
+            Fresh All Along. Your all-in-one local farmers market companion. Connecting growers, chefs, and families through sustainable, seasonal food.
+          </p>
+          <span style="font-size:0.8rem; font-weight:700; color:var(--accent);">FreshFind — Web Innovation Unleashed</span>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#directory">Find a Market</a></li>
+            <li><a href="#produce">Produce Guide</a></li>
+            <li><a href="#seasonal">Seasonal Calendar</a></li>
+            <li><a href="#eco-calculator">Eco Calculator</a></li>
+            <li><a href="#harvest-radar">Live Harvest Radar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Our Mission</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#" id="footerOpenBookmarks">My Bookmarks</a></li>
+            <li><a href="#" id="footerOpenAuth">Shopper Account</a></li>
+            <li><a href="javascript:void(0)" onclick="window.replayFreshFindIntro()" style="color:#22c55e; font-weight:700;">✨ Replay Intro</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>eGreen Newsletter</h4>
+          <p style="font-size:0.88rem; margin-bottom:0.85rem;">Get weekly alerts on what crops are in peak harvest at your local market.</p>
+          <div class="find-input-wrap">
+            <input type="email" placeholder="Enter your email...">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 FreshFind. SRS v1.0 Compliant.</div>
+        <div style="display:flex; align-items:center; gap:0.75rem; background:rgba(34,197,94,0.08); padding:0.35rem 0.85rem; border-radius:var(--radius-full); border:1px solid rgba(34,197,94,0.2);">
+          <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600; display:flex; align-items:center; gap:4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" style="vertical-align:-2px;margin-right:4px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg> Community Visitors:
+          </span>
+          <div id="visitorOdometerDigits" class="visitor-odometer-digits" style="display:inline-flex; gap:3px;"></div>
+        </div>
+        <div style="display:flex; gap:1.5rem;">
+          <span>Category: Web Innovation Unleashed</span>
+          <span>Theme: eGreen Basket</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS & FLOATING WIDGETS
+       ========================================================================== -->
+
+  <!-- Market Detail Modal (SRS Mandatory) -->
+  <div id="marketDetailModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <button id="closeMarketDetailBtn" class="modal-close-btn" aria-label="Close Modal">✕</button>
+      <div id="marketDetailContent">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookmarks & Personal Notes Drawer (SRS Mandatory) -->
+  <aside id="bookmarksDrawer" class="bookmarks-drawer" aria-label="Personal Bookmarks">
+    <div class="bookmarks-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        <h3 style="font-size:1.25rem;">My Green Itinerary</h3>
+      </div>
+      <button id="closeBookmarksBtn" class="header-icon-btn" style="border:none;" aria-label="Close Drawer">✕</button>
+    </div>
+
+    <div id="bookmarksList" class="bookmarks-body">
+      <!-- Populated dynamically -->
+    </div>
+
+    <div class="bookmarks-footer">
+      <button id="exportBookmarksBtn" class="btn-primary" style="justify-content:center; width:100%;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Print / Export Formatted List</span>
+      </button>
+      <button id="downloadBookmarksBtn" class="btn-secondary" style="justify-content:center; width:100%;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Download Text Shopping List</span>
+      </button>
+      <button id="shareBookmarksBtn" class="btn-secondary" style="justify-content:center; width:100%;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        <span>Share Itinerary</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Social Share Modal (SRS Mandatory) -->
+  <div id="shareModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-dialog" style="max-width:440px; padding:2rem; text-align:center;">
+      <button id="closeShareModalBtn" class="modal-close-btn" aria-label="Close Share Modal">✕</button>
+      <div style="width:60px; height:60px; border-radius:50%; background:var(--bg-muted); display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      </div>
+      <h3 style="margin-bottom:0.5rem;">Share FreshFind</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.75rem;">
+        Inspire friends and family to eat fresh, support local growers, and shrink their carbon footprint!
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem;">
+        <a id="shareWhatsapp" href="#" target="_blank" rel="noopener" class="btn-primary" style="background:#25D366; justify-content:center;">
+          Share via WhatsApp
+        </a>
+        <a id="shareTwitter" href="#" target="_blank" rel="noopener" class="btn-primary" style="background:#1DA1F2; justify-content:center;">
+          Share on X (Twitter)
+        </a>
+        <a id="shareFacebook" href="#" target="_blank" rel="noopener" class="btn-primary" style="background:#1877F2; justify-content:center;">
+          Share on Facebook
+        </a>
+        <button id="copyShareLinkBtn" class="btn-secondary" style="justify-content:center;">
+          Copy Direct Link
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dummy Login / Signup Modal (SRS Mandatory) -->
+  <div id="authModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-dialog" style="max-width:460px; padding:2.5rem;">
+      <button id="closeAuthBtn" class="modal-close-btn" aria-label="Close Login Modal">✕</button>
+      
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <div style="width:60px; height:60px; border-radius:50%; background:var(--bg-muted); display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem;">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <h3 style="font-size:1.5rem;">Welcome to FreshFind</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted);">Design continuity authentication simulation</p>
+      </div>
+
+      <div class="season-tabs-bar" style="margin-bottom:1.5rem;">
+        <button class="season-tab-btn auth-tab-btn active" data-mode="login">Sign In</button>
+        <button class="season-tab-btn auth-tab-btn" data-mode="signup">Create Account</button>
+      </div>
+
+      <form id="authForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <div>
+          <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:0.35rem;">Email Address</label>
+          <div class="find-input-wrap">
+            <input type="email" id="authEmail" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:0.35rem;">Password</label>
+          <div class="find-input-wrap">
+            <input type="password" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <button type="submit" id="authSubmitBtn" class="btn-primary" style="justify-content:center; padding:0.75rem; margin-top:0.5rem;">
+          Sign In to FreshFind
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- AI Chatbot Widget (FreshBot AI) (SRS Mandatory) -->
+  <div id="chatbotLauncher" class="chatbot-launcher-btn" title="Ask FreshBot AI" aria-label="Open Chatbot">
+    <div class="chatbot-pulse-halo" aria-hidden="true"></div>
+    <div class="chatbot-launcher-icon-wrap">
+      <img src="assets/images/robot_avatar.png" alt="FreshBot AI Avatar" class="chatbot-launcher-img">
+    </div>
+    <span class="chat-ping-beacon"></span>
+    <!-- Floating Interactive Invite Callout Pill -->
+    <div id="botTooltipPill" class="chatbot-callout-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Ask FreshBot AI</span>
+    </div>
+  </div>
+
+  <div id="chatbotWindow" class="chatbot-window">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <div class="chat-header-avatar">
+          <img src="assets/images/robot_avatar.png" alt="FreshBot AI" class="chat-header-avatar-img">
+        </div>
+        <div>
+          <div style="line-height:1.2; display:flex; align-items:center; gap:0.4rem;">
+            <span style="font-weight:700;">FreshBot AI</span>
+            <span class="bot-badge-pro">FRESHFIND PRO</span>
+          </div>
+          <div class="bot-online-status">
+            <span class="online-indicator-dot"></span>
+            <span>Online • Intelligent Assistant</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button id="chatVoiceToggleBtn" class="chat-header-btn" title="Toggle Voice Speech"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
+        <button id="chatClearBtn" class="chat-header-btn" title="Clear Chat">↺</button>
+        <button id="chatCloseBtn" class="chat-header-btn" title="Close Chat">✕</button>
+      </div>
+    </div>
+
+    <!-- Chat Messages Scroll Area -->
+    <div id="chatMessages" class="chat-messages-body">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- Suggested Quick Reply Chips (SRS Mandatory) -->
+    <div id="chatQuickReplies" class="chat-quick-replies-wrap">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- Chat Input Form with Mic Speech -->
+    <div class="chat-input-row">
+      <button id="chatMicBtn" class="chat-mic-btn" title="Speak Query (Voice Recognition)" aria-label="Voice Input">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+      </button>
+      <input type="text" id="chatInputField" placeholder="Ask about markets, timings, produce...">
+      <button id="chatSendBtn" class="chat-send-btn" title="Send Query" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </div>
+  </div><!-- /chatbotWindow -->
+
+  <!-- Global Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Leaflet JS (Zero External Keys, 100% Reliable Map System) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- FreshFind Universal Client Bundle (100% Reliable on both file:/// and http://) -->
+  <script>
+    // Ticker live day & clock
+    (function(){
+      const dayEl = document.getElementById('tickerDay');
+      const clockEl = document.getElementById('tickerClock');
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      function update(){
+        const now = new Date();
+        if (dayEl) dayEl.textContent = days[now.getDay()];
+        if (clockEl) clockEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+  </script>
+  <script src="js/bundle.js"></script>
+
+  <!-- 🌾 HARVEST RADAR & SMART ROUTE PLANNER — Interactive Logic -->
+  <script>
+  (function() {
+    function initHarvestRadar() {
+      // ── Mode Tab Switching ──
+      var tabRadar   = document.getElementById('tabHarvestRadar');
+      var tabPlanner = document.getElementById('tabRoutePlanner');
+      var panelRadar   = document.getElementById('radarPanelContent');
+      var panelPlanner = document.getElementById('plannerPanelContent');
+
+      function setMode(mode) {
+        if (mode === 'radar') {
+          tabRadar.classList.add('active');
+          tabPlanner.classList.remove('active');
+          panelRadar.classList.add('active');
+          panelPlanner.classList.remove('active');
+        } else {
+          tabPlanner.classList.add('active');
+          tabRadar.classList.remove('active');
+          panelPlanner.classList.add('active');
+          panelRadar.classList.remove('active');
+        }
+      }
+
+      tabRadar && tabRadar.addEventListener('click', function() { setMode('radar'); });
+      tabPlanner && tabPlanner.addEventListener('click', function() { setMode('planner'); });
+
+      // ── Radar Filter Chips ──
+      var filterChips = document.querySelectorAll('.radar-filter-chip');
+      var radarCards  = document.querySelectorAll('.radar-card');
+
+      filterChips.forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          filterChips.forEach(function(c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+          var filter = chip.getAttribute('data-filter');
+          radarCards.forEach(function(card) {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = '';
+              card.style.animation = 'fadeIn 0.35s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // ── Route Planner: Multi-select chip toggles ──
+      document.querySelectorAll('.planner-selectable-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          // For commute and time groups — single select
+          var parentGroup = chip.closest('#commuteChips, #timeChips');
+          if (parentGroup) {
+            parentGroup.querySelectorAll('.planner-selectable-chip').forEach(function(c) {
+              c.classList.remove('active');
+            });
+            chip.classList.add('active');
+          } else {
+            // Cravings — multi-select toggle
+            chip.classList.toggle('active');
+          }
+        });
+      });
+
+      // ── Itinerary Generator ──
+      var generateBtn = document.getElementById('generateItineraryBtn');
+      generateBtn && generateBtn.addEventListener('click', function() {
+        var activeCravings = Array.from(document.querySelectorAll('#cravingChips .planner-selectable-chip.active')).map(function(c) { return c.getAttribute('data-val'); });
+        var activeCommute  = document.querySelector('#commuteChips .planner-selectable-chip.active');
+        var activeTime     = document.querySelector('#timeChips .planner-selectable-chip.active');
+
+        var commute = activeCommute ? activeCommute.getAttribute('data-val') : 'walk';
+        var timeSlot = activeTime   ? activeTime.getAttribute('data-val')   : 'morning';
+
+        // Co2 savings & distance by mode
+        var co2Map  = { walk: '5.8 kg', bike: '5.8 kg', transit: '3.2 kg', ev: '1.9 kg' };
+        var distMap = { walk: '1.8 mi loop', bike: '3.4 mi loop', transit: '4.2 mi loop', ev: '5.6 mi loop' };
+        var titleMap = {
+          morning: 'The Sunrise Harvest Market Loop',
+          midday:  'The Midday Farm-to-Table Discovery Tour',
+          weekend: 'The Weekend Grand Family Market Expedition'
+        };
+
+        // Build 3 dynamic stops from cravings
+        var allStops = [
+          { time: '8:15 AM', market: 'Downtown Farmers Market',   crop: 'Honeycrisp Apples + Heirloom Tomatoes',         note: 'Largest market on the circuit. Arrives fresh from Oakwood Orchards at 5:45 AM.' },
+          { time: '9:30 AM', market: 'Sunset Valley Cooperative', crop: '🍓 Wild Mountain Strawberries + Raw Berry Jam',      note: 'Small-batch producer. Quantities extremely limited — arrive early for reserve crates.' },
+          { time: '10:45 AM', market: 'Green Haven Co-Op',        crop: '🥬 Rainbow Carrots + Tuscan Kale + Basil Micro',   note: 'Hydro-cooled storage on-site. Best for bulk greens — 100% soil organic certified.' },
+          { time: '9:00 AM', market: 'Highland Apiaries Stall',   crop: 'Raw Wildflower Comb Honey (Cold Extracted)',     note: 'Ultra-rare cold-extraction process preserves 100% live enzymes and pollen density.' },
+          { time: '10:15 AM', market: 'Riverbend Bread Collective', crop: '🥖 Sourdough Loaves + Ancient Grain Flatbreads', note: 'Open-fire stone oven. Long rise, heritage wheat from local partners.' },
+          { time: '11:00 AM', market: 'Northridge Farm Stand',    crop: 'Farmstead Cheeses + Fresh Labneh',               note: 'Award-winning artisan cheeses made on-site. Cash preferred for best prices.' },
+        ];
+
+        // Pick relevant stops based on cravings
+        var stopPool = [];
+        if (activeCravings.includes('berries'))  stopPool.push(allStops[1]);
+        if (activeCravings.includes('greens'))   stopPool.push(allStops[2]);
+        if (activeCravings.includes('honey'))    stopPool.push(allStops[3]);
+        if (activeCravings.includes('bakery'))   stopPool.push(allStops[4]);
+        if (activeCravings.includes('cheese'))   stopPool.push(allStops[5]);
+        // Always include the flagship market
+        stopPool.unshift(allStops[0]);
+
+        var stops = stopPool.slice(0, 3);
+        // Fill up to 3 if fewer chosen
+        var si = 0;
+        while (stops.length < 3) {
+          if (!stops.includes(allStops[si])) stops.push(allStops[si]);
+          si++;
+        }
+
+        // Reassign times by timeSlot offset
+        var timeOffsets = {
+          morning: [0, 75, 150],
+          midday:  [120, 195, 270],
+          weekend: [0, 90, 195]
+        };
+        var baseHour = timeSlot === 'midday' ? 11 : 8;
+        var offsets  = timeOffsets[timeSlot] || timeOffsets.morning;
+        stops = stops.map(function(stop, i) {
+          var totalMins = baseHour * 60 + offsets[i];
+          var h = Math.floor(totalMins / 60);
+          var m = totalMins % 60;
+          var ampm = h >= 12 ? 'PM' : 'AM';
+          var h12  = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+          var mStr = m === 0 ? '00' : (m < 10 ? '0' + m : '' + m);
+          return Object.assign({}, stop, { time: h12 + ':' + mStr + ' ' + ampm });
+        });
+
+        // Render timeline
+        var timeline = document.getElementById('itineraryTimeline');
+        if (timeline) {
+          timeline.innerHTML = stops.map(function(stop) {
+            return '<div class="timeline-stop-item">' +
+              '<div class="stop-time-col">' + stop.time + '</div>' +
+              '<div class="stop-node-dot"></div>' +
+              '<div class="stop-detail-col">' +
+                '<div class="stop-name">' + stop.market + '</div>' +
+                '<div class="stop-crop">' + stop.crop + '</div>' +
+                '<p class="stop-note">' + stop.note + '</p>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
+
+        // Update header info
+        var titleEl = document.getElementById('itineraryTitle');
+        var co2El   = document.getElementById('itineraryCo2Badge');
+        var distEl  = document.getElementById('itineraryDistBadge');
+        if (titleEl) titleEl.textContent = titleMap[timeSlot] || 'Your Custom Market Trail';
+        if (co2El)   co2El.textContent   = 'Saves ' + (co2Map[commute] || '5.8 kg') + ' CO₂';
+        if (distEl)  distEl.textContent  = '' + (distMap[commute] || '1.8 mi loop');
+
+        // Show output card
+        var outputCard = document.getElementById('itineraryOutputCard');
+        if (outputCard) {
+          outputCard.style.display = 'block';
+          outputCard.style.animation = 'slideUp 0.45s ease both';
+          setTimeout(function() {
+            outputCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+        }
+
+        // Flash button
+        generateBtn.innerHTML = '<span>✓ Itinerary Ready! Regenerate ↻</span>';
+        setTimeout(function() {
+          generateBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Generate Smart Market Day Itinerary</span>';
+        }, 4000);
+      });
+
+      // ── Copy Itinerary to Clipboard ──
+      var copyBtn = document.getElementById('copyItineraryBtn');
+      copyBtn && copyBtn.addEventListener('click', function() {
+        var timelineEl = document.getElementById('itineraryTimeline');
+        var title = document.getElementById('itineraryTitle');
+        var co2   = document.getElementById('itineraryCo2Badge');
+        if (!timelineEl) return;
+        var text = 'FreshFind Market Day Itinerary\n' +
+          (title ? title.textContent + '\n' : '') +
+          (co2   ? co2.textContent + '\n\n' : '\n') +
+          Array.from(timelineEl.querySelectorAll('.timeline-stop-item')).map(function(item) {
+            var t = item.querySelector('.stop-time-col');
+            var n = item.querySelector('.stop-name');
+            var c = item.querySelector('.stop-crop');
+            return (t ? t.textContent.trim() : '') + ' → ' + (n ? n.textContent.trim() : '') + '\n   ' + (c ? c.textContent.trim() : '');
+          }).join('\n');
+        navigator.clipboard && navigator.clipboard.writeText(text).then(function() {
+          copyBtn.innerHTML = '<span>✓ Copied to Clipboard!</span>';
+          setTimeout(function() {
+            copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Itinerary to Clipboard</span>';
+          }, 2500);
+        });
+      });
+
+      // ── Reserve Alert toast shortcut ──
+      window.freshFindApp = window.freshFindApp || {};
+      window.freshFindApp.triggerCropAlert = function(cropName) {
+        var container = document.getElementById('toastContainer');
+        if (!container) return;
+        var t = document.createElement('div');
+        t.className = 'toast';
+        t.innerHTML = '<span>Reserve alert set for <strong>' + cropName + '</strong>! You\'ll be notified 30 min before market opens.</span>';
+        container.appendChild(t);
+        setTimeout(function() {
+          t.style.opacity = '0';
+          t.style.transform = 'translateY(10px)';
+          t.style.transition = 'all 0.3s ease';
+          setTimeout(function() { t.remove(); }, 300);
+        }, 3500);
+      };
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHarvestRadar);
+    } else {
+      initHarvestRadar();
+    }
+  })();
+  </script>
+
+  <!-- 🌿 LIVING GARDEN BOTANICAL SCROLLBAR (100% Guaranteed Static & Instant in DOM) -->
+  <div id="gardenScrollbar" class="garden-scrollbar-wrap" role="scrollbar" aria-label="Living Garden Botanical Scrollbar" aria-controls="main">
+    <!-- Top Bud Cap: Large Sprouting Fresh Leaf -->
+    <div class="garden-top-bud" title="Scroll to Top of Garden" id="gardenTopBud">
+      <svg viewBox="0 0 44 44" class="garden-bud-svg" fill="none">
+        <circle cx="22" cy="22" r="18" fill="rgba(184, 233, 134, 0.25)" filter="blur(4px)" />
+        <path d="M22 40 C22 30, 20 24, 22 18" stroke="#163D2A" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M22 24 C15 20, 8 22, 6 15 C11 13, 18 16, 22 24" fill="url(#gardenSproutGrad1)" stroke="#163D2A" stroke-width="1.2"/>
+        <path d="M22 21 C27 15, 36 16, 38 8 C31 8, 24 13, 22 21" fill="url(#gardenSproutGrad2)" stroke="#163D2A" stroke-width="1.2"/>
+        <circle cx="22" cy="15" r="3.2" fill="#FFF9EC" stroke="#B8E986" stroke-width="1"/>
+        <circle cx="21" cy="14" r="1.2" fill="#ffffff"/>
+        <defs>
+          <linearGradient id="gardenSproutGrad1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#B8E986"/>
+            <stop offset="100%" stop-color="#6FAF45"/>
+          </linearGradient>
+          <linearGradient id="gardenSproutGrad2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#B8E986"/>
+            <stop offset="50%" stop-color="#6FAF45"/>
+            <stop offset="100%" stop-color="#163D2A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Vine Stem Track -->
+    <div class="garden-vine-track" id="gardenVineTrack" title="Click along vine to jump">
+      <svg class="garden-vine-svg" preserveAspectRatio="none" viewBox="0 0 28 500">
+        <path class="garden-vine-path-bg" d="M14 0 Q20 125, 9 250 T18 500" fill="none" stroke="rgba(22, 61, 42, 0.35)" stroke-width="7" stroke-linecap="round"/>
+        <path class="garden-vine-path" d="M14 0 Q20 125, 9 250 T18 500" fill="none" stroke="url(#gardenVineGrad)" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="16" cy="95" r="3.2" fill="#B8E986" stroke="#163D2A" stroke-width="0.8"/>
+        <circle cx="10" cy="210" r="3.2" fill="#6FAF45" stroke="#163D2A" stroke-width="0.8"/>
+        <circle cx="14" cy="335" r="3.2" fill="#B8E986" stroke="#163D2A" stroke-width="0.8"/>
+        <circle cx="17" cy="440" r="3.2" fill="#6FAF45" stroke="#163D2A" stroke-width="0.8"/>
+        <defs>
+          <linearGradient id="gardenVineGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#B8E986"/>
+            <stop offset="30%" stop-color="#6FAF45"/>
+            <stop offset="70%" stop-color="#163D2A"/>
+            <stop offset="100%" stop-color="#B98245"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Decorative Leaves along the vine -->
+      <div class="garden-deco-leaf deco-1" style="top: 18%;" data-side="left">
+        <svg viewBox="0 0 22 22" width="20" height="20">
+          <path d="M20 20 C11 17, 3 11, 3 3 C11 3, 17 11, 20 20" fill="#6FAF45" stroke="#163D2A" stroke-width="1.2"/>
+          <path d="M20 20 L6 6" stroke="#DDEACB" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="garden-deco-leaf deco-2" style="top: 42%;" data-side="right">
+        <svg viewBox="0 0 22 22" width="20" height="20">
+          <path d="M3 20 C12 17, 20 11, 20 3 C12 3, 6 11, 3 20" fill="#B8E986" stroke="#163D2A" stroke-width="1.2"/>
+          <path d="M3 20 L17 6" stroke="#FFF9EC" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="garden-deco-leaf deco-3" style="top: 68%;" data-side="left">
+        <svg viewBox="0 0 22 22" width="18" height="18">
+          <path d="M20 20 C11 17, 3 11, 3 3 C11 3, 17 11, 20 20" fill="#6FAF45" stroke="#163D2A" stroke-width="1.2"/>
+          <path d="M20 20 L6 6" stroke="#DDEACB" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="garden-deco-leaf deco-4" style="top: 88%;" data-side="right">
+        <svg viewBox="0 0 22 22" width="18" height="18">
+          <path d="M3 20 C12 17, 20 11, 20 3 C12 3, 6 11, 3 20" fill="#DDEACB" stroke="#163D2A" stroke-width="1.2"/>
+        </svg>
+      </div>
+
+      <!-- Large Draggable Botanical Leaf Thumb -->
+      <div class="garden-leaf-thumb" id="gardenLeafThumb" title="Drag to Scroll" tabindex="0" role="slider" aria-orientation="vertical">
+        <div class="garden-thumb-inner">
+          <svg viewBox="0 0 52 74" class="garden-thumb-leaf-svg" style="overflow:visible;">
+            <defs>
+              <linearGradient id="leafRealBodyGrad" x1="0.15" y1="0.0" x2="0.85" y2="1.0">
+                <stop offset="0%" stop-color="#BAF268"/>
+                <stop offset="18%" stop-color="#84DB3A"/>
+                <stop offset="45%" stop-color="#49A429"/>
+                <stop offset="75%" stop-color="#236B27"/>
+                <stop offset="100%" stop-color="#123B17"/>
+              </linearGradient>
+              <linearGradient id="leafSunlightGlow" x1="0" y1="0" x2="1" y2="0.8">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+                <stop offset="35%" stop-color="#CEFAA0" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#236B27" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="dewDropGrad" x1="0.2" y1="0.1" x2="0.8" y2="0.9">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+                <stop offset="40%" stop-color="#E2FCD0" stop-opacity="0.75"/>
+                <stop offset="85%" stop-color="#559938" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#19481E" stop-opacity="0.85"/>
+              </linearGradient>
+            </defs>
+            <path d="M26 68 C25 60, 25 53, 26 47 C14 44, 4 33, 4 21 C4 9, 15 2, 27 1 C39 2, 49 11, 48 23 C48 35, 38 45, 27 48 C27 54, 28 61, 28 68 Z" fill="rgba(10, 30, 16, 0.42)" transform="translate(1.5, 3.5)"/>
+            <path d="M26 72 C25 65, 25.5 58, 26 50" fill="none" stroke="#2D7A2E" stroke-width="3" stroke-linecap="round"/>
+            <path d="M26.2 72 C25.3 65, 25.8 58, 26.2 50" fill="none" stroke="#8FE240" stroke-width="1.2" stroke-linecap="round"/>
+            <path class="leaf-blade-path" d="M27 2 C21 8, 5 16, 5 28 C5 40, 15 49, 26 52 C37 49, 47 38, 47 26 C47 14, 33 6, 27 2 Z" fill="url(#leafRealBodyGrad)" stroke="#16431E" stroke-width="1.2"/>
+            <path d="M27 3 C21 9, 6 17, 6 28 C6 38, 14 46, 26 50 C25 36, 25 18, 27 3 Z" fill="url(#leafSunlightGlow)"/>
+            <path d="M26 3 C20 9, 7 17, 7 28 C7 36, 12 43, 20 48" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8" stroke-linecap="round"/>
+            <path d="M26 51 C25.5 38, 25.8 20, 27 3" fill="none" stroke="#133D19" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M26 51 C25.5 38, 25.8 20, 27 3" fill="none" stroke="#E5F9CB" stroke-width="1.2" stroke-linecap="round"/>
+            <g stroke="#D4F3AF" stroke-width="0.75" stroke-linecap="round" fill="none" opacity="0.85">
+              <path d="M26 44 C20 42, 13 41, 10 37"/><path d="M26 36 C19 34, 12 31, 8 26"/><path d="M26 27 C19 24, 13 21, 10 16"/><path d="M26.5 18 C22 15, 17 13, 14 9"/>
+            </g>
+            <g stroke="#C6EFA0" stroke-width="0.75" stroke-linecap="round" fill="none" opacity="0.85">
+              <path d="M26 44 C32 42, 39 40, 42 35"/><path d="M26 35 C33 33, 40 29, 44 23"/><path d="M26.2 26 C33 23, 39 19, 42 14"/><path d="M26.5 17 C31 14, 36 12, 39 8"/>
+            </g>
+            <ellipse cx="17" cy="27" rx="3.3" ry="2.7" fill="url(#dewDropGrad)"/>
+            <circle cx="16" cy="25.8" r="1.1" fill="#FFFFFF" opacity="0.95"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Woven Market Basket Cap -->
+    <div class="garden-bottom-basket" title="Scroll to Fresh Harvest Floor" id="gardenBottomBasket">
+      <div class="garden-basket-inner">
+        <svg viewBox="0 0 46 46" class="garden-basket-svg" fill="none">
+          <ellipse cx="23" cy="24" rx="20" ry="12" fill="rgba(22, 61, 42, 0.28)"/>
+          <path d="M12 20 C12 11, 34 11, 34 20" stroke="#875323" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M13 20 C13 13, 33 13, 33 20" stroke="#C98B4B" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M7 20 C8 35, 12 40, 23 40 C34 40, 38 35, 39 20 Z" fill="#C98B4B" stroke="#5C3814" stroke-width="1.6"/>
+          <path d="M9 25 C16 28, 30 28, 37 25" stroke="#5C3814" stroke-width="1" fill="none"/>
+          <path d="M11 31 C17 34, 29 34, 35 31" stroke="#5C3814" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       GUARANTEED INTERACTION SYSTEM (Zero-Lag Global Click & Scroll Handler)
+       ══════════════════════════════════════════════════════════════════ -->
+  <script>
+    (function() {
+      // 1. Force dismiss intro and unlock screen immediately or after 2s max
+      setTimeout(function() {
+        var intro = document.getElementById('scrollyIntroSection');
+        if (intro && (!intro.classList.contains('intro-dismissed') || intro.style.display !== 'none')) {
+          if (typeof window.dismissFreshFindIntro === 'function') {
+            window.dismissFreshFindIntro();
+          } else {
+            intro.style.setProperty('display', 'none', 'important');
+            intro.style.setProperty('pointer-events', 'none', 'important');
+            intro.classList.add('intro-dismissed');
+            document.body.classList.add('intro-finished');
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+          }
+        }
+      }, 2000);
+
+      // 2. Global Click Delegation for Cards, Links, Modals, Buttons (100% Hit Precision)
+      document.addEventListener('click', function(e) {
+        var ptNode = (e.clientX && e.clientY) ? (document.elementFromPoint(e.clientX, e.clientY) || e.target) : e.target;
+        var targetNode = e.target;
+
+        // A. Market Card & Explore Button Clicks
+        var card = targetNode.closest('.market-card, .view-market-detail-btn, [data-action="open-market"]') ||
+                   ptNode.closest('.market-card, .view-market-detail-btn, [data-action="open-market"]');
+        if (card && !targetNode.closest('.market-fav-btn') && !ptNode.closest('.market-fav-btn')) {
+          var id = card.getAttribute('data-id') || card.closest('[data-id]')?.getAttribute('data-id');
+          if (id) {
+            e.preventDefault();
+            if (window.freshFindApp && typeof window.freshFindApp.openMarketDetail === 'function') {
+              window.freshFindApp.openMarketDetail(id);
+            } else {
+              var attempts = 0;
+              var checkInt = setInterval(function() {
+                attempts++;
+                if (window.freshFindApp && typeof window.freshFindApp.openMarketDetail === 'function') {
+                  clearInterval(checkInt);
+                  window.freshFindApp.openMarketDetail(id);
+                } else if (attempts > 20) {
+                  clearInterval(checkInt);
+                }
+              }, 100);
+            }
+            return;
+          }
+        }
+
+        // B. Modal Close Buttons
+        if (targetNode.closest('#closeMarketDetailBtn, .modal-close-btn') || ptNode.closest('#closeMarketDetailBtn, .modal-close-btn')) {
+          e.preventDefault();
+          document.querySelectorAll('.modal-overlay').forEach(function(m) {
+            m.classList.remove('active');
+            m.style.display = 'none';
+          });
+          document.body.style.overflow = '';
+          return;
+        }
+
+        // C. Modal Background Click to Close
+        if (targetNode.classList.contains('modal-overlay') || ptNode.classList.contains('modal-overlay')) {
+          var modalToClose = targetNode.classList.contains('modal-overlay') ? targetNode : ptNode;
+          modalToClose.classList.remove('active');
+          modalToClose.style.display = 'none';
+          document.body.style.overflow = '';
+          return;
+        }
+
+        // D. Navigation Links (Hash links smooth scroll with offset)
+        var link = targetNode.closest('a') || ptNode.closest('a');
+        if (link) {
+          var href = link.getAttribute('href');
+          if (href && href.startsWith('#') && href.length > 1) {
+            var targetId = href.substring(1);
+            if (targetId === 'eco') targetId = 'eco-calculator';
+            var targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              e.preventDefault();
+              var top = targetEl.getBoundingClientRect().top + window.pageYOffset - 90;
+              window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+              document.querySelectorAll('.nav-item-pill, .nav-item-link').forEach(function(l) { l.classList.remove('active'); });
+              var activeNav = document.querySelector('.main-nav a[href="' + href + '"]');
+              if (activeNav) activeNav.classList.add('active');
+              return;
+            }
+          }
+        }
+
+        // E. Auxiliary Links (Bookmarks, Auth)
+        if (targetNode.closest('#footerOpenBookmarks, #navCartBtn, #bookmarksToggleBtn') || ptNode.closest('#footerOpenBookmarks, #navCartBtn, #bookmarksToggleBtn')) {
+          e.preventDefault();
+          window.freshFindApp?.bookmarks?.open?.();
+        }
+        if (targetNode.closest('#footerOpenAuth, #navUserBtn, #authToggleBtn') || ptNode.closest('#footerOpenAuth, #navUserBtn, #authToggleBtn')) {
+          e.preventDefault();
+          var authModal = document.getElementById('authModal');
+          if (authModal) {
+            authModal.classList.add('active');
+            authModal.style.display = 'flex';
+          }
+        }
+      }, true);
+
+      // 3. Living Garden Leaf Scrollbar Controller (100% Native Pure JS)
+      function initLivingScrollbar() {
+        var wrap = document.getElementById('gardenScrollbar');
+        var track = document.getElementById('gardenVineTrack');
+        var thumb = document.getElementById('gardenLeafThumb');
+        var topBud = document.getElementById('gardenTopBud');
+        var bottomBasket = document.getElementById('gardenBottomBasket');
+        var decoLeaves = Array.from(document.querySelectorAll('.garden-deco-leaf'));
+
+        if (!wrap || !track || !thumb) return;
+
+        var isDragging = false;
+        var startY = 0;
+        var startScroll = 0;
+        var lastY = window.scrollY;
+        var lastTime = Date.now();
+        var rot = 0;
+
+        function updateThumb() {
+          var scrollH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+          if (scrollH <= 0) scrollH = 1;
+          var curScroll = window.scrollY || window.pageYOffset || 0;
+          var pct = Math.max(0, Math.min(1, curScroll / scrollH));
+          var trackH = track.clientHeight || 300;
+          var thumbH = thumb.clientHeight || 65;
+          var maxTop = Math.max(0, trackH - thumbH);
+          var top = pct * maxTop;
+          thumb.style.transform = 'translate3d(0, ' + top.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+        }
+
+        window.addEventListener('scroll', function() {
+          var now = Date.now();
+          var curY = window.scrollY;
+          var dt = Math.max(1, now - lastTime);
+          var v = (curY - lastY) / dt;
+          lastY = curY;
+          lastTime = now;
+          rot = Math.max(-14, Math.min(14, v * 10));
+
+          // Sway decorative leaves
+          decoLeaves.forEach(function(l, i) {
+            var side = l.getAttribute('data-side') === 'left' ? -1 : 1;
+            l.style.transform = 'rotate(' + (rot * side * (1 + i * 0.2)).toFixed(1) + 'deg)';
+          });
+
+          updateThumb();
+
+          clearTimeout(wrap._settleTimer);
+          wrap._settleTimer = setTimeout(function() {
+            rot = 0;
+            updateThumb();
+            decoLeaves.forEach(function(l) { l.style.transform = 'rotate(0deg)'; });
+          }, 150);
+        }, { passive: true });
+
+        window.addEventListener('resize', updateThumb, { passive: true });
+
+        // Click top bud -> scroll to top
+        topBud?.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Click bottom basket -> scroll to bottom
+        bottomBasket?.addEventListener('click', function() {
+          window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+        });
+
+        // Click on track -> jump scroll
+        track.addEventListener('click', function(e) {
+          if (e.target.closest('#gardenLeafThumb')) return;
+          var rect = track.getBoundingClientRect();
+          var clickY = e.clientY - rect.top;
+          var pct = Math.max(0, Math.min(1, clickY / rect.height));
+          var scrollH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+          window.scrollTo({ top: pct * scrollH, behavior: 'smooth' });
+        });
+
+        // Drag handling on leaf thumb
+        thumb.addEventListener('mousedown', function(e) {
+          isDragging = true;
+          startY = e.clientY;
+          startScroll = window.scrollY;
+          document.body.classList.add('garden-scrollbar-dragging');
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', function(e) {
+          if (!isDragging) return;
+          var dy = e.clientY - startY;
+          var trackH = track.clientHeight || 300;
+          var thumbH = thumb.clientHeight || 65;
+          var maxTop = Math.max(1, trackH - thumbH);
+          var scrollH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+          var scrollDelta = (dy / maxTop) * scrollH;
+          window.scrollTo({ top: startScroll + scrollDelta, behavior: 'instant' });
+        });
+
+        window.addEventListener('mouseup', function() {
+          if (isDragging) {
+            isDragging = false;
+            document.body.classList.remove('garden-scrollbar-dragging');
+          }
+        });
+
+        // Initial positioning
+        setTimeout(updateThumb, 100);
+        setTimeout(updateThumb, 500);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLivingScrollbar);
+      } else {
+        initLivingScrollbar();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+/* ==========================================================================
+   FreshFind - Keyframe Animations & Micro-Interactions (POWER EDITION)
+   ========================================================================== */
+
+/* --- Core Status Animations --- */
+@keyframes radarPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--open-pulse); opacity: 0.8; }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); opacity: 0; }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); opacity: 0; }
+}
+
+@keyframes clockTick {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 25px) scale(1.1); }
+  66% { transform: translate(-20px, 50px) scale(0.92); }
+  100% { transform: translate(10px, -30px) scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealCard {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes revealFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideToastIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounceSlight {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* --- Cinematic Intro Animations --- */
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes introGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.5), inset 0 0 25px rgba(34, 197, 94, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 100px rgba(34, 197, 94, 1), inset 0 0 50px rgba(245, 158, 11, 0.6);
+  }
+}
+
+@keyframes holographicShine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes introExitZoom {
+  0% { opacity: 1; transform: scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: scale(1.15); filter: blur(16px); pointer-events: none; visibility: hidden; }
+}
+
+@keyframes titleFlicker {
+  0%, 94%, 96%, 98%, 100% { opacity: 1; }
+  95%, 97%, 99% { opacity: 0.6; }
+}
+
+@keyframes cyberScan {
+  0% { top: -2px; opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes particleRise {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes borderRace {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- 3D Hero Animations --- */
+@keyframes float3DFruitApple {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  33% { transform: translateY(-18px) rotate(8deg) scale(1.06); }
+  66% { transform: translateY(10px) rotate(-6deg) scale(0.97); }
+}
+
+@keyframes float3DFruitCarrot {
+  0%, 100% { transform: translateY(0px) rotate(-15deg) scale(1); }
+  50% { transform: translateY(-22px) rotate(-2deg) scale(1.1); }
+}
+
+@keyframes float3DFruitTomato {
+  0%, 100% { transform: translateY(0px) rotate(4deg) scale(1); }
+  50% { transform: translateY(-24px) rotate(-6deg) scale(1.12); }
+}
+
+@keyframes float3DFruitAvocado {
+  0%, 100% { transform: translateY(0px) rotate(-8deg) scale(1); }
+  50% { transform: translateY(-19px) rotate(5deg) scale(1.08); }
+}
+
+@keyframes float3DFruitLemon {
+  0%, 100% { transform: translateY(0px) rotate(6deg) scale(1); }
+  50% { transform: translateY(-16px) rotate(-5deg) scale(1.1); }
+}
+
+@keyframes float3DEcoShield {
+  0%, 100% { transform: translateY(0px) rotate(5deg) scale(1); }
+  50% { transform: translateY(-16px) rotate(-4deg) scale(1.08); }
+}
+
+@keyframes float3DFruitHoney {
+  0%, 100% { transform: translateY(0px) rotate(-5deg) scale(1); }
+  50% { transform: translateY(-20px) rotate(6deg) scale(1.07); }
+}
+
+@keyframes float3DFruitBerries {
+  0%, 100% { transform: translateY(0px) rotate(4deg) scale(1); }
+  50% { transform: translateY(-17px) rotate(-8deg) scale(1.09); }
+}
+
+@keyframes auroraDrift {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.85; }
+  50% { transform: scale(1.12) translate(25px, -15px); opacity: 1; }
+  100% { transform: scale(0.95) translate(-20px, 20px); opacity: 0.8; }
+}
+
+@keyframes pulseGlowAmbient {
+  0%, 100% { transform: scale(0.96); opacity: 0.55; filter: blur(35px); }
+  50% { transform: scale(1.06); opacity: 0.85; filter: blur(50px); }
+}
+
+@keyframes tickerScroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes heroVideoAmbientGlow {
+  0%, 100% {
+    box-shadow: 0 16px 50px rgba(21, 128, 61, 0.25), 0 0 60px rgba(34, 197, 94, 0.18);
+    border-color: rgba(34, 197, 94, 0.55);
+  }
+  50% {
+    box-shadow: 0 24px 80px rgba(21, 128, 61, 0.45), 0 0 100px rgba(245, 158, 11, 0.4);
+    border-color: rgba(245, 158, 11, 0.8);
+  }
+}
+
+@keyframes waterRipplePulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* --- Eco Metric Number Count-up Effect --- */
+@keyframes countUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Morphing Background Blob --- */
+@keyframes morphBlob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 50% 40% 60% / 40% 70% 30% 60%; }
+  75% { border-radius: 40% 60% 60% 40% / 70% 30% 60% 40%; }
+}
+
+/* --- Neon Pulse Glow --- */
+@keyframes neonGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px var(--primary-glow), 0 0 15px var(--primary-glow);
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow), 0 0 70px var(--primary-glow);
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.4);
+  }
+}
+
+/* --- Progress Bar Fill --- */
+@keyframes progressFill {
+  from { width: 0%; }
+}
+
+/* --- Shimmer Loading Effect --- */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ==========================================================================
+   UTILITY ANIMATION CLASSES
+   ========================================================================== */
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-bounce-click {
+  animation: bounceSlight 0.28s ease;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL SYSTEM
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(55px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-on-scroll.delay-1 { transition-delay: 0.08s; }
+.reveal-on-scroll.delay-2 { transition-delay: 0.16s; }
+.reveal-on-scroll.delay-3 { transition-delay: 0.24s; }
+.reveal-on-scroll.delay-4 { transition-delay: 0.32s; }
+.reveal-on-scroll.delay-5 { transition-delay: 0.4s; }
+.reveal-on-scroll.delay-6 { transition-delay: 0.48s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-55px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(55px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 🌟 Futuristic 3D Perspective Scroll Reveal */
+.reveal-3d {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(15deg) translateY(45px) scale(0.96);
+  transform-origin: center bottom;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-3d.revealed {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+}
+
+/* Glowing Leading Tip on Scroll Progress Bar */
+#scrollProgressBar::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -3px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 10px #facc15, 0 0 20px #22c55e, 0 0 30px #4ade80;
+  animation: pulseDot 1s infinite alternate;
+}
+
+/* Shimmer Highlight for Section Badges */
+.section-tag.revealed {
+  background-size: 200% auto;
+  animation: badgeGlow 3s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+  0%, 100% { border-color: var(--border-medium); }
+  50% { border-color: var(--primary); box-shadow: 0 0 12px rgba(34, 197, 94, 0.3); }
+}
+
+/* ==========================================================================
+   CARD HOVER EFFECTS (PREMIUM)
+   ========================================================================== */
+
+.market-card,
+.produce-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease !important;
+  transform-origin: center bottom;
+}
+
+.market-card:hover,
+.produce-card:hover {
+  transform: translateY(-11px) scale(1.02) !important;
+}
+
+.market-card::after,
+.produce-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.market-card:hover::after,
+.produce-card:hover::after {
+  opacity: 1;
+}
+
+/* --- Eco Metric Box Hover --- */
+.eco-metric-box {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.35s ease !important;
+}
+
+.eco-metric-box:hover {
+  transform: translateY(-8px) scale(1.04) !important;
+  box-shadow: 0 16px 40px rgba(21, 128, 61, 0.2) !important;
+}
+
+/* --- Section Tag Entrance --- */
+.section-tag {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* --- Scrolling Ticker Effect for Stats --- */
+.stat-ticker {
+  display: inline-block;
+  animation: countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ==========================================================================
+   BACKGROUND PARTICLE SYSTEM (Pure CSS)
+   ========================================================================== */
+
+.bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  opacity: 0;
+  animation: particleRise linear infinite;
+}
+
+.particle:nth-child(1) { left: 5%; width: 4px; height: 4px; animation-duration: 12s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 15%; width: 6px; height: 6px; animation-duration: 15s; animation-delay: 2s; }
+.particle:nth-child(3) { left: 25%; width: 3px; height: 3px; animation-duration: 10s; animation-delay: 4s; }
+.particle:nth-child(4) { left: 35%; width: 5px; height: 5px; animation-duration: 18s; animation-delay: 1s; }
+.particle:nth-child(5) { left: 50%; width: 4px; height: 4px; animation-duration: 14s; animation-delay: 6s; }
+.particle:nth-child(6) { left: 65%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 3s; }
+.particle:nth-child(7) { left: 75%; width: 3px; height: 3px; animation-duration: 16s; animation-delay: 8s; }
+.particle:nth-child(8) { left: 85%; width: 5px; height: 5px; animation-duration: 13s; animation-delay: 5s; }
+.particle:nth-child(9) { left: 92%; width: 4px; height: 4px; animation-duration: 17s; animation-delay: 7s; }
+.particle:nth-child(10) { left: 45%; width: 6px; height: 6px; animation-duration: 20s; animation-delay: 9s; background: var(--accent-light); }
+
+/* ==========================================================================
+   LIVING GARDEN SCROLLBAR ANIMATIONS
+   ========================================================================== */
+
+@keyframes budPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(184, 233, 134, 0.4)); }
+  50% { transform: scale(1.1) rotate(4deg); filter: drop-shadow(0 0 10px rgba(184, 233, 134, 0.85)); }
+}
+
+@keyframes leafSettleBounce {
+  0% { transform: scale(1.18) rotate(var(--leaf-sway, 0deg)); }
+  35% { transform: scale(0.92) rotate(calc(var(--leaf-sway, 0deg) * -0.5)); }
+  70% { transform: scale(1.06) rotate(calc(var(--leaf-sway, 0deg) * 0.2)); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes gardenSporeFloat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  100% { transform: translate(calc((var(--rnd, 0.5) - 0.5) * 16px), -24px) scale(0); opacity: 0; }
+}
+
+@keyframes harvestPop {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  45% { transform: translateY(-18px) scale(1.25); opacity: 1; }
+  80% { transform: translateY(-24px) scale(1); opacity: 0.85; }
+  100% { transform: translateY(-30px) scale(0.4); opacity: 0; }
+}
+
+@keyframes gardenBasketGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(185, 130, 69, 0.5)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 16px rgba(184, 233, 134, 0.85)) drop-shadow(0 0 24px rgba(185, 130, 69, 0.7)); transform: scale(1.12); }
+}
+
+/* --- VIP Card Luminous Light Sweep --- */
+@keyframes cardVIPShine {
+  0% { left: -140%; opacity: 0; }
+  30% { opacity: 0.7; }
+  100% { left: 160%; opacity: 0; }
+}
+
+@keyframes badgeVIPGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 18px rgba(184, 233, 134, 0.8), 0 0 28px rgba(34, 197, 94, 0.5); }
+}
+
+/* ==========================================================================
+   CINEMATIC HERO MOTION KEYFRAMES (Matched to User Mockup)
+   ========================================================================== */
+
+@keyframes slowCinematicDrift {
+  0% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.06) translate(-1%, -1%); }
+  100% { transform: scale(1.02) translate(0, 0); }
+}
+
+@keyframes sunbeamPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes scriptSway {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(-6deg) translateY(-6px); }
+}
+
+@keyframes btnPulseGlow {
+  0%, 100% {
+    box-shadow: 0 10px 28px rgba(34, 197, 94, 0.45), 0 0 0 0 rgba(34, 197, 94, 0.35);
+  }
+  50% {
+    box-shadow: 0 14px 38px rgba(34, 197, 94, 0.6), 0 0 0 8px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes bellRingPulse {
+  0%, 100% { transform: rotate(0); box-shadow: 0 0 12px rgba(239, 68, 68, 0.4); }
+  5%, 15% { transform: rotate(-12deg); }
+  10%, 20% { transform: rotate(12deg); }
+  25% { transform: rotate(0); box-shadow: 0 0 22px rgba(239, 68, 68, 0.8); }
+}
+
+@keyframes mouseWheelSlide {
+  0% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(8px); opacity: 0.2; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Hero Pollen / Dust Rise Particles --- */
+@keyframes heroPollenRise {
+  0%   { transform: translateY(0) translateX(0) scale(1);         opacity: 0; }
+  8%   { opacity: 1; }
+  40%  { transform: translateY(-35vh) translateX(12px) scale(1.2); opacity: 0.9; }
+  70%  { transform: translateY(-65vh) translateX(-8px) scale(0.8); opacity: 0.55; }
+  90%  { opacity: 0.15; }
+  100% { transform: translateY(-105vh) translateX(5px) scale(0.4); opacity: 0; }
+}
+
+/* --- Hero Headline Word Stagger Shimmer --- */
+@keyframes heroWordIn {
+  0%   { opacity: 0; transform: translateY(30px) skewY(3deg); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
+}
+
+/* --- Ribbon Stat Ticker Bounce --- */
+@keyframes statTickerBounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  60% { transform: translateY(-2px); }
+}
+
+/* --- Hero CTA Button Glimmer Shine --- */
+@keyframes heroBtnShine {
+  0%   { left: -100%; opacity: 0; }
+  30%  { opacity: 0.6; }
+  100% { left: 120%;  opacity: 0; }
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "botName": "FreshBot AI",
+  "welcomeMessage": "Hello! I am FreshBot, your intelligent farmers market guide 🌱. Ask me about nearby markets, seasonal produce, operating hours, or click one of the quick suggestions below!",
+  "quickReplies": [
+    { "label": "Which markets are open today? ⏰", "query": "Which markets are open today?" },
+    { "label": "Seasonal produce right now 🍓", "query": "What produce is in season right now?" },
+    { "label": "Find organic vegetable markets 🥬", "query": "Where can I find organic vegetables?" },
+    { "label": "How to export my bookmarks? 🔖", "query": "How do I export bookmarks and notes?" }
+  ],
+  "intents": [
+    {
+      "id": "greeting",
+      "keywords": ["hello", "hi", "hey", "assalam", "good morning", "good evening", "greetings", "start", "freshbot"],
+      "response": "Hello there! Welcome to FreshFind! 🌿 I can help you locate nearby farmers markets, check operating hours, browse seasonal produce, or calculate your eco footprint. What would you like to explore?",
+      "quickReplies": ["Markets open today ⏰", "Produce Guide 🥕", "Calculate Eco Footprint 🌍"]
+    },
+    {
+      "id": "open_today",
+      "keywords": ["open today", "open now", "timings", "today", "schedule", "working hours", "open right now"],
+      "action": "FILTER_OPEN_TODAY",
+      "response": "I've checked our live real-time market schedules! Currently active and scheduled markets are highlighted with our green radar badge. You can view them right now in the directory.",
+      "quickReplies": ["View Market Directory 📍", "Weekend markets 📅", "Suncrest Market 🌄"]
+    },
+    {
+      "id": "organic_produce",
+      "keywords": ["organic", "pesticide free", "chemical free", "bio dynamic", "healthy", "natural"],
+      "action": "FILTER_PRODUCE_ORGANIC",
+      "response": "For certified organic and bio-dynamic goods, we highly recommend **Green Valley Organic Harvest Market** (Downtown) and **Emerald Meadows Eco-Village Market** (Westside)! Both prohibit synthetic pesticides and practice regenerative farming.",
+      "relatedMarketId": "mkt-1",
+      "quickReplies": ["Open Green Valley Details 🏬", "Browse Produce Guide 🥕"]
+    },
+    {
+      "id": "fruits_season",
+      "keywords": ["fruit", "fruits", "berries", "strawberry", "apples", "lemon", "avocado", "sweet"],
+      "action": "NAVIGATE_PRODUCE_FRUITS",
+      "response": "We have amazing fruit selections! Depending on the season, you'll discover **Sweet Coastal Albion Strawberries** at Harbor Breeze, **Honeycrisp Apples** at Green Valley, and tree-matured **Hass Avocados**.",
+      "quickReplies": ["Explore All Fruits 🍓", "Harbor Breeze Market 🌊"]
+    },
+    {
+      "id": "vegetables_greens",
+      "keywords": ["vegetable", "vegetables", "kale", "tomatoes", "carrots", "mushrooms", "greens", "spinach"],
+      "action": "NAVIGATE_PRODUCE_VEG",
+      "response": "Looking for crisp greens? Check out **Heirloom Brandywine Tomatoes**, **Tuscan Dinosaur Kale**, and **Lion's Mane Mushrooms**! Grown by local growers and harvested hours before market opening.",
+      "quickReplies": ["View Vegetables 🥬", "Find Markets Near Me 📍"]
+    },
+    {
+      "id": "dairy_honey",
+      "keywords": ["dairy", "cheese", "eggs", "honey", "milk", "butter", "artisan"],
+      "action": "NAVIGATE_PRODUCE_DAIRY",
+      "response": "Looking for farmstead dairy and raw honey? **Riverfront Artisanal Market** has handcrafted goat cheese, and **Green Valley Market** offers pasture-raised golden eggs and raw wildflower honey.",
+      "quickReplies": ["Riverfront Market 🧀", "View Raw Honey 🍯"]
+    },
+    {
+      "id": "bookmarks_export",
+      "keywords": ["bookmark", "favorite", "export", "notes", "save", "print", "share"],
+      "action": "OPEN_BOOKMARKS",
+      "response": "You can save any market or produce item by tapping the heart icon 💚. In the Bookmarks panel, you can add personal shopping notes and **Export as a formatted printable list or JSON/text file**!",
+      "quickReplies": ["Open Bookmarks Panel 🔖", "Export My List 📄"]
+    },
+    {
+      "id": "eco_impact",
+      "keywords": ["eco", "carbon", "food miles", "green basket", "sustainable", "co2", "environment", "calculator"],
+      "action": "OPEN_ECO_CALC",
+      "response": "Shopping at local farmers markets saves an average of **1,450 food transit miles** per meal compared to conventional supermarket chains! Try our interactive **Eco-Impact & Carbon Calculator** to compute your personalized green savings.",
+      "quickReplies": ["Launch Eco Calculator 🌍", "Learn About eGreen Basket 🌿"]
+    },
+    {
+      "id": "payment_cards",
+      "keywords": ["payment", "card", "cash", "credit card", "apple pay", "digital pay", "tap to pay"],
+      "response": "Almost all our featured markets accept credit/debit cards, Apple Pay, Google Pay, and digital tap-to-pay. Many vendors also accept SNAP/EBT tokens at market information booths.",
+      "quickReplies": ["Market Directory 📍", "Contact Support ✉"]
+    },
+    {
+      "id": "parking_pets",
+      "keywords": ["parking", "pets", "dogs", "car", "subway", "wheelchair", "accessible"],
+      "response": "Most markets are pet-friendly (on leashes) and wheelchair accessible! Check the **Amenities** tags on each market card for designated parking lots, subway access, and bicycle valet services.",
+      "quickReplies": ["Show Market Directory 📍"]
+    },
+    {
+      "id": "contact_help",
+      "keywords": ["contact", "help", "email", "phone", "support", "team", "feedback"],
+      "action": "NAVIGATE_CONTACT",
+      "response": "Our community support team is here for you! You can reach out through our Contact page, or email us directly at support@freshfind.eco.",
+      "quickReplies": ["Go to Contact Page ✉", "About FreshFind Team 👥"]
+    },
+    {
+      "id": "global_challenge",
+      "keywords": ["global challenge", "freshfind", "first position", "1st position", "competition", "award", "judges", "winner", "sustainability", "project"],
+      "response": "🏆 **FreshFind Project**: FreshFind represents our next-generation **eGreen Basket** initiative! Built with real-time interactive mapping, local farm traceability, zero-food-miles carbon calculation, voice-enabled AI assistance, and responsive glassmorphism design. Designed to secure 1st position through genuine sustainability and technological excellence!",
+      "quickReplies": ["Explore Eco Calculator 🌍", "Open Market Directory 📍", "Browse In-Season Crops 🍓"]
+    },
+    {
+      "id": "urdu_friendly",
+      "keywords": ["salam", "assalam", "kya haal", "kaise ho", "sabzi", "batao", "btao", "kahan", "urdu", "shukriya", "kia hal", "kya hal"],
+      "response": "Walaikum Assalam! 🌿 Bohat khushi hui aap se mil kar! FreshFind par aap apne qareebi farmers markets, taza sabzian (vegetables), organic phal (fruits), aur live schedules ba-asani dekh sakte hain. Aapko kya daryaft karna hai?",
+      "quickReplies": ["Aaj kaunsi market khuli hai? ⏰", "Taza sabzian 🥬", "Organic Phal 🍓"]
+    },
+    {
+      "id": "recipes_ideas",
+      "keywords": ["recipe", "cook", "dish", "meal", "soup", "salad", "smoothie", "make", "dinner", "lunch"],
+      "response": "👨‍🍳 **Farm-to-Table Recipe Inspiration**:\n1. **Crisp Summer Dinosaur Kale Salad**: Toss fresh Tuscan kale with lemon-infused virgin olive oil, shaved parmesan, and heirloom tomatoes.\n2. **Wild Lion's Mane Mushroom Sauté**: Pan-seared with farmstead butter and fresh rosemary.\n3. **Golden Sunrise Smoothie**: Blend fresh strawberries, raw wildflower honey, and organic almond milk!",
+      "quickReplies": ["Browse Vegetables 🥬", "Browse Fruits 🍓", "Find Markets Near Me 📍"]
+    },
+    {
+      "id": "market_bargains",
+      "keywords": ["deal", "discount", "cheap", "bargain", "budget", "save money", "price", "affordable"],
+      "response": "💡 **Pro-Shopper Market Hacks**:\n• **Golden Hour Discounts**: Visit in the final 45 minutes before closing; farmers often bundle excess produce at 30-50% off!\n• **Buy in Bulk / Flats**: In-season berries and stone fruits are much cheaper when purchased by the full case.\n• **Ugly but Delicious**: Look for 'seconds' or imperfect produce for 40% lower cost—ideal for sauces and smoothies!",
+      "quickReplies": ["Open Today's Markets ⏰", "Calculate Green Savings 🌍"]
+    },
+    {
+      "id": "freshness_storage",
+      "keywords": ["store", "preserve", "keep fresh", "spoil", "fridge", "shelf life", "crisper"],
+      "response": "❄️ **Freshness Preservation Guide**:\n• **Leafy Greens (Kale, Spinach)**: Wrap in a slightly damp paper towel and store in an airtight container in the crisper drawer.\n• **Carrots & Radishes**: Cut off green tops immediately so they don't draw moisture from the root.\n• **Berries**: Do NOT wash until right before eating! Store dry in a paper towel-lined container.",
+      "quickReplies": ["Explore All Produce 🥕", "Markets Open Now 📍"]
+    }
+  ],
+  "defaultResponse": "I'm still learning new things! 🌿 You can ask me about **market locations**, **operating hours today**, **seasonal fruits & vegetables**, or click one of the quick suggestions below:",
+  "defaultQuickReplies": [
+    "Markets open today ⏰",
+    "Browse Produce Guide 🥕",
+    "Eco Impact Calculator 🌍",
+    "Export My Bookmarks 🔖"
+  ]
+}
